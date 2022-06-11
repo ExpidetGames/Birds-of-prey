@@ -1,0 +1,169 @@
+{
+    "name": "Controls",
+    "maps": [
+        {
+            "name": "PlayerControls",
+            "id": "d9ced4bb-0e03-49c9-9560-93143aa53837",
+            "actions": [
+                {
+                    "name": "MoveKeys",
+                    "type": "Value",
+                    "id": "d02c96cb-28fb-4074-a612-d3876fbf8c56",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MouseDelta",
+                    "type": "Value",
+                    "id": "d0aeb29e-bcd8-484e-85bf-43107f9b466f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Value",
+                    "id": "f1cb37d7-2731-4084-a828-06c355d79941",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Sneak",
+                    "type": "Value",
+                    "id": "6458d864-df36-4cd6-b643-f343b6ed227a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Value",
+                    "id": "a7b8ce45-6c8f-47a8-9c7b-f93e73616830",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "MoveVec",
+                    "id": "e495e5ab-e1f7-4cf7-a797-7344e0507177",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveKeys",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "c5749ed0-7fa1-42dd-bfb5-f944b5ab00e0",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "15605c7b-7d6b-4e41-b6f4-d79cbabeb8f9",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "c3ff3e28-f52a-44ac-a3e8-0216bc1089d7",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "5fa74274-e6d4-435e-9c19-750dd37f20fb",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0cee1cf4-bcaf-4154-ab55-a9245bd9fd43",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7c49817-6daf-4367-92be-97df3e3c96c4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5d1b1cc-087f-4adc-a8c6-70dd3d039b92",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sneak",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f719be65-2d36-45b7-9de9-7612f66c897c",
+                    "path": "<Keyboard>/OEM1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sneak",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c76d6526-6a54-469a-8bc6-3a86f0e2093b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
