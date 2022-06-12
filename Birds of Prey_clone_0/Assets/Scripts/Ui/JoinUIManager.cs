@@ -47,7 +47,6 @@ public class JoinUIManager : MonoBehaviour {
         if(roomIDInput.text.Length == 6 && !roomIDInput.text.Any(char.IsDigit)) {
             string message = "{\"type\":\"joinRoom\", \"Id\":\"" + NetworkedVariables.playerId + "\",\"roomId\":\"" + roomIDInput.text.ToUpper() + "\", \"name\":\"" + nameInput.text + "\", \"startHealth\":\"" + PrefabOrganizer.Planes[planeType].startHealth + "\", \"planeType\":\"" + planeType.ToString() + "\"}";
             TCPClient.callStack.Insert(0, message);
-            ;
         } else {
             TMPro.TextMeshProUGUI[] allTexts = roomIDInput.GetComponentsInChildren<TMPro.TextMeshProUGUI>();
             for(int i = 0; i < allTexts.Length; i++) {
@@ -67,9 +66,13 @@ public class JoinUIManager : MonoBehaviour {
 
 
     private void connectToServer() {
-        UDPClient udpClient = new UDPClient(serverIpInput.text, 9535, int.Parse(localUdpPortInput.text));
-        udpClient.connect();
-        TCPClient tcpClient = new TCPClient(serverIpInput.text, 9536);
-        tcpClient.connect();
+        if(UDPClient.updClient == null) {
+            UDPClient udpClient = new UDPClient(serverIpInput.text, 9535, int.Parse(localUdpPortInput.text));
+            udpClient.connect();
+        }
+        if(TCPClient.ws == null) {
+            TCPClient tcpClient = new TCPClient(serverIpInput.text, 9536);
+            tcpClient.connect();
+        }
     }
 }

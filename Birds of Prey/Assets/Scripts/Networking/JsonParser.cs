@@ -6,158 +6,156 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 //This class encodes to Json and decodes from it
-public class JsonParser : MonoBehaviour
-{
+public class JsonParser : MonoBehaviour {
     //Converts a given Transform into a String thats send to the Server
-    public static string transformToJson(Transform input){
-        float[,] transformArr = new float[,] {{input.position.x, input.position.y, input.position.z}, {input.eulerAngles.x, input.eulerAngles.y, input.eulerAngles.z}, {input.localScale.x, input.localScale.y, input.localScale.z}};
+    public static string transformToJson(Transform input) {
+        float[,] transformArr = new float[,] { { input.position.x, input.position.y, input.position.z }, { input.eulerAngles.x, input.eulerAngles.y, input.eulerAngles.z }, { input.localScale.x, input.localScale.y, input.localScale.z } };
         string jsonPosition = JsonConvert.SerializeObject(transformArr);
         return jsonPosition;
     }
 
     //Decodes a message and does something based on that
-    public static void decodeJsonMessage(string message){
+    public static void decodeJsonMessage(string message) {
         //Debug.Log(message);
         JObject decodedMessage = null;
-        if(message != null){
+        if(message != null) {
             decodedMessage = JObject.Parse(message);
-        }else{
+        } else {
             return;
         }
-        string messageType = (string) decodedMessage["type"];
+        string messageType = (string)decodedMessage["type"];
         //Debug.Log(messageType);
         //The owned Player just joined and receives its Id
-        if(messageType.Equals("setId")){
+        if(messageType.Equals("setId")) {
             //Debug.Log($"Received Id: {(string) decodedMessage["newId"]}");
-            NetworkedVariables.playerId = (string) decodedMessage["newId"];
+            NetworkedVariables.playerId = (string)decodedMessage["newId"];
         }
         //The transform data of at least one client has changed so it has to be updated
-        if(messageType.Equals("updatePlayerTransform")){
-            foreach(KeyValuePair<string, string> playerData in decodedMessage["allPlayerTransformDict"].ToObject<Dictionary<string, string>>()){
+        if(messageType.Equals("updatePlayerTransform")) {
+            foreach(KeyValuePair<string, string> playerData in decodedMessage["allPlayerTransformDict"].ToObject<Dictionary<string, string>>()) {
                 List<List<float>> transformData = stringListToFloatList(JsonConvert.DeserializeObject<List<List<string>>>(playerData.Value));
                 //print("Udpating position of player: " + playerData.Key);
-                if(NetworkedVariables.allConnectedPlayerTransforms.ContainsKey(playerData.Key)){
+                if(NetworkedVariables.allConnectedPlayerTransforms.ContainsKey(playerData.Key)) {
                     NetworkedVariables.allConnectedPlayerTransforms[playerData.Key] = transformData;
-                }else{
+                } else {
                     NetworkedVariables.allConnectedPlayerTransforms.Add(playerData.Key, transformData);
                 }
             }
         }
         //A bullet was shot and the other clients are informed with this message
-        if(messageType.Equals("bulletShot")){
-            string bulletType = (string) decodedMessage["bulletType"];
-            string shooter = (string) decodedMessage["shooter"];
+        if(messageType.Equals("bulletShot")) {
+            string bulletType = (string)decodedMessage["bulletType"];
+            string shooter = (string)decodedMessage["shooter"];
             List<float> startPosition = new List<float>();
             List<float> angle = new List<float>();
             List<float> velocity = new List<float>();
             //Retrieving the start Position of the bullet
-            foreach(string position in decodedMessage["startPos"].ToObject<List<string>>()){
+            foreach(string position in decodedMessage["startPos"].ToObject<List<string>>()) {
                 startPosition.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
             }
             //Retrieving the velocity of the plane
-            foreach(string position in decodedMessage["velocity"].ToObject<List<string>>()){
+            foreach(string position in decodedMessage["velocity"].ToObject<List<string>>()) {
                 velocity.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
             }
 
             //Retrieving the facing Direction of the plane
-            foreach(string position in decodedMessage["planeFacingDirection"].ToObject<List<string>>()){
+            foreach(string position in decodedMessage["planeFacingDirection"].ToObject<List<string>>()) {
                 angle.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
             }
             ProjectileManager.shootBullet(startPosition, angle, velocity, bulletType, shooter);
         }
-        if(messageType.Equals("rocketShot")){
-            string rocketType = (string) decodedMessage["rocketType"];
-            string shooter = (string) decodedMessage["shooter"];
-            string target = (string) decodedMessage["targetId"];
+        if(messageType.Equals("rocketShot")) {
+            string rocketType = (string)decodedMessage["rocketType"];
+            string shooter = (string)decodedMessage["shooter"];
+            string target = (string)decodedMessage["targetId"];
             List<float> startPosition = new List<float>();
             List<float> facingAngle = new List<float>();
             List<float> velocity = new List<float>();
             //Retrieving the start Position of the rocket
-            foreach(string position in decodedMessage["startPos"].ToObject<List<string>>()){
+            foreach(string position in decodedMessage["startPos"].ToObject<List<string>>()) {
                 startPosition.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
             }
             //Retrieving the facing Direction of the shooter
-            foreach(string position in decodedMessage["facingAngle"].ToObject<List<string>>()){
+            foreach(string position in decodedMessage["facingAngle"].ToObject<List<string>>()) {
                 facingAngle.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
             }
             //Retrieving the velocity of the shooter
-            foreach(string position in decodedMessage["velocity"].ToObject<List<string>>()){
+            foreach(string position in decodedMessage["velocity"].ToObject<List<string>>()) {
                 velocity.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
             }
             ProjectileManager.shootRocket(startPosition: startPosition, facingAngle: facingAngle, velocity: velocity, type: rocketType, shooter: shooter, target: target);
         }
-        if(messageType.Equals("playerHit")){
-            int newHealth = (int) decodedMessage["newHealth"];
-            string hitPlayer = (string) decodedMessage["hitPlayerId"];
-            if(NetworkedVariables.playerHealths[hitPlayer] > 0){
+        if(messageType.Equals("playerHit")) {
+            int newHealth = (int)decodedMessage["newHealth"];
+            string hitPlayer = (string)decodedMessage["hitPlayerId"];
+            if(NetworkedVariables.playerHealths[hitPlayer] > 0) {
                 NetworkedVariables.playerHealths[hitPlayer] = newHealth;
             }
         }
-        if(messageType.Equals("playerDied")){
-            string deadPlayer = (string) decodedMessage["deadPlayer"];
-            string killer = (string) decodedMessage["killer"];
-            Dictionary<string, string> deadPlayerInfo = new Dictionary<string, string> () {["deadPlayerId"] = deadPlayer, ["killer"] = killer, ["deactivated"] = "0"};
+        if(messageType.Equals("playerDied")) {
+            string deadPlayer = (string)decodedMessage["deadPlayer"];
+            string killer = (string)decodedMessage["killer"];
+            Dictionary<string, string> deadPlayerInfo = new Dictionary<string, string>() { ["deadPlayerId"] = deadPlayer, ["killer"] = killer, ["deactivated"] = "0" };
             NetworkedVariables.deadPlayers.Add(deadPlayerInfo);
         }
-        if(messageType.Equals("rejoin")){
-            string playerId = (string) decodedMessage["playerId"];
-            int newHealth = (int) decodedMessage["newHealth"];
+        if(messageType.Equals("rejoin")) {
+            string playerId = (string)decodedMessage["playerId"];
+            int newHealth = (int)decodedMessage["newHealth"];
             NetworkedVariables.playerHealths[playerId] = newHealth;
             //Debug.Log($"The new health of player {playerId} is {NetworkedVariables.playerHealths[playerId]}");
-            Dictionary<string, string> respawningPlayerInfo = new Dictionary<string, string>{["id"] = playerId};
+            Dictionary<string, string> respawningPlayerInfo = new Dictionary<string, string> { ["id"] = playerId };
             NetworkedVariables.playersToRejoin.Add(respawningPlayerInfo);
         }
         //Another client disconnected
-        if(messageType.Equals("clientDisconnected")){
-            string disconnectedId = (string) decodedMessage["Id"];
-            if(disconnectedId == NetworkedVariables.playerId){
+        if(messageType.Equals("clientDisconnected")) {
+            string disconnectedId = (string)decodedMessage["Id"];
+            if(disconnectedId == NetworkedVariables.playerId) {
                 NetworkedVariables.inGame = false;
                 NetworkedVariables.scenceToLoad.Add(0);
                 NetworkedVariables.roomId = "";
                 NetworkedVariables.allConnectedPlayerTransforms = new Dictionary<string, List<List<float>>>();
                 NetworkedVariables.playerHealths = new Dictionary<string, int>();
             }
-            
-            if(NetworkedVariables.allConnectedPlayerTransforms.ContainsKey(disconnectedId)){
+            if(NetworkedVariables.allConnectedPlayerTransforms.ContainsKey(disconnectedId)) {
                 NetworkedVariables.allConnectedPlayerTransforms.Remove(disconnectedId);
-                NetworkedVariables.disconnectedPlayerIds.Add(disconnectedId);
             }
+            NetworkedVariables.disconnectedPlayerIds.Add(disconnectedId);
         }
-        if(messageType.Equals("createdRoom")){
-            NetworkedVariables.roomId = ((string) decodedMessage["newRoomId"]);
+        if(messageType.Equals("createdRoom")) {
+            NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
             NetworkedVariables.inGame = true;
             NetworkedVariables.scenceToLoad.Add(1);
         }
-        if(messageType.Equals("joinSuccess")){
-            NetworkedVariables.roomId = ((string) decodedMessage["newRoomId"]);
+        if(messageType.Equals("joinSuccess")) {
+            NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
             NetworkedVariables.inGame = true;
             NetworkedVariables.scenceToLoad.Add(1);
         }
-        if(messageType.Equals("otherPlayerData")){
-            foreach(KeyValuePair<string, string> playerName in decodedMessage["names"].ToObject<Dictionary<string, string>>()){
+        if(messageType.Equals("otherPlayerData")) {
+            foreach(KeyValuePair<string, string> playerName in decodedMessage["names"].ToObject<Dictionary<string, string>>()) {
                 NetworkedVariables.playerNames[playerName.Key] = playerName.Value;
             }
 
-            foreach(KeyValuePair<string, string> playerHealth in decodedMessage["healthValues"].ToObject<Dictionary<string, string>>()){
+            foreach(KeyValuePair<string, string> playerHealth in decodedMessage["healthValues"].ToObject<Dictionary<string, string>>()) {
                 NetworkedVariables.playerHealths[playerHealth.Key] = int.Parse(playerHealth.Value);
                 //Debug.Log($"Player {playerHealth.Key} has {playerHealth.Value} Health Points");
             }
 
-            foreach(KeyValuePair<string, string> planeTypes in decodedMessage["planeTypes"].ToObject<Dictionary<string, string>>()){
-                NetworkedVariables.planeTypes[planeTypes.Key] = (PlaneTypes) Enum.Parse(typeof(PlaneTypes), planeTypes.Value);
+            foreach(KeyValuePair<string, string> planeTypes in decodedMessage["planeTypes"].ToObject<Dictionary<string, string>>()) {
+                NetworkedVariables.planeTypes[planeTypes.Key] = (PlaneTypes)Enum.Parse(typeof(PlaneTypes), planeTypes.Value);
                 //Debug.Log($"Player {planeTypes.Key} flies the plane {(PlaneTypes) Enum.Parse(typeof(PlaneTypes), planeTypes.Value)}");
             }
         }
-        if(messageType.Equals("Error")){
-           NetworkedVariables.joinErrorMessage = ((string) decodedMessage["value"]);
+        if(messageType.Equals("Error")) {
+            NetworkedVariables.joinErrorMessage = ((string)decodedMessage["value"]);
         }
     }
 
-    public static List<List<float>> stringListToFloatList(List<List<string>> input){
+    public static List<List<float>> stringListToFloatList(List<List<string>> input) {
         List<List<float>> output = new List<List<float>>();
-        for(int i = 0; i < input.Count; i += 1){
+        for(int i = 0; i < input.Count; i += 1) {
             List<float> innerList = new List<float>();
-            for(int j = 0; j < input[i].Count; j += 1){
+            for(int j = 0; j < input[i].Count; j += 1) {
                 innerList.Add(float.Parse(input[i][j].Trim(), CultureInfo.InvariantCulture.NumberFormat));
             }
             output.Add(innerList);
