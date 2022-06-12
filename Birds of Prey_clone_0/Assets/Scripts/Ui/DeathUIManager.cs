@@ -1,18 +1,16 @@
 using UnityEngine;
 
-public class DeathUIManager : MonoBehaviour
-{
-    [SerializeField] private AudioListener audioListener;
+public class DeathUIManager : MonoBehaviour {
 
-    private void Update() {
-        
-    }
-    public void rejoinTheFight(){
-        //audioListener.enabled = false;
-        TCPClient.callStack.Insert(0, "{\"type\":\"rejoin\", \"roomId\":\""+NetworkedVariables.roomId+"\", \"playerId\":\""+NetworkedVariables.playerId+"\", \"newHealth\":\""+PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].startHealth+"\"}");
+    public void rejoinTheFight() {
+        TCPClient.callStack.Insert(0, "{\"type\":\"rejoin\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"playerId\":\"" + NetworkedVariables.playerId + "\", \"newHealth\":\"" + PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].startHealth + "\"}");
     }
 
-    public void surrender(){
-        //audioListener.enabled = false;
+    public void surrender() {
+        if(true) {
+
+        } else {
+
+        }
     }
 }
