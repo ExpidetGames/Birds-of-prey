@@ -34,11 +34,13 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("updatePlayerTransform")) {
             foreach(KeyValuePair<string, string> playerData in decodedMessage["allPlayerTransformDict"].ToObject<Dictionary<string, string>>()) {
                 List<List<float>> transformData = stringListToFloatList(JsonConvert.DeserializeObject<List<List<string>>>(playerData.Value));
-                //print("Udpating position of player: " + playerData.Key);
-                if(NetworkedVariables.allConnectedPlayerTransforms.ContainsKey(playerData.Key)) {
-                    NetworkedVariables.allConnectedPlayerTransforms[playerData.Key] = transformData;
-                } else {
-                    NetworkedVariables.allConnectedPlayerTransforms.Add(playerData.Key, transformData);
+                lock(NetworkedVariables.allConnectedPlayerTransforms) {
+                    //print("Udpating position of player: " + playerData.Key);
+                    if(NetworkedVariables.allConnectedPlayerTransforms.ContainsKey(playerData.Key)) {
+                        NetworkedVariables.allConnectedPlayerTransforms[playerData.Key] = transformData;
+                    } else {
+                        NetworkedVariables.allConnectedPlayerTransforms.Add(playerData.Key, transformData);
+                    }
                 }
             }
         }

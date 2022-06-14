@@ -89,6 +89,10 @@ public class PlayerManager : MonoBehaviour {
                     NetworkedVariables.scenceToLoad.Add(1);
                     spawnedPlayerIds = new List<string>();
                     allPlayers = new Dictionary<string, GameObject>();
+                    ownPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);
+                    ownPlayer.GetComponent<PlayerHealth>().setHealth(NetworkedVariables.playerHealths[NetworkedVariables.playerId]);
+                    ownPlayer.GetComponent<PlayerHealth>().myId = NetworkedVariables.playerId;
+                    spawnedPlayerIds.Add(NetworkedVariables.playerId);
                     //Disabling all audioListeners because own Player has an Audio Listener and this stupid error message is really annoying..
                     AudioListener[] audioListeners = FindObjectsOfType<AudioListener>();
                     foreach(AudioListener audioListener in audioListeners) {
