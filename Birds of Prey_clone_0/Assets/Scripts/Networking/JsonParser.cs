@@ -125,13 +125,15 @@ public class JsonParser : MonoBehaviour {
         }
         if(messageType.Equals("createdRoom")) {
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
+            NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
             NetworkedVariables.inGame = true;
-            NetworkedVariables.scenceToLoad.Add(1);
+            NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
         }
         if(messageType.Equals("joinSuccess")) {
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
+            NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
             NetworkedVariables.inGame = true;
-            NetworkedVariables.scenceToLoad.Add(1);
+            NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
         }
         if(messageType.Equals("otherPlayerData")) {
             foreach(KeyValuePair<string, string> playerName in decodedMessage["names"].ToObject<Dictionary<string, string>>()) {

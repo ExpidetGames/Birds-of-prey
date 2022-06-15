@@ -23,16 +23,16 @@ public class PlayerManager : MonoBehaviour {
         }
         allPlayers = new Dictionary<string, GameObject>();
         spawnedPlayerIds = new List<string>();
-        //Spawning Own Player
-
-
     }
 
     private void Update() {
-        if(ownPlayer == null && SceneManager.GetActiveScene().buildIndex == 1) {
+        //Spawning the own Player if it is null and the Player is back in the world
+        if(ownPlayer == null && SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex) {
             ownPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);
             ownPlayer.GetComponent<PlayerHealth>().setHealth(NetworkedVariables.playerHealths[NetworkedVariables.playerId]);
             ownPlayer.GetComponent<PlayerHealth>().myId = NetworkedVariables.playerId;
+            ownPlayer.GetComponentInChildren<Plane>().thrust = PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].thrust;
+            ownPlayer.GetComponentInChildren<Plane>().turnTorque = PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].turnTorque;
             spawnedPlayerIds.Add(NetworkedVariables.playerId);
         }
         updatePlayerTransforms();
@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour {
         if(playerTransforms.Count > spawnedPlayerIds.Count) {
             lock(playerTransforms) {
                 foreach(string newPlayerId in playerTransforms.Keys) {
-                    if(!spawnedPlayerIds.Contains(newPlayerId) && !allPlayers.ContainsKey(newPlayerId) && SceneManager.GetActiveScene().buildIndex == 1) {
+                    if(!spawnedPlayerIds.Contains(newPlayerId) && !allPlayers.ContainsKey(newPlayerId) && SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex) {
                         //Spawning the new Player Dummy Object
                         GameObject spawnedPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.planeTypes[newPlayerId]].playerDummy, transform.position, Quaternion.identity);
                         PlayerDummyScript dummy = spawnedPlayer.GetComponent<PlayerDummyScript>();
@@ -86,7 +86,7 @@ public class PlayerManager : MonoBehaviour {
             foreach(Dictionary<string, string> respawningPlayerInfo in NetworkedVariables.playersToRejoin) {
                 //The owned client wants to rejoin
                 if(respawningPlayerInfo["id"] == NetworkedVariables.playerId) {
-                    NetworkedVariables.scenceToLoad.Add(1);
+                    NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
                     spawnedPlayerIds = new List<string>();
                     allPlayers = new Dictionary<string, GameObject>();
                     ownPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);

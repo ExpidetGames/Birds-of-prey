@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 //This class is responsible for updating UI and holds functions the buttons execute
 public class JoinUIManager : MonoBehaviour {
@@ -10,6 +12,8 @@ public class JoinUIManager : MonoBehaviour {
     [SerializeField] private TMP_InputField localUdpPortInput;
     [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private TMP_Text errorDisplay;
+    [Space]
+    [SerializeField] private List<int> worldIndeces;
     [Space]
     [SerializeField] private string ip;
     [SerializeField] private int tcpServerPort;
@@ -36,7 +40,7 @@ public class JoinUIManager : MonoBehaviour {
     IEnumerator createRoomTask() {
         connectToServer();
         yield return new WaitWhile(() => string.IsNullOrEmpty(NetworkedVariables.playerId));
-        string message = "{\"type\":\"createRoom\", \"Id\":\"" + NetworkedVariables.playerId + "\", \"name\":\"" + nameInput.text + "\", \"startHealth\":\"" + PrefabOrganizer.Planes[planeType].startHealth + "\", \"planeType\":\"" + planeType.ToString() + "\"}";
+        string message = "{\"type\":\"createRoom\", \"Id\":\"" + NetworkedVariables.playerId + "\", \"name\":\"" + nameInput.text + "\", \"startHealth\":\"" + PrefabOrganizer.Planes[planeType].startHealth + "\", \"planeType\":\"" + planeType.ToString() + "\", \"worldIndex\":\"" + worldIndeces[Random.Range(0, worldIndeces.Count)] + "\"}";
         TCPClient.callStack.Insert(0, message);
     }
 

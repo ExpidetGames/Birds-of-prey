@@ -7,10 +7,7 @@ public class DeathUIManager : MonoBehaviour {
     }
 
     public void surrender() {
-        if(true) {
-
-        } else {
-
-        }
+        //Disconnecting the Player out of the room and sending it to the join Screen
+        NetworkedVariables.disconnectedPlayerIds.Add(NetworkedVariables.playerId);
     }
 }
