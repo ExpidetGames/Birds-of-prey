@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 using TMPro;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 //This class is responsible for updating UI and holds functions the buttons execute
@@ -12,6 +11,8 @@ public class JoinUIManager : MonoBehaviour {
     [SerializeField] private TMP_InputField localUdpPortInput;
     [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private TMP_Text errorDisplay;
+    [SerializeField] private Canvas JoinCanvas;
+    [SerializeField] private Canvas selectionCanvas;
     [Space]
     [SerializeField] private List<int> worldIndeces;
     [Space]
@@ -20,10 +21,11 @@ public class JoinUIManager : MonoBehaviour {
     [SerializeField] private int udpServerPort;
     [SerializeField] private int localUdpPort;
     [Space]
-    [SerializeField] private PlaneTypes planeType;
+    [HideInInspector] public PlaneTypes planeType;
 
 
     private void Start() {
+        planeType = PlaneTypes.STANDARD_AIRCRAFT;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
@@ -68,6 +70,10 @@ public class JoinUIManager : MonoBehaviour {
         StartCoroutine(joinRoomTask());
     }
 
+    public void selectPlane() {
+        JoinCanvas.GetComponent<Canvas>().enabled = false;
+        selectionCanvas.GetComponent<Canvas>().enabled = true;
+    }
 
     private void connectToServer() {
         if(UDPClient.updClient == null) {

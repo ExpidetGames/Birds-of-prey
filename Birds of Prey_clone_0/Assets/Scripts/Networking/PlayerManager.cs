@@ -182,7 +182,7 @@ public class PlayerManager : MonoBehaviour {
         string facingDirection = "[\"" + planeFacingDirection.x.ToString().Replace(",", ".") + "\",\"" + planeFacingDirection.y.ToString().Replace(",", ".") + "\", \"" + planeFacingDirection.z.ToString().Replace(",", ".") + "\"]";
         string startPosition = "[\"" + startPoint.x.ToString().Replace(",", ".") + "\",\"" + startPoint.y.ToString().Replace(",", ".") + "\", \"" + startPoint.z.ToString().Replace(",", ".") + "\"]";
         string velocity = "[\"" + planeVelocity.x.ToString().Replace(",", ".") + "\",\"" + planeVelocity.y.ToString().Replace(",", ".") + "\", \"" + planeVelocity.z.ToString().Replace(",", ".") + "\"]";
-        TCPClient.callStack.Insert(0, "{\"type\":\"shootBulletRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"shooter\":\"" + NetworkedVariables.playerId + "\", \"bulletType\":\"" + bulletType + "\", \"bulletStartPosition\": " + startPosition + ",\"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
+        UDPClient.udpCallStack.Insert(0, "{\"type\":\"shootBulletRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"shooter\":\"" + NetworkedVariables.playerId + "\", \"bulletType\":\"" + bulletType + "\", \"bulletStartPosition\": " + startPosition + ",\"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
     }
 
     public void disconnectPlayer(string playerId) {

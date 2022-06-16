@@ -819,8 +819,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed82cca970136744baf52832e485356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenBullets: 0.2
-  timeBetweenRockets: 0
   radarDistance: 1000
   timeToLockTarget: 0.00001
   lockDuration: 5000

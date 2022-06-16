@@ -33,9 +33,10 @@ public class PrefabOrganizer : MonoBehaviour {
         public GameObject playerDummy;
         public BulletTypes bulletAmuniton;
         public RocketTypes rocketAmunition;
+        public Sprite planeSprite;
+        public Vector3 turnTorque;
         public int startHealth;
         public int thrust;
-        public Vector3 turnTorque;
         public float timeBetweenRockets;
         public float timeBetweenBullets;
     }

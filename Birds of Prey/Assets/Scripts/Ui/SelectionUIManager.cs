@@ -1,33 +1,48 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Linq;
+using System.Collections.Generic;
 public class SelectionUIManager : MonoBehaviour {
 
-    [SerializeField] private GameObject planeTypeUIBlueprint;
-    [SerializeField] private GameObject ContentParent;
+    [SerializeField] private GameObject planeImage;
+    [SerializeField] private Image selectedPlanePreview;
+    [SerializeField] private Canvas JoinCanvas;
+    [SerializeField] private Canvas selectionCanvas;
 
-    [SerializeField] private int distanceFromTop;
-    [SerializeField] private int distanceFromRight;
-    [SerializeField] private int distanceFromBottom;
-    [SerializeField] private int distanceFromLeft;
-    [SerializeField] private int distanceBetweenRows;
-    [SerializeField] private int distanceBetween;
-
-
-
+    private List<PlaneImageController> allPlanes = new List<PlaneImageController>();
+    private PlaneImageController currentlySelectedElement;
 
     private void Start() {
+        Populate();
+    }
 
-        for(int y = 0; y < 10; y++) {
-            for(int x = 0; x < 50; x++) {
-                GameObject currentPlaneType = Instantiate(planeTypeUIBlueprint);
-                // currentPlaneType.GetComponentInChildren<Image>().color = Color.black;
-                currentPlaneType.transform.SetParent(ContentParent.transform);
-                float newXDelta = Mathf.Clamp((currentPlaneType.GetComponentInChildren<Image>().rectTransform.rect.width + 10) * x, distanceFromLeft, ContentParent.GetComponentInChildren<RectTransform>().rect.x + ContentParent.GetComponentInChildren<RectTransform>().rect.width + distanceFromRight);
-                float newYDelta = Mathf.Clamp((currentPlaneType.GetComponentInChildren<Image>().rectTransform.rect.height + 10) * y, distanceFromTop, ContentParent.GetComponentInChildren<RectTransform>().rect.y + ContentParent.GetComponentInChildren<RectTransform>().rect.height + distanceFromBottom);
-                Debug.Log($"Max x Value {ContentParent.GetComponentInChildren<RectTransform>().rect.x + Mathf.Abs(ContentParent.GetComponentInChildren<RectTransform>().rect.width) - distanceFromRight}");
-                currentPlaneType.transform.position = new Vector3(currentPlaneType.transform.position.x + newXDelta, currentPlaneType.transform.position.y - 100 - (currentPlaneType.GetComponentInChildren<Image>().rectTransform.rect.height + 10) * y, currentPlaneType.transform.position.z);
-            }
+    void Populate() {
+        GameObject currentObj;
+        PlaneImageController currentController;
+
+        for(int i = 0; i < PrefabOrganizer.Planes.Count; i++) {
+            currentObj = (GameObject)Instantiate(planeImage, transform);
+            currentObj.GetComponent<Image>().sprite = PrefabOrganizer.Planes[PrefabOrganizer.Planes.Keys.ElementAt(i)].planeSprite;
+            currentController = currentObj.GetComponent<PlaneImageController>();
+            currentController.myIndex = i;
+            currentController.manager = this;
+            allPlanes.Add(currentController);
         }
+        currentlySelectedElement = allPlanes[0].select();
+        selectedPlanePreview.sprite = PrefabOrganizer.Planes[PrefabOrganizer.Planes.Keys.ElementAt(currentlySelectedElement.myIndex)].planeSprite;
+    }
+
+    public void selectElement(int index) {
+        if(currentlySelectedElement != null) {
+            currentlySelectedElement.deselect();
+        }
+        currentlySelectedElement = allPlanes[index].GetComponent<PlaneImageController>().select();
+        selectedPlanePreview.sprite = PrefabOrganizer.Planes[PrefabOrganizer.Planes.Keys.ElementAt(index)].planeSprite;
+    }
+
+    public void backToJoinScreen() {
+        JoinCanvas.GetComponent<Canvas>().enabled = true;
+        JoinCanvas.GetComponent<JoinUIManager>().planeType = PrefabOrganizer.Planes.Keys.ElementAt(currentlySelectedElement.myIndex);
+        selectionCanvas.GetComponent<Canvas>().enabled = false;
     }
 }
