@@ -45,8 +45,13 @@ public class PlayerManager : MonoBehaviour {
             lock(playerTransforms) {
                 foreach(string newPlayerId in playerTransforms.Keys) {
                     if(!spawnedPlayerIds.Contains(newPlayerId) && !allPlayers.ContainsKey(newPlayerId) && SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex) {
+                        GameObject spawnedPlayer;
                         //Spawning the new Player Dummy Object
-                        GameObject spawnedPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.planeTypes[newPlayerId]].playerDummy, transform.position, Quaternion.identity);
+                        if(NetworkedVariables.planeTypes.ContainsKey(newPlayerId)) {
+                            spawnedPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.planeTypes[newPlayerId]].playerDummy, transform.position, Quaternion.identity);
+                        } else {
+                            continue;
+                        }
                         PlayerDummyScript dummy = spawnedPlayer.GetComponent<PlayerDummyScript>();
                         PlayerHealth dummyHealth = spawnedPlayer.GetComponent<PlayerHealth>();
                         if(dummy != null) {
@@ -193,6 +198,11 @@ public class PlayerManager : MonoBehaviour {
             allPlayers.Remove(playerId);
             //Removing the ID from the spawned Ids
             spawnedPlayerIds.Remove(playerId);
+            //
+            NetworkedVariables.allConnectedPlayerTransforms.Remove(playerId);
+            NetworkedVariables.planeTypes.Remove(playerId);
+            NetworkedVariables.playerHealths.Remove(playerId);
+            NetworkedVariables.playerNames.Remove(playerId);
         }
     }
 

@@ -5,13 +5,22 @@ public class WorldUIManager : MonoBehaviour {
 
     [SerializeField] private TMP_Text roomIdDisplay;
     [SerializeField] private TMP_Text nameDisplay;
+    [SerializeField] private GameObject pauseMenu;
+
+    [SerializeField] private GameObject pauseButton;
+    private void Start() {
+        pauseMenu.SetActive(false);
+        pauseButton.SetActive(true);
+    }
 
     private void Update() {
-        if(roomIdDisplay != null) {
-            roomIdDisplay.text = NetworkedVariables.roomId;
-        }
-        if(NetworkedVariables.inGame && NetworkedVariables.playerNames.ContainsKey(NetworkedVariables.playerId) && nameDisplay != null) {
-            nameDisplay.text = NetworkedVariables.playerNames[NetworkedVariables.playerId];
+        if(pauseMenu.activeInHierarchy) {
+            if(roomIdDisplay != null) {
+                roomIdDisplay.text = NetworkedVariables.roomId;
+            }
+            if(NetworkedVariables.inGame && NetworkedVariables.playerNames.ContainsKey(NetworkedVariables.playerId) && nameDisplay != null) {
+                nameDisplay.text = NetworkedVariables.playerNames[NetworkedVariables.playerId];
+            }
         }
     }
 
@@ -22,5 +31,13 @@ public class WorldUIManager : MonoBehaviour {
         }
     }
 
+    public void pauseGame() {
+        pauseButton.SetActive(false);
+        pauseMenu.SetActive(true);
+    }
 
+    public void continueGame() {
+        pauseMenu.SetActive(false);
+        pauseButton.SetActive(true);
+    }
 }
