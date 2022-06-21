@@ -42,9 +42,12 @@ public class PlayerManager : MonoBehaviour {
         Dictionary<string, List<List<float>>> playerTransforms = NetworkedVariables.allConnectedPlayerTransforms;
         //There is new player that needs to be spawned
         if(playerTransforms.Count > spawnedPlayerIds.Count) {
+            Debug.Log("Realising needed Spawn");
             lock(playerTransforms) {
                 foreach(string newPlayerId in playerTransforms.Keys) {
+                    Debug.Log($"Trying to spawn Player {newPlayerId}. Spawned Players doesnt contains Player ID: {spawnedPlayerIds.Contains(newPlayerId)}. All Players doesnt Contain Key: {!allPlayers.ContainsKey(newPlayerId)} we are in the correct scene: {SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex}");
                     if(!spawnedPlayerIds.Contains(newPlayerId) && !allPlayers.ContainsKey(newPlayerId) && SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex) {
+                        Debug.Log("Spawning Player");
                         GameObject spawnedPlayer;
                         //Spawning the new Player Dummy Object
                         if(NetworkedVariables.planeTypes.ContainsKey(newPlayerId)) {
@@ -75,6 +78,7 @@ public class PlayerManager : MonoBehaviour {
                 if(deadPlayerInfo["deactivated"] == "0") {
                     string deadPlayerId = deadPlayerInfo["deadPlayerId"];
                     if(deadPlayerId == NetworkedVariables.playerId) {
+                        allPlayers.Clear();
                         NetworkedVariables.scenceToLoad.Add(2);
                     } else {
                         spawnedPlayerIds.Remove(deadPlayerId);
@@ -124,7 +128,6 @@ public class PlayerManager : MonoBehaviour {
         }
         //Every Player is spawned so the position of them have to be updated
         if(playerTransforms.Count == spawnedPlayerIds.Count) {
-            //The players positions have to be updated
             foreach(string playerId in allPlayers.Keys) {
                 if(allPlayers[playerId] != null && playerTransforms.ContainsKey(playerId)) {
                     List<List<float>> currentPlayerInformation = playerTransforms[playerId];
@@ -144,20 +147,11 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    private List<List<float>> clone2DList(List<List<float>> oldList) {
-        List<List<float>> newList = new List<List<float>>();
-        for(int i = 0; i < oldList.Count; i++) {
-            List<float> inner = new List<float>();
-            for(int j = 0; j < oldList[i].Count; j++) {
-                inner.Add(oldList[i][j]);
-            }
-            newList.Add(inner);
-        }
-        return newList;
-    }
-
     public GameObject playerObjectFromId(string playerId) {
-        return allPlayers[playerId];
+        if(allPlayers != null && allPlayers.ContainsKey(playerId)) {
+            return allPlayers[playerId];
+        }
+        return null;
     }
 
     public string idFromGameObject(GameObject playerObject) {

@@ -10,7 +10,6 @@ public class Rocket : Projectile {
 
     void Start() {
         base.OnStart();
-        Debug.Log(targetId);
         RocketTypes rocketType = (RocketTypes)projectileType;
         particleSystems = this.GetComponentsInChildren<ParticleSystem>();
         projectileSpeed = PrefabOrganizer.Rockets[rocketType].projectileSpeed;

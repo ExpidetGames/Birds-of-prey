@@ -81,7 +81,7 @@ public class Shooter : MonoBehaviour {
     private void accquireTarget() {
         //Debug.DrawRay(radarPoint.transform.position, plane.transform.TransformDirection(Vector3.forward) * radarDistance, Color.blue);
         RaycastHit hit;
-        Physics.Raycast(radarPoint.transform.position, plane.transform.TransformDirection(Vector3.forward), out hit, radarDistance);
+        Physics.SphereCast(radarPoint.transform.position, 5, plane.transform.TransformDirection(Vector3.forward), out hit, radarDistance);
         if(hit.distance > 0) {
             //A target is hit
             currentLock = hit.collider.gameObject;
