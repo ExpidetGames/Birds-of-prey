@@ -44,6 +44,13 @@ public class JsonParser : MonoBehaviour {
                 }
             }
         }
+        //A target got locket and the players get informed about this unfortunate event
+        if(messageType.Equals("targetLocked")) {
+            //TCPClient.callStack.Insert(0, "{\"type\": \"targetLocked\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"shooter\":\"" + NetworkedVariables.playerId + "\", \"target\":\"" + targetId + "\"}");
+            string lockedTargetId = (string)decodedMessage["target"];
+            string shooter = (string)decodedMessage["shooter"];
+            NetworkedVariables.targetLockInfo.Add(new Dictionary<string, string> { ["shooter"] = shooter, ["target"] = lockedTargetId });
+        }
         //A bullet was shot and the other clients are informed with this message
         if(messageType.Equals("bulletShot")) {
             string bulletType = (string)decodedMessage["bulletType"];

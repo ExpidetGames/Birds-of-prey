@@ -42,12 +42,9 @@ public class PlayerManager : MonoBehaviour {
         Dictionary<string, List<List<float>>> playerTransforms = NetworkedVariables.allConnectedPlayerTransforms;
         //There is new player that needs to be spawned
         if(playerTransforms.Count > spawnedPlayerIds.Count) {
-            Debug.Log("Realising needed Spawn");
             lock(playerTransforms) {
                 foreach(string newPlayerId in playerTransforms.Keys) {
-                    Debug.Log($"Trying to spawn Player {newPlayerId}. Spawned Players doesnt contains Player ID: {spawnedPlayerIds.Contains(newPlayerId)}. All Players doesnt Contain Key: {!allPlayers.ContainsKey(newPlayerId)} we are in the correct scene: {SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex}");
                     if(!spawnedPlayerIds.Contains(newPlayerId) && !allPlayers.ContainsKey(newPlayerId) && SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex) {
-                        Debug.Log("Spawning Player");
                         GameObject spawnedPlayer;
                         //Spawning the new Player Dummy Object
                         if(NetworkedVariables.planeTypes.ContainsKey(newPlayerId)) {
@@ -78,7 +75,6 @@ public class PlayerManager : MonoBehaviour {
                 if(deadPlayerInfo["deactivated"] == "0") {
                     string deadPlayerId = deadPlayerInfo["deadPlayerId"];
                     if(deadPlayerId == NetworkedVariables.playerId) {
-                        allPlayers.Clear();
                         NetworkedVariables.scenceToLoad.Add(2);
                     } else {
                         spawnedPlayerIds.Remove(deadPlayerId);
@@ -96,12 +92,11 @@ public class PlayerManager : MonoBehaviour {
                 //The owned client wants to rejoin
                 if(respawningPlayerInfo["id"] == NetworkedVariables.playerId) {
                     NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
-                    spawnedPlayerIds = new List<string>();
-                    allPlayers = new Dictionary<string, GameObject>();
+                    spawnedPlayerIds.Clear();
+                    allPlayers.Clear();
                     ownPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);
                     ownPlayer.GetComponent<PlayerHealth>().setHealth(NetworkedVariables.playerHealths[NetworkedVariables.playerId]);
                     ownPlayer.GetComponent<PlayerHealth>().myId = NetworkedVariables.playerId;
-                    spawnedPlayerIds.Add(NetworkedVariables.playerId);
                     //Disabling all audioListeners because own Player has an Audio Listener and this stupid error message is really annoying..
                     AudioListener[] audioListeners = FindObjectsOfType<AudioListener>();
                     foreach(AudioListener audioListener in audioListeners) {
@@ -138,10 +133,10 @@ public class PlayerManager : MonoBehaviour {
                     //Updating Size
                     allPlayers[playerId].transform.localScale = new Vector3(currentPlayerInformation[2][0], currentPlayerInformation[2][1], currentPlayerInformation[2][2]);
                     //Updating Rotation of Name Tag so the name is always readable TODO: Update so it rotates to the camera of the plane not to the plane itself
-                    PlayerDummyScript dummy = allPlayers[playerId].GetComponent<PlayerDummyScript>();
-                    if(dummy != null && ownPlayer != null) {
-                        dummy.rotateNameTowards(ownPlayer);
-                    }
+                    // PlayerDummyScript dummy = allPlayers[playerId].GetComponent<PlayerDummyScript>();
+                    // if(dummy != null && ownPlayer != null) {
+                    //     dummy.rotateNameTowards(ownPlayer);
+                    // }
                 }
             }
         }

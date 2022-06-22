@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class Hud : MonoBehaviour {
     [Header("Components")]
@@ -14,6 +15,7 @@ public class Hud : MonoBehaviour {
     [SerializeField] private RectTransform boresight = null;
     [SerializeField] private RectTransform mousePos = null;
     [SerializeField] private TMP_Text healthDisplay = null;
+    [SerializeField] private TMP_Text lockInfoDisplay = null;
     [SerializeField] private PlayerHealth playerHealth = null;
 
     private Camera playerCam = null;
@@ -48,6 +50,23 @@ public class Hud : MonoBehaviour {
 
         if(healthDisplay != null) {
             healthDisplay.SetText(playerHealth.getHealth().ToString());
+        }
+
+        if(NetworkedVariables.targetLockInfo.Count > 0) {
+            string stringToDisplay = "";
+            lock(NetworkedVariables.targetLockInfo) {
+                foreach(Dictionary<string, string> lockInfo in NetworkedVariables.targetLockInfo) {
+                    if(lockInfo["target"] == NetworkedVariables.playerId) {
+                        stringToDisplay += $"You got locked by the Player {lockInfo["shooter"]}";
+                    }
+                    if(lockInfo["shooter"] == NetworkedVariables.playerId) {
+                        stringToDisplay += $"You locked the Player {lockInfo["target"]}";
+                    }
+                    stringToDisplay += "\n";
+                }
+                lockInfoDisplay.SetText(stringToDisplay);
+                NetworkedVariables.targetLockInfo.Clear();
+            }
         }
     }
 

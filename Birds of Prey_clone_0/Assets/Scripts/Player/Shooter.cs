@@ -94,11 +94,16 @@ public class Shooter : MonoBehaviour {
                 timeUntilLock = 0;
             }
 
+            // The player was good enough to consistently hold the lock on the target so the lock is accquired (Poor guy)
             if(timeUntilLock >= timeToLockTarget) {
-                // The player was good enough to consistently hold the lock on the target so the lock is accquired (Poor guy)
-                currentTarget = currentLock;
-                timeUntilUnlock = lockDuration;
-                Debug.Log("The Target is accquired and has the name: " + currentTarget.name);
+                String targetId = playerManager.idFromGameObject(currentLock);
+                //and the player is a real player (not the ground or sth else)
+                if(targetId != null) {
+                    currentTarget = currentLock;
+                    timeUntilUnlock = lockDuration;
+                    //Informing the other Players about the lock
+                    TCPClient.callStack.Insert(0, "{\"type\": \"targetLocked\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"shooter\":\"" + NetworkedVariables.playerId + "\", \"target\":\"" + targetId + "\"}");
+                }
             }
             lastLock = currentLock;
         } else {
