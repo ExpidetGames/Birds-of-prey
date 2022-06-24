@@ -41,6 +41,12 @@ public class PrefabOrganizer : MonoBehaviour {
         public float timeBetweenBullets;
     }
 
+    [Serializable]
+    public class World {
+        public int buildIndex;
+        public string name;
+    }
+
     [SerializeField] private List<Bullet> _bullets = new List<Bullet>();
     public static Dictionary<BulletTypes, Bullet> Bullets = new Dictionary<BulletTypes, Bullet>();
 
@@ -49,6 +55,9 @@ public class PrefabOrganizer : MonoBehaviour {
 
     [SerializeField] private List<Plane> _planes = new List<Plane>();
     public static Dictionary<PlaneTypes, Plane> Planes = new Dictionary<PlaneTypes, Plane>();
+
+    [SerializeField] private List<World> _worlds = new List<World>();
+    public static List<World> Worlds = new List<World>();
 
     void Awake() {
         foreach(Bullet bullet in _bullets) {
@@ -61,6 +70,10 @@ public class PrefabOrganizer : MonoBehaviour {
 
         foreach(Plane player in _planes) {
             Planes[player.playerType] = player;
+        }
+
+        foreach(World world in _worlds) {
+            Worlds.Add(world);
         }
     }
 

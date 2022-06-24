@@ -1103,11 +1103,16 @@ MonoBehaviour:
     bulletAmuniton: 0
     rocketAmunition: 0
     planeSprite: {fileID: 21300000, guid: 8d5ebc0e7583a524d9b527650deb7fe7, type: 3}
-    turnTorque: {x: 20, y: 20, z: 20}
+    turnTorque: {x: 90, y: 90, z: 90}
     startHealth: 100
     thrust: 100
     timeBetweenRockets: 3
     timeBetweenBullets: 0.1
+  _worlds:
+  - buildIndex: 1
+    name: '"World1"'
+  - buildIndex: 3
+    name: '"World2"'
 --- !u!1 &409244197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,7 +2032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -14400, y: 194301.62}
+  m_AnchoredPosition: {x: -36200, y: 561164.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &901004877
@@ -4361,7 +4366,6 @@ MonoBehaviour:
   errorDisplay: {fileID: 523587543}
   JoinCanvas: {fileID: 1746726406}
   selectionCanvas: {fileID: 1604403297}
-  worldIndeces: 0100000003000000
   ip: jodast.de
   tcpServerPort: 6942
   udpServerPort: 6943

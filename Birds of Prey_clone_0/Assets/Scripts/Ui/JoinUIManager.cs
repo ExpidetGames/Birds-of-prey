@@ -14,8 +14,6 @@ public class JoinUIManager : MonoBehaviour {
     [SerializeField] private Canvas JoinCanvas;
     [SerializeField] private Canvas selectionCanvas;
     [Space]
-    [SerializeField] private List<int> worldIndeces;
-    [Space]
     [SerializeField] private string ip;
     [SerializeField] private int tcpServerPort;
     [SerializeField] private int udpServerPort;
@@ -42,7 +40,7 @@ public class JoinUIManager : MonoBehaviour {
     IEnumerator createRoomTask() {
         connectToServer();
         yield return new WaitWhile(() => string.IsNullOrEmpty(NetworkedVariables.playerId));
-        string message = "{\"type\":\"createRoom\", \"Id\":\"" + NetworkedVariables.playerId + "\", \"name\":\"" + nameInput.text + "\", \"startHealth\":\"" + PrefabOrganizer.Planes[planeType].startHealth + "\", \"planeType\":\"" + planeType.ToString() + "\", \"worldIndex\":\"" + worldIndeces[Random.Range(0, worldIndeces.Count)] + "\"}";
+        string message = "{\"type\":\"createRoom\", \"Id\":\"" + NetworkedVariables.playerId + "\", \"name\":\"" + nameInput.text + "\", \"startHealth\":\"" + PrefabOrganizer.Planes[planeType].startHealth + "\", \"planeType\":\"" + planeType.ToString() + "\", \"worldIndex\":\"" + PrefabOrganizer.Worlds[Random.Range(0, PrefabOrganizer.Worlds.Count)].buildIndex + "\"}";
         TCPClient.callStack.Insert(0, message);
     }
 
