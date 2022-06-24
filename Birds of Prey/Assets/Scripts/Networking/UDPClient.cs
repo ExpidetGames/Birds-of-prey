@@ -35,12 +35,12 @@ public class UDPClient {
             Debug.Log("Error occured: " + e.Message);
         }
         sender = new Thread(new ThreadStart(sendCallStack));
-        receiver = new Thread(new ThreadStart(receiveMessageFromUDPServer));
+        receiver = new Thread(new ThreadStart(receiveMessageOnUDP));
         sender.Start();
         receiver.Start();
     }
 
-    void sendMessageToUDPServer(string message) {
+    void sendMessageOnUDP(string message) {
         if(!string.IsNullOrEmpty(message)) {
             byte[] sendBytes = Encoding.ASCII.GetBytes(message);
             updClient.Send(sendBytes, sendBytes.Length);
@@ -51,7 +51,7 @@ public class UDPClient {
     void sendCallStack() {
         while(true) {
             if(udpCallStack.Count > 0 && sender != null) {
-                sendMessageToUDPServer(udpCallStack[udpCallStack.Count - 1]);
+                sendMessageOnUDP(udpCallStack[udpCallStack.Count - 1]);
                 udpCallStack.RemoveAt(udpCallStack.Count - 1);
             } else {
                 Thread.Sleep(10);
@@ -60,7 +60,7 @@ public class UDPClient {
     }
 
     //Assigned to receiver thread
-    void receiveMessageFromUDPServer() {
+    void receiveMessageOnUDP() {
         while(true) {
             byte[] receiveBytes = updClient.Receive(ref remoteEndPoint);
             string receivedString = Encoding.ASCII.GetString(receiveBytes);
