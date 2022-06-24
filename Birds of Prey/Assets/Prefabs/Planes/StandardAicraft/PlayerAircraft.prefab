@@ -1317,7 +1317,7 @@ MonoBehaviour:
   controller: {fileID: 7831039118925943539}
   thrust: 10
   turnTorque: {x: 90, y: 25, z: 45}
-  thrustMult: 800
+  thrustMult: 100
   turnMult: 7
   sensitivity: 5
   aggressiveTurnAngle: 5

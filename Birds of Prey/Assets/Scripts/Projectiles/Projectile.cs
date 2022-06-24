@@ -56,7 +56,8 @@ public class Projectile : MonoBehaviour {
     }
 
     public void OnCollisionEnter(Collision other) {
-        if(other.gameObject.tag != "Projectile" && other.gameObject.tag != "OwnPlayer") {
+        if(other.gameObject.tag != "Projectile") {
+            Debug.Log($"Destroying projectile because it hit: {other.gameObject.name}");
             destroyProjectile();
         }
     }

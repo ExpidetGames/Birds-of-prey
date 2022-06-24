@@ -26,7 +26,7 @@ public class Rocket : Projectile {
 
     private void Update() {
         if(Vector3.Distance(this.gameObject.transform.position, this.gameObject.transform.position) <= 10) {
-            base.updateCollidersOfGameObject(base.ColliderObject, true);
+            //base.updateCollidersOfGameObject(base.ColliderObject, true);
         }
         if(timeUntilRocketEnginesFire <= 0) {
             Vector3 flightDirection = Vector3.forward;

@@ -1083,8 +1083,8 @@ MonoBehaviour:
     turnSpeed: 15
     projectileSpeed: 1000
     despawnTime: 10
-    timeUntilRocketEnginesFire: 0.5
-    timeUntilRocketGetsLethal: 0.8
+    timeUntilRocketEnginesFire: 3
+    timeUntilRocketGetsLethal: 3
   _planes:
   - playerType: 0
     realPlayer: {fileID: 7831039119531705820, guid: 76695ecf88a711845824c99013d48b26, type: 3}
@@ -2032,7 +2032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -36200, y: 561164.5}
+  m_AnchoredPosition: {x: -44600, y: 681024.44}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &901004877
