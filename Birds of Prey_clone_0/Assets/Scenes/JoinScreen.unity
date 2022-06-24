@@ -1073,7 +1073,7 @@ MonoBehaviour:
     rocketPrefab: {fileID: 5498384020234834197, guid: 8f9518b38881b4a4cab810f9d90d7491, type: 3}
     damage: 100
     turnSpeed: 15
-    projectileSpeed: 500
+    projectileSpeed: 200
     despawnTime: 10
     timeUntilRocketEnginesFire: 1
     timeUntilRocketGetsLethal: 2
@@ -1081,7 +1081,7 @@ MonoBehaviour:
     rocketPrefab: {fileID: 3039492762239379163, guid: 26b365fbcb0d333489254e1f9185f2d3, type: 3}
     damage: 1000
     turnSpeed: 15
-    projectileSpeed: 1000
+    projectileSpeed: 200
     despawnTime: 10
     timeUntilRocketEnginesFire: 3
     timeUntilRocketGetsLethal: 3
@@ -2032,8 +2032,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -44600, y: 681024.44}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -46800, y: 726502.3}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &901004877
 MonoBehaviour:
@@ -2125,9 +2125,9 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 20, y: -17}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &918177018
 MonoBehaviour:
@@ -3739,9 +3739,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: -17, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1372400912
 MonoBehaviour:
@@ -4541,9 +4541,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: -17}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1804870934
 MonoBehaviour:
