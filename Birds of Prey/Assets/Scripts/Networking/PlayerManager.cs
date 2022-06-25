@@ -135,10 +135,10 @@ public class PlayerManager : MonoBehaviour {
                     //Updating Size
                     allPlayers[playerId].transform.localScale = new Vector3(currentPlayerInformation[2][0], currentPlayerInformation[2][1], currentPlayerInformation[2][2]);
                     //Updating Rotation of Name Tag so the name is always readable TODO: Update so it rotates to the camera of the plane not to the plane itself
-                    // PlayerDummyScript dummy = allPlayers[playerId].GetComponent<PlayerDummyScript>();
-                    // if(dummy != null && ownPlayer != null) {
-                    //     dummy.rotateNameTowards(ownPlayer);
-                    // }
+                    PlayerDummyScript dummy = allPlayers[playerId].GetComponent<PlayerDummyScript>();
+                    if(dummy != null && ownPlayer != null) {
+                        dummy.rotateNameTowards();
+                    }
                 }
             }
         }

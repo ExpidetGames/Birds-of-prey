@@ -26,6 +26,8 @@ public static class NetworkedVariables {
     public static List<Dictionary<string, string>> deadPlayers = new List<Dictionary<string, string>>();
     //Holds the players who want to rejoin the game
     public static List<Dictionary<string, string>> playersToRejoin = new List<Dictionary<string, string>>();
+    //Holds the information about the current game Mode
+    public static GameModeTypes currentGameMode = GameModeTypes.OneVsOne;
     //True when Player is in world false if he is in Main Menu
     public static bool inGame;
     //Stores the BuildIndex of the world the players are playing
