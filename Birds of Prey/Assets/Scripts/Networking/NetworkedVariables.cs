@@ -12,8 +12,6 @@ public static class NetworkedVariables {
     public static Dictionary<string, List<List<float>>> allConnectedPlayerTransforms = new Dictionary<string, List<List<float>>>();
     //Holds the Player names that are currently in the lobby {id: PlayerName, id: PlayerName...}
     public static Dictionary<string, string> playerNames = new Dictionary<string, string>();
-    //Contains the information of a lock if a target is locked
-    public static List<Dictionary<string, string>> targetLockInfo = new List<Dictionary<string, string>>();
     //Holds the plane Types of every Player
     public static Dictionary<string, PlaneTypes> planeTypes = new Dictionary<string, PlaneTypes>();
     //Holds the health of all connected Players
@@ -22,6 +20,8 @@ public static class NetworkedVariables {
     public static List<int> scenceToLoad = new List<int>();
     //Set by the JSONParser when a client disconnects and checked by the Scene Updater to delete disconnected Clients
     public static List<string> disconnectedPlayerIds = new List<string>();
+    //Contains the information of a lock if a target is locked
+    public static List<Dictionary<string, string>> targetLockInfo = new List<Dictionary<string, string>>();
     //Holds the players who are currently dead/in limbo (The death scene) 
     public static List<Dictionary<string, string>> deadPlayers = new List<Dictionary<string, string>>();
     //Holds the players who want to rejoin the game
@@ -35,6 +35,6 @@ public static class NetworkedVariables {
     //The room Id the player is currently in
     public static string roomId;
     //Set when the entered GameCode doesnt exist
-    public static string joinErrorMessage;
+    public static string errorMessage;
 
 }

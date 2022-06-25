@@ -8,6 +8,7 @@ public class DeathUIManager : MonoBehaviour {
 
     public void surrender() {
         //Disconnecting the Player out of the room and sending it to the join Screen
-        NetworkedVariables.disconnectedPlayerIds.Add(NetworkedVariables.playerId);
+        TCPClient.callStack.Add("{\"type\":\"clientDisconnected\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"Id\":\"" + NetworkedVariables.playerId + "\"}");
+        NetworkedVariables.inGame = false;
     }
 }

@@ -30,8 +30,8 @@ public class JoinUIManager : MonoBehaviour {
 
     private void Update() {
 
-        if(!string.IsNullOrEmpty(NetworkedVariables.joinErrorMessage) && errorDisplay != null) {
-            errorDisplay.text = NetworkedVariables.joinErrorMessage;
+        if(!string.IsNullOrEmpty(NetworkedVariables.errorMessage) && errorDisplay != null) {
+            errorDisplay.text = NetworkedVariables.errorMessage;
         }
     }
 
@@ -56,7 +56,7 @@ public class JoinUIManager : MonoBehaviour {
             for(int i = 0; i < allTexts.Length; i++) {
                 allTexts[i].color = Color.red;
             }
-            NetworkedVariables.joinErrorMessage = "Invalid Room Id. The Room Id has six letters with zero digits! There is no Case sensitivity!";
+            NetworkedVariables.errorMessage = "Invalid Room Id. The Room Id has six letters with zero digits! There is no Case sensitivity!";
         }
     }
 

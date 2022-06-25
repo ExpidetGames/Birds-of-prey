@@ -158,7 +158,7 @@ public class JsonParser : MonoBehaviour {
             }
         }
         if(messageType.Equals("Error")) {
-            NetworkedVariables.joinErrorMessage = ((string)decodedMessage["value"]);
+            NetworkedVariables.errorMessage = ((string)decodedMessage["value"]);
         }
     }
 

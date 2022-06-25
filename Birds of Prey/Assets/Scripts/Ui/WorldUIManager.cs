@@ -7,13 +7,14 @@ public class WorldUIManager : MonoBehaviour {
     [SerializeField] private TMP_Text nameDisplay;
     [SerializeField] private GameObject pauseMenu;
 
-    [SerializeField] private GameObject pauseButton;
     private void Start() {
-        pauseMenu.SetActive(false);
-        pauseButton.SetActive(true);
+        pauseMenu.GetComponent<Canvas>().enabled = false;
     }
 
     private void Update() {
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            pauseMenu.GetComponent<Canvas>().enabled = !pauseMenu.GetComponent<Canvas>().enabled;
+        }
         if(pauseMenu.activeInHierarchy) {
             if(roomIdDisplay != null) {
                 roomIdDisplay.text = NetworkedVariables.roomId;
@@ -31,13 +32,7 @@ public class WorldUIManager : MonoBehaviour {
         }
     }
 
-    public void pauseGame() {
-        pauseButton.SetActive(false);
-        pauseMenu.SetActive(true);
-    }
-
     public void continueGame() {
-        pauseMenu.SetActive(false);
-        pauseButton.SetActive(true);
+        pauseMenu.GetComponent<Canvas>().enabled = false;
     }
 }

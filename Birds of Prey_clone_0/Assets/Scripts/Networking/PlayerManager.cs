@@ -115,7 +115,9 @@ public class PlayerManager : MonoBehaviour {
                 if(id == NetworkedVariables.playerId) {
                     spawnedPlayerIds.Clear();
                     allPlayers.Clear();
-                    ownPlayer.SetActive(false);
+                    if(ownPlayer != null) {
+                        ownPlayer.SetActive(false);
+                    }
                 }
                 disconnectPlayer(id);
             }
