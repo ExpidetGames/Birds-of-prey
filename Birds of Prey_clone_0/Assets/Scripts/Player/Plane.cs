@@ -17,10 +17,10 @@ public class Plane : MonoBehaviour {
     [SerializeField] private MouseFlightController controller = null;
 
     [Header("Physics")]
-    [Tooltip("Force to push plane forwards with")][HideInInspector] public float thrust = 100f;
+    [Tooltip("Force to push plane forwards with")] public float thrust = 100f;
     [Tooltip("Pitch, Yaw, Roll")] public Vector3 turnTorque = new Vector3(90f, 25f, 45f);
-    [Tooltip("The force Multiplier of the thrust")][HideInInspector] public float thrustMult = 200f;
-    [Tooltip("The force Multiplier for turning")][HideInInspector] public float turnMult = 7;
+    [Tooltip("The force Multiplier of the thrust")] public float thrustMult = 1000f;
+    [Tooltip("The force Multiplier for turning")] public float turnMult = 1000f;
 
     [Header("Autopilot")]
     [Tooltip("Sensitivity for autopilot flight.")] public float sensitivity = 5f;
@@ -62,7 +62,7 @@ public class Plane : MonoBehaviour {
     private bool pitchOverride = false;
 
     private void Awake() {
-
+        Debug.Log($"The thrust is: {thrust} the thrustMult is: {thrustMult} and the turn Mult is {turnMult}");
         if(controller == null)
             Debug.LogError(name + ": Plane - Missing reference to MouseFlightController!");
     }

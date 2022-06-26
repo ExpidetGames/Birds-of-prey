@@ -75,8 +75,11 @@ public class PlayerManager : MonoBehaviour {
                 if(deadPlayerInfo["deactivated"] == "0") {
                     string deadPlayerId = deadPlayerInfo["deadPlayerId"];
                     if(deadPlayerId == NetworkedVariables.playerId) {
+                        //Dead player side
                         NetworkedVariables.scenceToLoad.Add(2);
-                    } else {
+                    } else if(allPlayers.ContainsKey(deadPlayerId)) {
+                        //Killers side#
+                        Debug.Log(getStringFromList(allPlayers.Keys.ToList()));
                         spawnedPlayerIds.Remove(deadPlayerId);
                         allPlayers[deadPlayerId].SetActive(false);
                         allPlayers.Remove(deadPlayerId);
@@ -132,9 +135,7 @@ public class PlayerManager : MonoBehaviour {
                     allPlayers[playerId].transform.position = Vector3.MoveTowards(allPlayers[playerId].transform.position, new Vector3(currentPlayerInformation[0][0], currentPlayerInformation[0][1], currentPlayerInformation[0][2]), Mathf.Infinity);
                     //Updating Rotation
                     allPlayers[playerId].transform.eulerAngles = new Vector3(currentPlayerInformation[1][0], currentPlayerInformation[1][1], currentPlayerInformation[1][2]);
-                    //Updating Size
-                    allPlayers[playerId].transform.localScale = new Vector3(currentPlayerInformation[2][0], currentPlayerInformation[2][1], currentPlayerInformation[2][2]);
-                    //Updating Rotation of Name Tag so the name is always readable TODO: Update so it rotates to the camera of the plane not to the plane itself
+                    //Updating Rotation of Name Tag so the name is always readable
                     PlayerDummyScript dummy = allPlayers[playerId].GetComponent<PlayerDummyScript>();
                     if(dummy != null && ownPlayer != null) {
                         dummy.rotateNameTowards();
@@ -197,14 +198,10 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    private string getStringFromList(List<List<float>> input) {
+    private string getStringFromList(List<string> input) {
         string outputString = "";
-        string[] parameters = { "Position: ", " Rotation: ", " Scale: " };
         for(int i = 0; i < input.Count; i++) {
-            outputString += parameters[i];
-            for(int j = 0; j < input[i].Count; j++) {
-                outputString += input[i][j].ToString() + ", ";
-            }
+            outputString += input[i] + ", ";
         }
         return outputString;
     }

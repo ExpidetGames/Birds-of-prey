@@ -1132,20 +1132,9 @@ MonoBehaviour:
     planeSprite: {fileID: 21300000, guid: 1015b20ddc5a0c74a81fca19c3d7b184, type: 3}
     turnTorque: {x: 90, y: 25, z: 45}
     startHealth: 100
-    thrust: 50
+    thrust: 100
     timeBetweenRockets: 1
     timeBetweenBullets: 0.2
-  - playerType: 1
-    realPlayer: {fileID: 7831039119531705820, guid: 20e8ee5c95df23e48816c189a04aaa84, type: 3}
-    playerDummy: {fileID: 8503469488898852508, guid: 6469400604c455a4d87ed7dcb552da33, type: 3}
-    bulletAmuniton: 0
-    rocketAmunition: 0
-    planeSprite: {fileID: 21300000, guid: 8d5ebc0e7583a524d9b527650deb7fe7, type: 3}
-    turnTorque: {x: 90, y: 90, z: 90}
-    startHealth: 100
-    thrust: 100
-    timeBetweenRockets: 3
-    timeBetweenBullets: 0.1
   _worlds:
   - buildIndex: 1
     name: '"World1"'
@@ -1165,10 +1154,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameModes:
   - gameModeType: 0
+    hasMaxPlayers: 1
+    maxPlayerCount: 2
+    hasTeams: 0
+    teamCount: 0
     useTime: 0
     timeInSeconds: 200
+    useKills: 0
+    killsToWin: 5
+    usePoints: 0
+    pointsToWin: 0
+  - gameModeType: 1
     hasMaxPlayers: 1
-    maxPlayerCount: 1
+    maxPlayerCount: 2
+    hasTeams: 0
+    teamCount: 0
+    useTime: 0
+    timeInSeconds: 200
+    useKills: 1
+    killsToWin: 2
+    usePoints: 0
+    pointsToWin: 0
 --- !u!1 &409244197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2387,7 +2393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -62600, y: 856189.56}
+  m_AnchoredPosition: {x: -81000, y: 1099187.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &901004877
@@ -3974,7 +3980,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1746726408}
         m_TargetAssemblyTypeName: JoinUIManager, Assembly-CSharp
         m_MethodName: onGameModeChanged
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

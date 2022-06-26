@@ -20,8 +20,8 @@ public class GameModeManager : MonoBehaviour {
 public class GameMode {
     public GameModeTypes gameModeType;
     [Header("Join settings")]
-    public bool hasMaxPlayers;
-    public int maxPlayerCount;
+    public bool hasMaxPlayers; //Implemented
+    public int maxPlayerCount; //Implemented
     public bool hasTeams;
     public int teamCount;
     [Header("Finish Conditions")]
@@ -39,5 +39,5 @@ public class GameMode {
 }
 
 public enum GameModeTypes {
-    OneVsOne, FourVsFour
+    OneVsOne, OneVsOneDeathmatch
 }

@@ -44,6 +44,17 @@ public class JsonParser : MonoBehaviour {
                 }
             }
         }
+        //A player or team has won
+        if(messageType.Equals("GameOver")) {
+            //Team if a whole Team has won. Single if one Person has won
+            string winnerType = (string)decodedMessage["winnerType"];
+            //For Example Blue (for teams) or 31 for singles
+            string winnerId = (string)decodedMessage["winnerId"];
+            //To ensure that the kill who won the game is accounted for
+            string lastKill = (string)decodedMessage["lastKill"];
+
+            Debug.Log($"The game was won by the player {winnerId}");
+        }
         //A target got locket and the players get informed about this unfortunate event
         if(messageType.Equals("targetLocked")) {
             //TCPClient.callStack.Insert(0, "{\"type\": \"targetLocked\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"shooter\":\"" + NetworkedVariables.playerId + "\", \"target\":\"" + targetId + "\"}");
@@ -139,6 +150,8 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("joinSuccess")) {
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
             NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
+            NetworkedVariables.currentGameMode = (GameModeTypes)((int)decodedMessage["gameMode"]);
+            Debug.Log("The current game Mode is: " + NetworkedVariables.currentGameMode);
             NetworkedVariables.inGame = true;
             NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
         }
