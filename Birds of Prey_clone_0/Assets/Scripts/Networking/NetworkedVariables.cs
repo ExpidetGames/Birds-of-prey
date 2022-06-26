@@ -30,6 +30,8 @@ public static class NetworkedVariables {
     public static GameModeTypes currentGameMode = GameModeTypes.OneVsOne;
     //True when Player is in world false if he is in Main Menu
     public static bool inGame;
+    //To avoid getting hit twice when the player is already dead
+    public static bool isDead;
     //Stores the BuildIndex of the world the players are playing
     public static int worldIndex;
     //The playerId which identifies the player

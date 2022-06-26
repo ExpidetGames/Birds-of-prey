@@ -79,7 +79,6 @@ public class PlayerManager : MonoBehaviour {
                         NetworkedVariables.scenceToLoad.Add(2);
                     } else if(allPlayers.ContainsKey(deadPlayerId)) {
                         //Killers side
-                        Debug.Log(getStringFromList(allPlayers.Keys.ToList()));
                         spawnedPlayerIds.Remove(deadPlayerId);
                         Destroy(allPlayers[deadPlayerId]);
                         allPlayers.Remove(deadPlayerId);
@@ -94,6 +93,7 @@ public class PlayerManager : MonoBehaviour {
             foreach(Dictionary<string, string> respawningPlayerInfo in NetworkedVariables.playersToRejoin) {
                 //The owned client wants to rejoin
                 if(respawningPlayerInfo["id"] == NetworkedVariables.playerId) {
+                    NetworkedVariables.isDead = false;
                     NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
                     spawnedPlayerIds.Clear();
                     allPlayers.Clear();
@@ -179,7 +179,6 @@ public class PlayerManager : MonoBehaviour {
         string facingDirection = "[\"" + planeFacingDirection.x.ToString().Replace(",", ".") + "\",\"" + planeFacingDirection.y.ToString().Replace(",", ".") + "\", \"" + planeFacingDirection.z.ToString().Replace(",", ".") + "\"]";
         string startPosition = "[\"" + startPoint.x.ToString().Replace(",", ".") + "\",\"" + startPoint.y.ToString().Replace(",", ".") + "\", \"" + startPoint.z.ToString().Replace(",", ".") + "\"]";
         string velocity = "[\"" + planeVelocity.x.ToString().Replace(",", ".") + "\",\"" + planeVelocity.y.ToString().Replace(",", ".") + "\", \"" + planeVelocity.z.ToString().Replace(",", ".") + "\"]";
-        Debug.Log("Informing the server to spawn a bullet");
         TCPClient.callStack.Insert(0, "{\"type\":\"shootBulletRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"shooter\":\"" + NetworkedVariables.playerId + "\", \"bulletType\":\"" + bulletType + "\", \"bulletStartPosition\": " + startPosition + ",\"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
     }
 

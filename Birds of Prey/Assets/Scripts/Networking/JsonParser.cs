@@ -49,11 +49,11 @@ public class JsonParser : MonoBehaviour {
             //Team if a whole Team has won. Single if one Person has won
             string winnerType = (string)decodedMessage["winnerType"];
             //For Example Blue (for teams) or 31 for singles
-            string winnerId = (string)decodedMessage["winnerId"];
+            string winner = (string)decodedMessage["winner"];
             //To ensure that the kill who won the game is accounted for
             string lastKill = (string)decodedMessage["lastKill"];
 
-            Debug.Log($"The game was won by the player {winnerId}");
+            Debug.Log($"The game was won by the player {winner}");
         }
         //A target got locket and the players get informed about this unfortunate event
         if(messageType.Equals("targetLocked")) {
