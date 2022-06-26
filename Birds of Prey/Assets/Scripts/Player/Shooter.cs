@@ -31,7 +31,7 @@ public class Shooter : MonoBehaviour {
     }
 
     void Update() {
-        //NORMAL BULLETS
+        //BULLETS
         if(Input.GetMouseButton(0) && timePastSinceLastBullet >= timeBetweenBullets) {
             foreach(GameObject gun in bulletSpawnPoints) {
                 Vector3 planeFacingDirection = plane.transform.TransformDirection(Vector3.forward);

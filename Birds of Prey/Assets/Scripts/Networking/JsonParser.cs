@@ -151,7 +151,6 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
             NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
             NetworkedVariables.currentGameMode = (GameModeTypes)((int)decodedMessage["gameMode"]);
-            Debug.Log("The current game Mode is: " + NetworkedVariables.currentGameMode);
             NetworkedVariables.inGame = true;
             NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
         }

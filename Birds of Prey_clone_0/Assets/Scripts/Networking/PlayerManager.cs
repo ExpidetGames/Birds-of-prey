@@ -78,10 +78,10 @@ public class PlayerManager : MonoBehaviour {
                         //Dead player side
                         NetworkedVariables.scenceToLoad.Add(2);
                     } else if(allPlayers.ContainsKey(deadPlayerId)) {
-                        //Killers side#
+                        //Killers side
                         Debug.Log(getStringFromList(allPlayers.Keys.ToList()));
                         spawnedPlayerIds.Remove(deadPlayerId);
-                        allPlayers[deadPlayerId].SetActive(false);
+                        Destroy(allPlayers[deadPlayerId]);
                         allPlayers.Remove(deadPlayerId);
                     }
                     NetworkedVariables.allConnectedPlayerTransforms.Remove(deadPlayerId);
@@ -179,7 +179,8 @@ public class PlayerManager : MonoBehaviour {
         string facingDirection = "[\"" + planeFacingDirection.x.ToString().Replace(",", ".") + "\",\"" + planeFacingDirection.y.ToString().Replace(",", ".") + "\", \"" + planeFacingDirection.z.ToString().Replace(",", ".") + "\"]";
         string startPosition = "[\"" + startPoint.x.ToString().Replace(",", ".") + "\",\"" + startPoint.y.ToString().Replace(",", ".") + "\", \"" + startPoint.z.ToString().Replace(",", ".") + "\"]";
         string velocity = "[\"" + planeVelocity.x.ToString().Replace(",", ".") + "\",\"" + planeVelocity.y.ToString().Replace(",", ".") + "\", \"" + planeVelocity.z.ToString().Replace(",", ".") + "\"]";
-        UDPClient.udpCallStack.Insert(0, "{\"type\":\"shootBulletRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"shooter\":\"" + NetworkedVariables.playerId + "\", \"bulletType\":\"" + bulletType + "\", \"bulletStartPosition\": " + startPosition + ",\"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
+        Debug.Log("Informing the server to spawn a bullet");
+        TCPClient.callStack.Insert(0, "{\"type\":\"shootBulletRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"shooter\":\"" + NetworkedVariables.playerId + "\", \"bulletType\":\"" + bulletType + "\", \"bulletStartPosition\": " + startPosition + ",\"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
     }
 
     public void disconnectPlayer(string playerId) {

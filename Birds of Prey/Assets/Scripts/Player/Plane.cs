@@ -62,7 +62,6 @@ public class Plane : MonoBehaviour {
     private bool pitchOverride = false;
 
     private void Awake() {
-        Debug.Log($"The thrust is: {thrust} the thrustMult is: {thrustMult} and the turn Mult is {turnMult}");
         if(controller == null)
             Debug.LogError(name + ": Plane - Missing reference to MouseFlightController!");
     }
