@@ -1,0 +1,32 @@
+@startuml
+class TMP_TextSelector_B {
+    - <<const>> k_LinkText : string = "You have selected link <#ffff00>"
+    - <<const>> k_WordText : string = "Word Index: <#ffff00>"
+    - isHoveringObject : bool
+    - m_selectedWord : int
+    - m_selectedLink : int
+    - m_lastIndex : int
+    Awake() : void
+    OnEnable() : void
+    OnDisable() : void
+    ON_TEXT_CHANGED(obj:Object) : void
+    LateUpdate() : void
+    + OnPointerEnter(eventData:PointerEventData) : void
+    + OnPointerExit(eventData:PointerEventData) : void
+    + OnPointerClick(eventData:PointerEventData) : void
+    + OnPointerUp(eventData:PointerEventData) : void
+    RestoreCachedVertexAttributes(index:int) : void
+}
+MonoBehaviour <|-- TMP_TextSelector_B
+IPointerEnterHandler <|-- TMP_TextSelector_B
+IPointerExitHandler <|-- TMP_TextSelector_B
+IPointerClickHandler <|-- TMP_TextSelector_B
+IPointerUpHandler <|-- TMP_TextSelector_B
+TMP_TextSelector_B --> "TextPopup_Prefab_01" RectTransform
+TMP_TextSelector_B --> "m_TextPopup_RectTransform" RectTransform
+TMP_TextSelector_B --> "m_TextPopup_TMPComponent" TextMeshProUGUI
+TMP_TextSelector_B --> "m_TextMeshPro" TextMeshProUGUI
+TMP_TextSelector_B --> "m_Canvas" Canvas
+TMP_TextSelector_B --> "m_Camera" Camera
+TMP_TextSelector_B --> "m_matrix" Matrix4x4
+@enduml

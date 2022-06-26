@@ -1,0 +1,55 @@
+@startuml
+class "@Controls" <<partial>> {
+    + @Controls()
+    + Dispose() : void
+    + bindingMask : InputBinding? <<get>> <<set>>
+    + devices : ReadOnlyArray<InputDevice>? <<get>> <<set>>
+    + Contains(action:InputAction) : bool
+    + GetEnumerator() : IEnumerator<InputAction>
+    GetEnumerator() : IEnumerator
+    + Enable() : void
+    + Disable() : void
+    + FindAction(actionNameOrId:string, throwIfNotFound:bool) : InputAction
+    + FindBinding(bindingMask:InputBinding, action:InputAction) : int
+}
+class "ReadOnlyArray`1"<T> {
+}
+class "IEnumerable`1"<T> {
+}
+class PlayerControlsActions <<struct>> {
+    + PlayerControlsActions(wrapper:@Controls)
+    + Get() : InputActionMap
+    + Enable() : void
+    + Disable() : void
+    + enabled : bool <<get>>
+    + SetCallbacks(instance:IPlayerControlsActions) : void
+}
+interface IPlayerControlsActions {
+    OnMoveKeys(context:InputAction.CallbackContext) : void
+    OnMouseDelta(context:InputAction.CallbackContext) : void
+    OnJump(context:InputAction.CallbackContext) : void
+    OnSneak(context:InputAction.CallbackContext) : void
+    OnShoot(context:InputAction.CallbackContext) : void
+}
+IInputActionCollection2 <|-- "@Controls"
+IDisposable <|-- "@Controls"
+"@Controls" --> "asset" InputActionAsset
+"@Controls" --> "controlSchemes<InputControlScheme>" "ReadOnlyArray`1"
+"@Controls" --> "bindings<InputBinding>" "IEnumerable`1"
+"@Controls" --> "m_PlayerControls" InputActionMap
+"@Controls" --> "m_PlayerControlsActionsCallbackInterface" IPlayerControlsActions
+"@Controls" --> "m_PlayerControls_MoveKeys" InputAction
+"@Controls" --> "m_PlayerControls_MouseDelta" InputAction
+"@Controls" --> "m_PlayerControls_Jump" InputAction
+"@Controls" --> "m_PlayerControls_Sneak" InputAction
+"@Controls" --> "m_PlayerControls_Shoot" InputAction
+"@Controls" --> "@PlayerControls" PlayerControlsActions
+"@Controls" +-- PlayerControlsActions
+PlayerControlsActions --> "m_Wrapper" "@Controls"
+PlayerControlsActions --> "@MoveKeys" InputAction
+PlayerControlsActions --> "@MouseDelta" InputAction
+PlayerControlsActions --> "@Jump" InputAction
+PlayerControlsActions --> "@Sneak" InputAction
+PlayerControlsActions --> "@Shoot" InputAction
+"@Controls" +-- IPlayerControlsActions
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+class ProjectileManager {
+    - Update() : void
+    + {static} shootBullet(bulletStart:List<float>, bulletAngle:List<float>, velocity:List<float>, type:string, shooter:string) : void
+    + {static} shootRocket(startPosition:List<float>, facingAngle:List<float>, velocity:List<float>, type:string, shooter:string, target:string) : void
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- ProjectileManager
+ProjectileManager o-> "bulletInformations<Dictionary<string, dynamic>>" "List`1"
+ProjectileManager o-> "rocketInformations<Dictionary<string, dynamic>>" "List`1"
+@enduml

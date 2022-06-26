@@ -1,0 +1,17 @@
+@startuml
+class SelectionUIManager {
+    - Start() : void
+    Populate() : void
+    + selectElement(index:int) : void
+    + backToJoinScreen() : void
+}
+class "List`1"<T> {
+}
+MonoBehaviour <|-- SelectionUIManager
+SelectionUIManager --> "planeImage" GameObject
+SelectionUIManager --> "selectedPlanePreview" Image
+SelectionUIManager --> "JoinCanvas" Canvas
+SelectionUIManager --> "selectionCanvas" Canvas
+SelectionUIManager o-> "allPlanes<PlaneImageController>" "List`1"
+SelectionUIManager --> "currentlySelectedElement" PlaneImageController
+@enduml

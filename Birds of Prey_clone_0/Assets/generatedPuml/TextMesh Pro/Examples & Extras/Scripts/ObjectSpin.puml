@@ -1,0 +1,23 @@
+@startuml
+class ObjectSpin {
+    + SpinSpeed : float = 5
+    + RotationRange : int = 15
+    - m_time : float
+    - frames : int = 0
+    Awake() : void
+    Update() : void
+}
+enum MotionType {
+    Rotation,
+    BackAndForth,
+    Translation,
+}
+MonoBehaviour <|-- ObjectSpin
+ObjectSpin --> "m_transform" Transform
+ObjectSpin --> "m_prevPOS" Vector3
+ObjectSpin --> "m_initial_Rotation" Vector3
+ObjectSpin --> "m_initial_Position" Vector3
+ObjectSpin --> "m_lightColor" Color32
+ObjectSpin --> "Motion" MotionType
+ObjectSpin +-- MotionType
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class PlayerDummyScript {
+    + setName(name:string) : void
+    + disableNameTag() : void
+    + rotateNameTowards() : void
+}
+MonoBehaviour <|-- PlayerDummyScript
+PlayerDummyScript --> "nameDisplay" TMP_Text
+PlayerDummyScript --> "nameTagCanvas" Canvas
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class Benchmark04 {
+    + SpawnType : int = 0
+    + MinPointSize : int = 12
+    + MaxPointSize : int = 64
+    + Steps : int = 4
+    Start() : void
+}
+MonoBehaviour <|-- Benchmark04
+Benchmark04 --> "m_Transform" Transform
+@enduml

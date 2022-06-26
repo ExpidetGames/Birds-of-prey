@@ -1,0 +1,69 @@
+@startuml
+class PrefabOrganizer {
+    Awake() : void
+}
+enum BulletTypes {
+    CRAZY_BULLET,
+}
+enum RocketTypes {
+    NORMAL_ROCKET,
+    CRAZY_ROCKET,
+    INSANE_ROCKET,
+}
+enum PlaneTypes {
+    STANDARD_AIRCRAFT,
+    CRAPPY_AIRCRAFT,
+}
+class Bullet {
+    + damage : int
+    + projectileSpeed : float
+    + despawnTime : float
+    + timeUntilBulletGetsLethal : float
+}
+class Rocket {
+    + damage : int
+    + turnSpeed : float
+    + projectileSpeed : float
+    + despawnTime : float
+    + timeUntilRocketEnginesFire : float
+    + timeUntilRocketGetsLethal : float
+}
+class Plane {
+    + startHealth : int
+    + thrust : int
+    + timeBetweenRockets : float
+    + timeBetweenBullets : float
+}
+class World {
+    + buildIndex : int
+    + name : string
+}
+class "List`1"<T> {
+}
+class "Dictionary`2"<T1,T2> {
+}
+MonoBehaviour <|-- PrefabOrganizer
+PrefabOrganizer o-> "_bullets<Bullet>" "List`1"
+PrefabOrganizer o-> "Bullets<BulletTypes,Bullet>" "Dictionary`2"
+PrefabOrganizer o-> "_rockets<Rocket>" "List`1"
+PrefabOrganizer o-> "Rockets<RocketTypes,Rocket>" "Dictionary`2"
+PrefabOrganizer o-> "_planes<Plane>" "List`1"
+PrefabOrganizer o-> "Planes<PlaneTypes,Plane>" "Dictionary`2"
+PrefabOrganizer o-> "_worlds<World>" "List`1"
+PrefabOrganizer o-> "Worlds<World>" "List`1"
+PrefabOrganizer +-- Bullet
+Bullet --> "bulletType" BulletTypes
+Bullet --> "bulletPrefab" GameObject
+PrefabOrganizer +-- Rocket
+Rocket --> "rocketType" RocketTypes
+Rocket --> "rocketPrefab" GameObject
+PrefabOrganizer +-- Plane
+Plane --> "playerType" PlaneTypes
+Plane --> "realPlayer" GameObject
+Plane --> "playerDummy" GameObject
+Plane --> "bulletAmuniton" BulletTypes
+Plane --> "rocketAmunition" RocketTypes
+Plane --> "planeSprite" Sprite
+Plane --> "turnTorque" Vector3
+PrefabOrganizer +-- World
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class OtherMenuItem {
+    - {static} OpenGitHub() : void
+    - {static} OpenFAQ() : void
+    - {static} OpenGitHubIssues() : void
+}
+@enduml

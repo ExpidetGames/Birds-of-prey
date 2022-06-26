@@ -1,0 +1,7 @@
+@startuml
+class DeathUIManager {
+    + rejoinTheFight() : void
+    + surrender() : void
+}
+MonoBehaviour <|-- DeathUIManager
+@enduml

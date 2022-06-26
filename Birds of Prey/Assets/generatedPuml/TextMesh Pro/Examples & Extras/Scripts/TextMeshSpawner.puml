@@ -1,0 +1,11 @@
+@startuml
+class TextMeshSpawner {
+    + SpawnType : int = 0
+    + NumberOfNPC : int = 12
+    Awake() : void
+    Start() : void
+}
+MonoBehaviour <|-- TextMeshSpawner
+TextMeshSpawner --> "TheFont" Font
+TextMeshSpawner --> "floatingText_Script" TextMeshProFloatingText
+@enduml

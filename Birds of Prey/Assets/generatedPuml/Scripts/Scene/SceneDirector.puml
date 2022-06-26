@@ -1,0 +1,8 @@
+@startuml
+class SceneDirector {
+    - Start() : void
+    Update() : void
+    - OnApplicationQuit() : void
+}
+MonoBehaviour <|-- SceneDirector
+@enduml

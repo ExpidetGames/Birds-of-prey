@@ -1,0 +1,11 @@
+@startuml
+class PlaneImageController {
+    + myIndex : int
+    + OnPressed() : void
+    + select() : PlaneImageController
+    + deselect() : void
+}
+MonoBehaviour <|-- PlaneImageController
+PlaneImageController --> "borders" GameObject
+PlaneImageController --> "manager" SelectionUIManager
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class ValidateCopiedFoldersIntegrity {
+    <<const>> SessionStateKey : string = "ValidateCopiedFoldersIntegrity_Init"
+    {static} ValidateCopiedFoldersIntegrity()
+    + {static} ValidateFolder(targetRoot:string, originalRoot:string, folderName:string) : void
+    {static} CreateMd5ForFolder(path:string) : string
+}
+@enduml

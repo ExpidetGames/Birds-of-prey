@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="86px" preserveAspectRatio="none" style="width:309px;height:86px;background:#FFFFFF;" version="1.1" viewBox="0 0 309 86" width="309px" zoomAndPan="magnify"><defs/><g><!--MD5=[39e9a881a2ae65294f51e67f5d486b0e]
+class ParrelSyncAssetModificationProcessor--><g id="elem_ParrelSyncAssetModificationProcessor"><rect codeLine="1" fill="#F1F1F1" height="65.6094" id="ParrelSyncAssetModificationProcessor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="288" x="7" y="7"/><ellipse cx="27.85" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M30.6156,18.875 Q30.7719,18.6563 30.9594,18.5469 Q31.1469,18.4375 31.3656,18.4375 Q31.7406,18.4375 31.975,18.7031 Q32.2094,18.9531 32.2094,19.5625 L32.2094,21.0156 Q32.2094,21.625 31.975,21.8906 Q31.7406,22.1563 31.3656,22.1563 Q31.0219,22.1563 30.8188,21.9531 Q30.6156,21.7656 30.5063,21.25 Q30.4594,20.8906 30.2719,20.7031 Q29.9438,20.3281 29.3344,20.1094 Q28.725,19.8906 28.1,19.8906 Q27.3344,19.8906 26.6938,20.2188 Q26.0688,20.5469 25.5688,21.2969 Q25.0844,22.0469 25.0844,23.0781 L25.0844,24.1719 Q25.0844,25.4063 25.975,26.2344 Q26.8656,27.0469 28.4594,27.0469 Q29.3969,27.0469 30.0531,26.7969 Q30.4438,26.6406 30.8656,26.2031 Q31.1313,25.9375 31.2719,25.8594 Q31.4281,25.7813 31.6313,25.7813 Q31.9594,25.7813 32.2094,26.0469 Q32.475,26.2969 32.475,26.6406 Q32.475,26.9844 32.1313,27.3906 Q31.6313,27.9688 30.8344,28.2969 Q29.7563,28.75 28.4594,28.75 Q26.9438,28.75 25.7406,28.125 Q24.7563,27.625 24.0688,26.5625 Q23.3813,25.4844 23.3813,24.2031 L23.3813,23.0469 Q23.3813,21.7188 23.9906,20.5781 Q24.6156,19.4219 25.7094,18.8125 Q26.8031,18.1875 28.0375,18.1875 Q28.7719,18.1875 29.4125,18.3594 Q30.0688,18.5156 30.6156,18.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="243" x="43.15" y="28.7285">ParrelSyncAssetModificationProcessor</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="294" y1="39" y2="39"/><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="294" y1="47" y2="47"/><ellipse cx="18" cy="58" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="262" x="27" y="65.5332">OnWillSaveAssets(paths:string[]) : string[]</text></g><!--MD5=[7bab4717337d7ad5f93c114e76a741d3]
+@startuml
+class ParrelSyncAssetModificationProcessor {
+    + {static} OnWillSaveAssets(paths:string[]) : string[]
+}
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 12:55:52 CEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>

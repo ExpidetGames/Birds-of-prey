@@ -1,0 +1,7 @@
+@startuml
+class EditorQuit {
+    {static} + IsQuiting : bool <<get>>
+    {static} Quit() : void
+    {static} EditorQuit()
+}
+@enduml

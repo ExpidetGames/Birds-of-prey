@@ -1,0 +1,8 @@
+@startuml
+class AskFeedbackDialog {
+    <<const>> InitializeOnLoadCountKey : string = "ParrelSync_InitOnLoadCount"
+    <<const>> StopShowingKey : string = "ParrelSync_StopShowFeedBack"
+    {static} AskFeedbackDialog()
+    - {static} ShowDialog() : void
+}
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class Rocket {
+    + targetId : string
+    - turnSpeed : float
+    - timeUntilRocketEnginesFire : float
+    Start() : void
+    - Update() : void
+}
+Projectile <|-- Rocket
+@enduml

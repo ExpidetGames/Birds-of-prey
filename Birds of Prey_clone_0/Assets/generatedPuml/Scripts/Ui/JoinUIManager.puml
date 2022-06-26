@@ -1,0 +1,28 @@
+@startuml
+class JoinUIManager {
+    - ip : string
+    - tcpServerPort : int
+    - udpServerPort : int
+    - localUdpPort : int
+    - Start() : void
+    - Update() : void
+    createRoomTask() : IEnumerator
+    joinRoomTask() : IEnumerator
+    + createRoom() : void
+    + joinRoom() : void
+    + selectPlane() : void
+    - connectToServer() : void
+    + onGameModeChanged() : void
+    + populateDropdown(dropdown:TMP_Dropdown) : void
+}
+MonoBehaviour <|-- JoinUIManager
+JoinUIManager --> "roomIDInput" TMP_InputField
+JoinUIManager --> "serverIpInput" TMP_InputField
+JoinUIManager --> "localUdpPortInput" TMP_InputField
+JoinUIManager --> "nameInput" TMP_InputField
+JoinUIManager --> "errorDisplay" TMP_Text
+JoinUIManager --> "gameModes" TMP_Dropdown
+JoinUIManager --> "JoinCanvas" Canvas
+JoinUIManager --> "selectionCanvas" Canvas
+JoinUIManager --> "planeType" PlaneTypes
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+class ClonesManager {
+    + <<const>> CloneFileName : string = ".clone"
+    + <<const>> CloneNameSuffix : string = "_clone"
+    + <<const>> ProjectName : string = "ParrelSync"
+    + <<const>> MaxCloneProjectCount : int = 10
+    + <<const>> ArgumentFileName : string = ".parrelsyncarg"
+    + <<const>> DefaultArgument : string = "client"
+    + {static} CreateCloneFromCurrent() : Project
+    + {static} CreateCloneFromPath(sourceProjectPath:string) : Project
+    - {static} RegisterClone(cloneProject:Project) : void
+    + {static} OpenProject(projectPath:string) : void
+    - {static} GetApplicationPath() : string
+    + {static} IsCloneProjectRunning(projectPath:string) : bool
+    + {static} DeleteClone(cloneProjectPath:string) : void
+    + {static} CreateProjectFolder(project:Project) : void
+    + {static} CopyLibraryFolder(sourceProject:Project, destinationProject:Project) : void
+    - {static} CreateLinkMac(sourcePath:string, destinationPath:string) : void
+    - {static} CreateLinkLinux(sourcePath:string, destinationPath:string) : void
+    - {static} CreateLinkWin(sourcePath:string, destinationPath:string) : void
+    + {static} LinkFolders(sourcePath:string, destinationPath:string) : void
+    - {static} isCloneFileExistCache : bool? = null
+    + {static} IsClone() : bool
+    + {static} GetCurrentProjectPath() : string
+    + {static} GetCurrentProject() : Project
+    + {static} GetArgument() : string
+    + {static} GetOriginalProjectPath() : string
+    + {static} GetCloneProjectsPath() : List<string>
+    + {static} CopyDirectoryWithProgressBar(sourcePath:string, destinationPath:string, progressBarPrefix:string) : void
+    - {static} CopyDirectoryWithProgressBarRecursive(source:DirectoryInfo, destination:DirectoryInfo, totalBytes:long, copiedBytes:long, progressBarPrefix:string) : void
+    - {static} GetDirectorySize(directory:DirectoryInfo, includeNested:bool, progressBarPrefix:string) : long
+    - {static} StartHiddenConsoleProcess(fileName:string, args:string) : void
+    - {static} ExecuteBashCommand(command:string) : void
+    + {static} OpenProjectInFileExplorer(path:string) : void
+}
+@enduml

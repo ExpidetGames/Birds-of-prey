@@ -1,0 +1,18 @@
+@startuml
+class TCPClient {
+    - ip : string
+    - port : int
+    + TCPClient(ip:string, port:int)
+    + connect() : void
+    sendCallStack() : void
+    receiveMessages() : void
+    - OnApplicationQuit() : void
+}
+class "List`1"<T> {
+}
+TCPClient --> "ws" WebSocket
+TCPClient o-> "callStack<string>" "List`1"
+TCPClient o-> "receivedMessages<string>" "List`1"
+TCPClient --> "senderThread" Thread
+TCPClient --> "receiverThread" Thread
+@enduml

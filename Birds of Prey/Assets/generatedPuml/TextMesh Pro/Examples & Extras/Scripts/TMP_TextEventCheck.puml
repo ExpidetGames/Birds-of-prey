@@ -1,0 +1,14 @@
+@startuml
+class TMP_TextEventCheck {
+    OnEnable() : void
+    OnDisable() : void
+    OnCharacterSelection(c:char, index:int) : void
+    OnSpriteSelection(c:char, index:int) : void
+    OnWordSelection(word:string, firstCharacterIndex:int, length:int) : void
+    OnLineSelection(lineText:string, firstCharacterIndex:int, length:int) : void
+    OnLinkSelection(linkID:string, linkText:string, linkIndex:int) : void
+}
+MonoBehaviour <|-- TMP_TextEventCheck
+TMP_TextEventCheck --> "TextEventHandler" TMP_TextEventHandler
+TMP_TextEventCheck --> "m_TextComponent" TMP_Text
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class EnvMapAnimator {
+    Awake() : void
+    Start() : IEnumerator
+}
+MonoBehaviour <|-- EnvMapAnimator
+EnvMapAnimator --> "RotationSpeeds" Vector3
+EnvMapAnimator --> "m_textMeshPro" TMP_Text
+EnvMapAnimator --> "m_material" Material
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+class VertexColorCycler {
+    Awake() : void
+    Start() : void
+    AnimateVertexColors() : IEnumerator
+}
+MonoBehaviour <|-- VertexColorCycler
+VertexColorCycler --> "m_TextComponent" TMP_Text
+@enduml

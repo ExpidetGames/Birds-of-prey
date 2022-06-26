@@ -1,0 +1,22 @@
+@startuml
+class VertexJitter {
+    + AngleMultiplier : float = 1.0f
+    + SpeedMultiplier : float = 1.0f
+    + CurveScale : float = 1.0f
+    - hasTextChanged : bool
+    Awake() : void
+    OnEnable() : void
+    OnDisable() : void
+    Start() : void
+    ON_TEXT_CHANGED(obj:Object) : void
+    AnimateVertexColors() : IEnumerator
+}
+class VertexAnim <<struct>> {
+    + angleRange : float
+    + angle : float
+    + speed : float
+}
+MonoBehaviour <|-- VertexJitter
+VertexJitter --> "m_TextComponent" TMP_Text
+VertexJitter +-- VertexAnim
+@enduml

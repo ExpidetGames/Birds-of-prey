@@ -1,0 +1,8 @@
+@startuml
+class JsonParser {
+    + {static} transformToJson(input:Transform) : string
+    + {static} decodeJsonMessage(message:string) : void
+    + {static} stringListToFloatList(input:List<List<string>>) : List<List<float>>
+}
+MonoBehaviour <|-- JsonParser
+@enduml

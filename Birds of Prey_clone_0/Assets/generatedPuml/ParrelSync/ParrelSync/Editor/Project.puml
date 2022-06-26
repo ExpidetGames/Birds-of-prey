@@ -1,0 +1,19 @@
+@startuml
+class Project {
+    + name : string
+    + projectPath : string
+    rootPath : string
+    + assetPath : string
+    + projectSettingsPath : string
+    + libraryPath : string
+    + packagesPath : string
+    + autoBuildPath : string
+    + localPackages : string
+    + Project()
+    + Project(path:string)
+    + Clone() : object
+    + updateNewName(newName:string) : void
+    + <<override>> ToString() : string
+    - ParsePath(path:string) : void
+}
+@enduml

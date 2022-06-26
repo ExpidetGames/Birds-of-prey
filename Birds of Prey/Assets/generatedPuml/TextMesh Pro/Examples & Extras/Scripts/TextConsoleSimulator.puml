@@ -1,0 +1,14 @@
+@startuml
+class TextConsoleSimulator {
+    - hasTextChanged : bool
+    Awake() : void
+    Start() : void
+    OnEnable() : void
+    OnDisable() : void
+    ON_TEXT_CHANGED(obj:Object) : void
+    RevealCharacters(textComponent:TMP_Text) : IEnumerator
+    RevealWords(textComponent:TMP_Text) : IEnumerator
+}
+MonoBehaviour <|-- TextConsoleSimulator
+TextConsoleSimulator --> "m_TextComponent" TMP_Text
+@enduml
