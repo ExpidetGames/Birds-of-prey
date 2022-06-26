@@ -1,9 +1,0 @@
-@startuml
-class ClonesManagerWindow {
-    + isCloneCreated : bool <<get>>
-    - {static} InitWindow() : void
-    - OnGUI() : void
-}
-EditorWindow <|-- ClonesManagerWindow
-ClonesManagerWindow --> "clonesScrollPos" Vector2
-@enduml

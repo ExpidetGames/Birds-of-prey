@@ -1,6 +1,0 @@
-@startuml
-class UpdateChecker {
-    + <<const>> LocalVersion : string = "1.5.1"
-    {static} CheckForUpdate() : void
-}
-@enduml
