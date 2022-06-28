@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 85
+  controlID: 16
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 86
+  controlID: 17
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 87
+  controlID: 18
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -270,8 +270,8 @@ MonoBehaviour:
     y: 0
     width: 386
     height: 987
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -328,8 +328,8 @@ MonoBehaviour:
     vZoomLockedByDefault: 0
     m_HBaseRangeMin: -560.5
     m_HBaseRangeMax: 560.5
-    m_VBaseRangeMin: -289
-    m_VBaseRangeMax: 289
+    m_VBaseRangeMin: -299.5
+    m_VBaseRangeMax: 299.5
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -346,11 +346,11 @@ MonoBehaviour:
     m_DrawArea:
       serializedVersion: 2
       x: 0
-      y: 21
+      y: 0
       width: 1121
-      height: 578
+      height: 599
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 560.5, y: 289}
+    m_Translation: {x: 560.5, y: 299.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
@@ -358,9 +358,9 @@ MonoBehaviour:
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
       x: -560.5
-      y: -289
+      y: -299.5
       width: 1121
-      height: 578
+      height: 599
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_LastWindowPixelSize: {x: 1121, y: 599}
@@ -402,21 +402,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: de58ffff2859ffff7259ffffc259ffff0c5affff565affffa05affffea5affff345bffff7e5bffffc85bffff125cffff5c5cffffa65cffffdc5dfffff85effffde5fffff1c66ffffb67effffba85ffff5c86ffffac86fffffc86ffff4c87ffff9687ffffe087ffff2a88ffff7a88ffffc488ffff1089ffff5a89ffffa489ffffee89ffff388affff828affffcc8affff2e8bffff788bffffc28bffff0c8cffff528cfffffa91ffff8092ffffc893ffff2496ffff7497ffffd8a6ffff5ca8ffffe0a8ffffe2a9ffff68aaffffd6aeffff90d1ffff32d2fffff4f3ffff26fbffff265f0000d46800001269000042690000248600001e920000
+      m_ExpandedIDs: 1cf7ffff66f7ffffb4f7fffffef7ffff48f8ffff92f8ffffecf8ffff36f9ffff80f9ffffcaf9ffff22fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: EXPORT_GOOGLE_SAT_WM
-        m_OriginalName: EXPORT_GOOGLE_SAT_WM
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -33102
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 9}
       m_SearchString: 
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Position:
     m_Target: {x: 53.4541, y: 114.88089, z: 202.4248}
     speed: 2
-    m_Value: {x: 53.454033, y: 114.88089, z: 202.42487}
+    m_Value: {x: 53.4541, y: 114.88089, z: 202.4248}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -702,11 +702,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.048716176, y: -0.9514391, z: 0.21354283, w: 0.21652085}
     speed: 2
-    m_Value: {x: 0.048713952, y: -0.95139563, z: 0.21353309, w: 0.21651097}
+    m_Value: {x: -0.048713952, y: 0.95139563, z: -0.21353309, w: -0.21651097}
   m_Size:
     m_Target: 8418.595
     speed: 2
-    m_Value: 8418.596
+    m_Value: 8418.595
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -800,37 +800,37 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/FBX/3D_Models/Map3
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/FBX/3D_Models/Map3
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Users\Bene\Programming\C#\Unity_Projekts\Github\Birds-of-prey\Birds
     of Prey
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: a25d0000
-    m_LastClickedID: 23970
-    m_ExpandedIDs: 00000000845d0000905d0000ca5d000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: ea5d0000
+    m_LastClickedID: 24042
+    m_ExpandedIDs: 00000000d45d0000d65d0000d85d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Scenes
-      m_OriginalName: Scenes
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 23970
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -844,7 +844,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000845d0000
+    m_ExpandedIDs: 00000000d45d0000d65d0000d85d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
