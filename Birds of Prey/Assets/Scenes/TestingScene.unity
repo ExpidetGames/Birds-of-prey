@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -248,8 +248,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.9339623, g: 0.7507587, b: 0.2511125, a: 1}
+  m_Intensity: 0.58
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -10309,7 +10309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &506470036106769969
 GameObject:
   m_ObjectHideFlags: 0
@@ -10441,7 +10441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &919139937251545228
 GameObject:
   m_ObjectHideFlags: 0
@@ -10500,8 +10500,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.239777, y: 0.088160515, z: 0.70891}
-  m_Center: {x: -0.062030792, y: 0.0742898, z: 0.54}
+  m_Size: {x: 1.8042693, y: 0.088160515, z: 0.69066024}
+  m_Center: {x: 0.0208745, y: 0.0742898, z: -0.39216673}
 --- !u!1 &1590600605590011214
 GameObject:
   m_ObjectHideFlags: 0
@@ -11169,7 +11169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 4617404297059115322}
   thrust: 300
-  turnTorque: {x: 90, y: 25, z: 45}
+  turnTorque: {x: 50, y: 25, z: 45}
   thrustMult: 15
   turnMult: 4
   sensitivity: 5
@@ -11675,6 +11675,7 @@ GameObject:
   - component: {fileID: 4617404296814608914}
   - component: {fileID: 5493414626681222003}
   - component: {fileID: 1461779167687848060}
+  - component: {fileID: 5493414626681222004}
   m_Layer: 0
   m_Name: Model
   m_TagString: OwnPlayer
@@ -11812,10 +11813,23 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.37106878
-  m_Height: 2.199204
+  m_Radius: 0.24655667
+  m_Height: 1.2124462
   m_Direction: 2
-  m_Center: {x: -0.012355447, y: 0.13000011, z: 0.22412682}
+  m_Center: {x: -0.012355447, y: 0.0054880083, z: 0.7175057}
+--- !u!65 &5493414626681222004
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617404296814608925}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4856746, y: 0.09893799, z: 0.54459524}
+  m_Center: {x: -0.0160259, y: -0.001953125, z: -1.0404272}
 --- !u!4 &5655725790811496180
 Transform:
   m_ObjectHideFlags: 0
@@ -11863,7 +11877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &5904316877981661612
 GameObject:
   m_ObjectHideFlags: 0
@@ -11931,7 +11945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6622354013419806003
 Transform:
   m_ObjectHideFlags: 0
