@@ -16,7 +16,7 @@ public class PregameLobbyUIManager : MonoBehaviour {
         mode.text = NetworkedVariables.currentGameMode.ToString();
         readyUpButtonText.text = (NetworkedVariables.isRoomCreator) ? "Start the game" : "Ready up";
         if(GameModeManager.gameModes[NetworkedVariables.currentGameMode].hasTeams) {
-            for(int i = 0; i < GameModeManager.gameModes[NetworkedVariables.currentGameMode].teamCount) {
+            for(int i = 0; i < GameModeManager.gameModes[NetworkedVariables.currentGameMode].teamCount;i++) {
                 Instantiate(scrollView);
             }
         }
