@@ -131,6 +131,7 @@ public class JsonParser : MonoBehaviour {
             string disconnectedId = (string)decodedMessage["Id"];
             if(disconnectedId == NetworkedVariables.playerId) {
                 NetworkedVariables.inGame = false;
+                NetworkedVariables.isRoomCreator = false;
                 NetworkedVariables.scenceToLoad.Add(0);
                 NetworkedVariables.roomId = "";
                 NetworkedVariables.allConnectedPlayerTransforms = new Dictionary<string, List<List<float>>>();
@@ -144,15 +145,23 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("createdRoom")) {
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
             NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
+            NetworkedVariables.isRoomCreator = true;
             NetworkedVariables.inGame = true;
-            NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
+            NetworkedVariables.scenceToLoad.Add(4);
+        }
+        if(messageType.Equals("readyUp")) {
+
+        }
+        if(messageType.Equals("unready")) {
+
         }
         if(messageType.Equals("joinSuccess")) {
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
             NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
             NetworkedVariables.currentGameMode = (GameModeTypes)((int)decodedMessage["gameMode"]);
+            NetworkedVariables.isRoomCreator = false;
             NetworkedVariables.inGame = true;
-            NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
+            NetworkedVariables.scenceToLoad.Add(4);
         }
         if(messageType.Equals("otherPlayerData")) {
             foreach(KeyValuePair<string, string> playerName in decodedMessage["names"].ToObject<Dictionary<string, string>>()) {

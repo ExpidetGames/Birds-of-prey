@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/World 1.unity
     guid: 2eeb5dd1e4659a44a8a76ad00bcdee22
+  - enabled: 1
+    path: Assets/Scenes/PregameLobby.unity
+    guid: 0b9cdac47a6011a4aa447d78cd72801d
   m_configObjects: {}

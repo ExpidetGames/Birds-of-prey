@@ -1,1 +1,2 @@
-https://golangdocs.com/golang-gorilla-websockets
+GorillaWebsockets for go: https://golangdocs.com/golang-gorilla-websockets
+ParrelSync for Unity: https://github.com/VeriorPies/ParrelSync
