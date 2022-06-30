@@ -30,6 +30,15 @@ public class JsonParser : MonoBehaviour {
             //Debug.Log($"Received Id: {(string) decodedMessage["newId"]}");
             NetworkedVariables.playerId = (string)decodedMessage["newId"];
         }
+        if(messageType.Equals("clientConnected")) {
+            string newClientId = (string)decodedMessage["id"];
+            string newClientName = (string)decodedMessage["name"];
+            string newClientTeam = (string)decodedMessage["team"];
+            bool isReady = (bool)decodedMessage["isReady"];
+            Client c = new Client(id: newClientId, name: newClientName, teamColor: newClientTeam, isReady);
+            // Debug.Log($"Client {c.id} connected. The name is: {c.name} and the team is: {c.teamColor}");
+            NetworkedVariables.connectedClients.Add(newClientId, c);
+        }
         //The transform data of at least one client has changed so it has to be updated
         if(messageType.Equals("updatePlayerTransform")) {
             foreach(KeyValuePair<string, string> playerData in decodedMessage["allPlayerTransformDict"].ToObject<Dictionary<string, string>>()) {
@@ -158,6 +167,8 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("joinSuccess")) {
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
             NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
+            //Populating the clients List in Networked Variables with the other clients
+
             NetworkedVariables.currentGameMode = (GameModeTypes)((int)decodedMessage["gameMode"]);
             NetworkedVariables.isRoomCreator = false;
             NetworkedVariables.inGame = true;

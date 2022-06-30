@@ -20,6 +20,8 @@ public static class NetworkedVariables {
     public static List<int> scenceToLoad = new List<int>();
     //Set by the JSONParser when a client disconnects and checked by the Scene Updater to delete disconnected Clients
     public static List<string> disconnectedPlayerIds = new List<string>();
+    //Contains all the clients and soon their information like id, name, team, health, planeType, transform, isDead and so on
+    public static Dictionary<string, Client> connectedClients = new Dictionary<string, Client>();
     //Contains the information of a lock if a target is locked
     public static List<Dictionary<string, string>> targetLockInfo = new List<Dictionary<string, string>>();
     //Holds the players who are currently dead/in limbo (The death scene) 

@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class ScrollViewPopulatorPGLobby : MonoBehaviour {
 
@@ -27,4 +26,10 @@ public class ScrollViewPopulatorPGLobby : MonoBehaviour {
         Destroy(objectToDestroy);
         spawnedNames.Remove(playerId);
     }
+
+    public void updateClient(string clientId, bool newReadyState) {
+        Image namePlateReadyIndicator = spawnedNames[clientId].GetComponentInChildren<Image>();
+        namePlateReadyIndicator.color = (newReadyState) ? Color.green : Color.red;
+    }
+
 }
