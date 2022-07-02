@@ -20,10 +20,10 @@ public class ScrollViewPopulatorPGLobby : MonoBehaviour {
         }
     }
 
-    public void removeFromList(string playerId) {
-        GameObject objectToDestroy = spawnedNames[playerId];
+    public void removeFromList(Client disconnectedClient) {
+        GameObject objectToDestroy = spawnedNames[disconnectedClient.id];
         Destroy(objectToDestroy);
-        spawnedNames.Remove(playerId);
+        spawnedNames.Remove(disconnectedClient.id);
     }
 
     public void updateClient(Client client) {

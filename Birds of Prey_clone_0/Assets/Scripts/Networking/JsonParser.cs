@@ -46,6 +46,9 @@ public class JsonParser : MonoBehaviour {
                 }
             }
         }
+        if(messageType.Equals("startGame")) {
+            NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
+        }
         //A player or team has won
         if(messageType.Equals("GameOver")) {
             //Team if a whole Team has won. Single if one Person has won
@@ -127,6 +130,14 @@ public class JsonParser : MonoBehaviour {
             //Debug.Log($"The new health of player {playerId} is {NetworkedVariables.playerHealths[playerId]}");
             Dictionary<string, string> respawningPlayerInfo = new Dictionary<string, string> { ["id"] = playerId };
             NetworkedVariables.playersToRejoin.Add(respawningPlayerInfo);
+        }
+        if(messageType.Equals("transferOwnership")) {
+            string newOwner = (string)decodedMessage["newOwner"];
+            Debug.Log("Ownership transfered to " + newOwner);
+            if(newOwner == NetworkedVariables.playerId) {
+                NetworkedVariables.isRoomCreator = true;
+                Debug.Log(NetworkedVariables.isRoomCreator);
+            }
         }
         //Another client disconnected
         if(messageType.Equals("clientDisconnected")) {
