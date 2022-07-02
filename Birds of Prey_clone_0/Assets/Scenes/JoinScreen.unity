@@ -1159,8 +1159,8 @@ MonoBehaviour:
     hasTeams: 1
     teamCount: 2
     teamColors:
-    - '"Red"'
-    - '"Blue"'
+    - Red
+    - Blue
     useTime: 0
     timeInSeconds: 200
     useKills: 0
@@ -1173,8 +1173,8 @@ MonoBehaviour:
     hasTeams: 1
     teamCount: 2
     teamColors:
-    - '"Red"'
-    - '"Blue"'
+    - Red
+    - Blue
     useTime: 0
     timeInSeconds: 200
     useKills: 1
@@ -2399,7 +2399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -85400, y: 1173807.2}
+  m_AnchoredPosition: {x: -88200, y: 1186751.6}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &901004877
