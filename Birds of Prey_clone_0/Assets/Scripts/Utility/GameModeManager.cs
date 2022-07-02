@@ -24,6 +24,7 @@ public class GameMode {
     public int maxPlayerCount; //Implemented
     public bool hasTeams;
     public int teamCount;
+    public string[] teamColors;
     [Header("Finish Conditions")]
     public bool useTime;
     public float timeInSeconds;

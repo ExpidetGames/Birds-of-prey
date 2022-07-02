@@ -1,30 +1,33 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class ScrollViewPopulatorPGLobby : MonoBehaviour {
 
+    [SerializeField] private GameObject namePlate;
+
     private Dictionary<string, GameObject> spawnedNames = new Dictionary<string, GameObject>();
-    // Start is called before the first frame update
-    void Start() {
 
+
+    public void addToList(Client newClient) {
+        if(!spawnedNames.ContainsKey(newClient.id)) {
+            GameObject newPlayerTag = Instantiate(namePlate);
+            newPlayerTag.GetComponentInChildren<TMP_Text>().SetText(newClient.name);
+            newPlayerTag.GetComponentsInChildren<Image>()[1].color = (newClient.isReady) ? Color.green : Color.red;
+            newPlayerTag.transform.SetParent(this.gameObject.transform);
+            spawnedNames.Add(newClient.id, newPlayerTag);
+        }
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
-
-    public void addToList(string playerId, GameObject playerNameTag) {
-        GameObject newPlayerTag = Instantiate(playerNameTag);
-        newPlayerTag.transform.parent = this.gameObject.transform;
-        spawnedNames.Add(playerId, newPlayerTag);
-    }
-
-    public void removeFromList(string playerId) {
-        GameObject objectToDestroy = spawnedNames[playerId];
+    public void removeFromList(Client disconnectedClient) {
+        GameObject objectToDestroy = spawnedNames[disconnectedClient.id];
         Destroy(objectToDestroy);
-        spawnedNames.Remove(playerId);
+        spawnedNames.Remove(disconnectedClient.id);
     }
+
+    public void updateClient(Client client) {
+        spawnedNames[client.id].GetComponentsInChildren<Image>()[1].color = (client.isReady) ? Color.green : Color.red;
+    }
+
 }
