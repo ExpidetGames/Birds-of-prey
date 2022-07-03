@@ -31,8 +31,8 @@ public class PlayerManager : MonoBehaviour {
             ownPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeType].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);
             ownPlayer.GetComponent<PlayerHealth>().setHealth(NetworkedVariables.connectedClients[NetworkedVariables.playerId].playerHealth);
             ownPlayer.GetComponent<PlayerHealth>().myId = NetworkedVariables.playerId;
-            ownPlayer.GetComponentInChildren<Plane>().thrust = PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].thrust;
-            ownPlayer.GetComponentInChildren<Plane>().turnTorque = PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].turnTorque;
+            ownPlayer.GetComponentInChildren<Plane>().thrust = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeType].thrust;
+            ownPlayer.GetComponentInChildren<Plane>().turnTorque = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeType].turnTorque;
             spawnedPlayerIds.Add(NetworkedVariables.playerId);
         }
         updatePlayerTransforms();
@@ -47,18 +47,18 @@ public class PlayerManager : MonoBehaviour {
                     if(!spawnedPlayerIds.Contains(newPlayerId) && !allPlayers.ContainsKey(newPlayerId) && SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex) {
                         GameObject spawnedPlayer;
                         //Spawning the new Player Dummy Object
-                        if(NetworkedVariables.planeTypes.ContainsKey(newPlayerId)) {
-                            spawnedPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.planeTypes[newPlayerId]].playerDummy, transform.position, Quaternion.identity);
+                        if(NetworkedVariables.connectedClients.ContainsKey(newPlayerId)) {
+                            spawnedPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.connectedClients[newPlayerId].planeType].playerDummy, transform.position, Quaternion.identity);
                         } else {
                             continue;
                         }
                         PlayerDummyScript dummy = spawnedPlayer.GetComponent<PlayerDummyScript>();
                         PlayerHealth dummyHealth = spawnedPlayer.GetComponent<PlayerHealth>();
                         if(dummy != null) {
-                            dummy.setName(NetworkedVariables.playerNames[newPlayerId]);
+                            dummy.setName(NetworkedVariables.connectedClients[newPlayerId].name);
                         }
                         if(dummyHealth != null) {
-                            dummyHealth.setHealth(NetworkedVariables.playerHealths[newPlayerId]);
+                            dummyHealth.setHealth(NetworkedVariables.connectedClients[newPlayerId].playerHealth);
                             dummyHealth.myId = newPlayerId;
                         }
                         //Adding the Player Object to all the Players to work with it later
