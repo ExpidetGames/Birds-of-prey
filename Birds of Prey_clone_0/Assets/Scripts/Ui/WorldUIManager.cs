@@ -19,8 +19,8 @@ public class WorldUIManager : MonoBehaviour {
             if(roomIdDisplay != null) {
                 roomIdDisplay.text = NetworkedVariables.roomId;
             }
-            if(NetworkedVariables.inGame && NetworkedVariables.playerNames.ContainsKey(NetworkedVariables.playerId) && nameDisplay != null) {
-                nameDisplay.text = NetworkedVariables.playerNames[NetworkedVariables.playerId];
+            if(NetworkedVariables.inGame && NetworkedVariables.connectedClients.ContainsKey(NetworkedVariables.playerId) && nameDisplay != null) {
+                nameDisplay.text = NetworkedVariables.connectedClients[NetworkedVariables.playerId].name;
             }
         }
     }
