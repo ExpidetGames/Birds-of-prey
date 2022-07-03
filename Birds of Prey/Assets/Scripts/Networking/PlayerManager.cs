@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour {
         //Spawning the own Player if it is null and the Player is back in the world
         if(ownPlayer == null && SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex) {
             ownPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeType].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);
-            ownPlayer.GetComponent<PlayerHealth>().setHealth(NetworkedVariables.playerHealths[NetworkedVariables.playerId]);
+            ownPlayer.GetComponent<PlayerHealth>().setHealth(NetworkedVariables.connectedClients[NetworkedVariables.playerId].playerHealth);
             ownPlayer.GetComponent<PlayerHealth>().myId = NetworkedVariables.playerId;
             ownPlayer.GetComponentInChildren<Plane>().thrust = PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].thrust;
             ownPlayer.GetComponentInChildren<Plane>().turnTorque = PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].turnTorque;

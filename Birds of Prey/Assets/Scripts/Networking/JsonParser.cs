@@ -32,7 +32,8 @@ public class JsonParser : MonoBehaviour {
         }
         if(messageType.Equals("clientConnected")) {
             PlaneTypes planeType = (PlaneTypes) Enum.Parse(typeof(PlaneTypes), (string)decodedMessage["PlaneType"]);
-            addClient((string)decodedMessage["Id"], (string)decodedMessage["Name"], (string)decodedMessage["Team"], (bool)decodedMessage["IsReady"], planeType);
+            int playerHealth = (int) decodedMessage["PlayerHealth"];
+            addClient((string)decodedMessage["Id"], (string)decodedMessage["Name"], (string)decodedMessage["Team"], playerHealth, (bool)decodedMessage["IsReady"], planeType);
         }
         //The transform data of at least one client has changed so it has to be updated
         if(messageType.Equals("updatePlayerTransform")) {
@@ -180,7 +181,8 @@ public class JsonParser : MonoBehaviour {
                 // Debug.Log($"Found client with name: {client["Name"]} and id {client["Id"]} with the team {client["Team"]}");
                 if(client["Id"] != NetworkedVariables.playerId) {
                     PlaneTypes planeType = (PlaneTypes) Enum.Parse(typeof(PlaneTypes), (string)client["PlaneType"]);
-                    addClient(client["Id"], client["Name"], client["Team"], bool.Parse(client["IsReady"]), planeType);
+                    int playerHealth = int.Parse(client["PlayerHealth"]);
+                    addClient(client["Id"], client["Name"], client["Team"], playerHealth, bool.Parse(client["IsReady"]), planeType);
                 }
             }
             NetworkedVariables.currentGameMode = (GameModeTypes)((int)decodedMessage["gameMode"]);
@@ -208,9 +210,9 @@ public class JsonParser : MonoBehaviour {
         }
     }
 
-    private static void addClient(string id, string name, string team, bool isReady, PlaneTypes planeType) {
+    private static void addClient(string id, string name, string team, int playerHealth, bool isReady, PlaneTypes planeType) {
         // Debug.Log($"Client {c.id} connected. The name is: {c.name} and the team is: {c.teamColor}");
-        NetworkedVariables.connectedClients.Add(id, new Client(id: id, name: name, teamColor: team, isReady: isReady, planeType: planeType));
+        NetworkedVariables.connectedClients.Add(id, new Client(id: id, name: name, teamColor: team, playerHealth: playerHealth, isReady: isReady, planeType: planeType));
     }
 
     public static List<List<float>> stringListToFloatList(List<List<string>> input) {
