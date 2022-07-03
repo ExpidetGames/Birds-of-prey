@@ -163,7 +163,7 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
             NetworkedVariables.isRoomCreator = true;
             NetworkedVariables.inGame = true;
-            NetworkedVariables.scenceToLoad.Add(4);
+            NetworkedVariables.scenceToLoad.Add(2);
         }
         if(messageType.Equals("ready")) {
             string playerId = (string)decodedMessage["Id"];

@@ -1147,10 +1147,12 @@ MonoBehaviour:
     timeBetweenRockets: 1
     timeBetweenBullets: 0.1
   _worlds:
-  - buildIndex: 1
-    name: '"World1"'
   - buildIndex: 3
-    name: '"World2"'
+    name: World1
+  - buildIndex: 4
+    name: World2
+  - buildIndex: 5
+    name: World3
 --- !u!114 &390984969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2410,7 +2412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -91800, y: 1273443.2}
+  m_AnchoredPosition: {x: -92200, y: 1294482}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &901004877
