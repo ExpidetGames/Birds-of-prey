@@ -16,6 +16,7 @@ public class JsonParser : MonoBehaviour {
 
     //Decodes a message and does something based on that
     public static void decodeJsonMessage(string message) {
+        Debug.Log(message);
         JObject decodedMessage = null;
         if(message != null) {
             decodedMessage = JObject.Parse(message);
@@ -178,7 +179,7 @@ public class JsonParser : MonoBehaviour {
             foreach(Dictionary<string, string> client in decodedMessage["otherClients"].ToObject<List<Dictionary<string, string>>>()) {
                 // Debug.Log($"Found client with name: {client["Name"]} and id {client["Id"]} with the team {client["Team"]}");
                 if(client["Id"] != NetworkedVariables.playerId) {
-                    PlaneTypes planeType = (PlaneTypes) Enum.Parse(typeof(PlaneTypes), (string)decodedMessage["PlaneType"]);
+                    PlaneTypes planeType = (PlaneTypes) Enum.Parse(typeof(PlaneTypes), (string)client["PlaneType"]);
                     addClient(client["Id"], client["Name"], client["Team"], bool.Parse(client["IsReady"]), planeType);
                 }
             }
