@@ -5,8 +5,8 @@ public class PlayerHealth : MonoBehaviour {
     [SerializeField] private int currentHealth;
 
     private void Update() {
-        if(NetworkedVariables.playerHealths.ContainsKey(myId)) {
-            currentHealth = NetworkedVariables.playerHealths[myId];
+        if(NetworkedVariables.connectedClients.ContainsKey(myId)) {
+            currentHealth = NetworkedVariables.connectedClients[myId].playerHealth;
         }
     }
 
