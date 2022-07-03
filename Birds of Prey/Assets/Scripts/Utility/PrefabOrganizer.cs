@@ -91,5 +91,5 @@ public enum RocketTypes {
 
 public enum PlaneTypes {
     STANDARD_AIRCRAFT,
-    CRAPPY_AIRCRAFT
+    F35
 }

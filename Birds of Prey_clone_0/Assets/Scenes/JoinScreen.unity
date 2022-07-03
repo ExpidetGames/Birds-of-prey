@@ -857,7 +857,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: jodast.de
+  m_Text: localhost
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1128,13 +1128,24 @@ MonoBehaviour:
     realPlayer: {fileID: 7831039119531705820, guid: 76695ecf88a711845824c99013d48b26, type: 3}
     playerDummy: {fileID: 8503469488898852508, guid: a088d1eede613504394f8a6ac3635009, type: 3}
     bulletAmuniton: 0
-    rocketAmunition: 2
+    rocketAmunition: 0
     planeSprite: {fileID: 21300000, guid: 1015b20ddc5a0c74a81fca19c3d7b184, type: 3}
-    turnTorque: {x: 90, y: 25, z: 45}
+    turnTorque: {x: 30, y: 25, z: 45}
     startHealth: 100
     thrust: 100
     timeBetweenRockets: 1
     timeBetweenBullets: 0.2
+  - playerType: 1
+    realPlayer: {fileID: 3609111521691741163, guid: 39ecde3de05985047b19a8ed9165d8a8, type: 3}
+    playerDummy: {fileID: 1368033364787646272, guid: c3bd72f56dd0ffa41ab45262301a535b, type: 3}
+    bulletAmuniton: 0
+    rocketAmunition: 2
+    planeSprite: {fileID: 21300000, guid: d499f926cd0fffd4182184e627c20d8d, type: 3}
+    turnTorque: {x: 70, y: 40, z: 45}
+    startHealth: 500
+    thrust: 500
+    timeBetweenRockets: 1
+    timeBetweenBullets: 0.1
   _worlds:
   - buildIndex: 1
     name: '"World1"'
@@ -1409,7 +1420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "jodast.de\u200B"
+  m_text: "localhost\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2399,7 +2410,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -88600, y: 1202658.4}
+  m_AnchoredPosition: {x: -91000, y: 1251478.6}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &901004877

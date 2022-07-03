@@ -16,7 +16,7 @@ public class JsonParser : MonoBehaviour {
 
     //Decodes a message and does something based on that
     public static void decodeJsonMessage(string message) {
-        Debug.Log(message);
+        // Debug.Log(message);
         JObject decodedMessage = null;
         if(message != null) {
             decodedMessage = JObject.Parse(message);
@@ -31,8 +31,8 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.playerId = (string)decodedMessage["newId"];
         }
         if(messageType.Equals("clientConnected")) {
-            PlaneTypes planeType = (PlaneTypes) Enum.Parse(typeof(PlaneTypes), (string)decodedMessage["PlaneType"]);
-            int playerHealth = (int) decodedMessage["PlayerHealth"];
+            PlaneTypes planeType = (PlaneTypes)Enum.Parse(typeof(PlaneTypes), (string)decodedMessage["PlaneType"]);
+            int playerHealth = (int)decodedMessage["PlayerHealth"];
             addClient((string)decodedMessage["Id"], (string)decodedMessage["Name"], (string)decodedMessage["Team"], playerHealth, (bool)decodedMessage["IsReady"], planeType);
         }
         //The transform data of at least one client has changed so it has to be updated
@@ -180,7 +180,7 @@ public class JsonParser : MonoBehaviour {
             foreach(Dictionary<string, string> client in decodedMessage["otherClients"].ToObject<List<Dictionary<string, string>>>()) {
                 // Debug.Log($"Found client with name: {client["Name"]} and id {client["Id"]} with the team {client["Team"]}");
                 if(client["Id"] != NetworkedVariables.playerId) {
-                    PlaneTypes planeType = (PlaneTypes) Enum.Parse(typeof(PlaneTypes), (string)client["PlaneType"]);
+                    PlaneTypes planeType = (PlaneTypes)Enum.Parse(typeof(PlaneTypes), (string)client["PlaneType"]);
                     int playerHealth = int.Parse(client["PlayerHealth"]);
                     addClient(client["Id"], client["Name"], client["Team"], playerHealth, bool.Parse(client["IsReady"]), planeType);
                 }
@@ -189,7 +189,8 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.isRoomCreator = false;
             NetworkedVariables.inGame = true;
             NetworkedVariables.scenceToLoad.Add(4);
-        }if(messageType.Equals("Error")) {
+        }
+        if(messageType.Equals("Error")) {
             NetworkedVariables.errorMessage = ((string)decodedMessage["value"]);
         }
     }
