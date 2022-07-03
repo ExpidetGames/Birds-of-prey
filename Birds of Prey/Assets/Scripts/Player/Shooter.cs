@@ -68,7 +68,7 @@ public class Shooter : MonoBehaviour {
                 if(Input.GetMouseButton(1) && timeUntilUnlock > 0) {
                     foreach(GameObject rocketSpawner in rocketSpawnPoints) {
                         Vector3 planeFacingDirection = plane.transform.TransformDirection(Vector3.forward);
-                        playerManager.shootRocket(currentTarget, rocketSpawner.transform.position, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.planeTypes[NetworkedVariables.playerId]].rocketAmunition);
+                        playerManager.shootRocket(currentTarget, rocketSpawner.transform.position, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeType].rocketAmunition);
                     }
                     timePastSinceLastRocket = 0f;
                 }

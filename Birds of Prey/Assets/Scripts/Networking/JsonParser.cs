@@ -116,8 +116,8 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("playerHit")) {
             int newHealth = (int)decodedMessage["newHealth"];
             string hitPlayer = (string)decodedMessage["hitPlayerId"];
-            if(NetworkedVariables.playerHealths[hitPlayer] > 0) {
-                NetworkedVariables.playerHealths[hitPlayer] = newHealth;
+            if(NetworkedVariables.connectedClients[hitPlayer].playerHealth > 0) {
+                NetworkedVariables.connectedClients[hitPlayer].playerHealth = newHealth;
             }
         }
         if(messageType.Equals("playerDied")) {
@@ -129,7 +129,7 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("rejoin")) {
             string playerId = (string)decodedMessage["playerId"];
             int newHealth = (int)decodedMessage["newHealth"];
-            NetworkedVariables.playerHealths[playerId] = newHealth;
+            NetworkedVariables.connectedClients[playerId].playerHealth = newHealth;
             //Debug.Log($"The new health of player {playerId} is {NetworkedVariables.playerHealths[playerId]}");
             Dictionary<string, string> respawningPlayerInfo = new Dictionary<string, string> { ["id"] = playerId };
             NetworkedVariables.playersToRejoin.Add(respawningPlayerInfo);
@@ -150,8 +150,8 @@ public class JsonParser : MonoBehaviour {
                 NetworkedVariables.isRoomCreator = false;
                 NetworkedVariables.scenceToLoad.Add(0);
                 NetworkedVariables.roomId = "";
-                NetworkedVariables.allConnectedPlayerTransforms = new Dictionary<string, List<List<float>>>();
-                NetworkedVariables.playerHealths = new Dictionary<string, int>();
+                NetworkedVariables.allConnectedPlayerTransforms.Clear();
+                NetworkedVariables.connectedClients.Clear();
             }
             if(NetworkedVariables.allConnectedPlayerTransforms.ContainsKey(disconnectedId)) {
                 NetworkedVariables.allConnectedPlayerTransforms.Remove(disconnectedId);
@@ -189,23 +189,7 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.isRoomCreator = false;
             NetworkedVariables.inGame = true;
             NetworkedVariables.scenceToLoad.Add(4);
-        }
-        if(messageType.Equals("otherPlayerData")) {
-            foreach(KeyValuePair<string, string> playerName in decodedMessage["names"].ToObject<Dictionary<string, string>>()) {
-                NetworkedVariables.playerNames[playerName.Key] = playerName.Value;
-            }
-
-            foreach(KeyValuePair<string, string> playerHealth in decodedMessage["healthValues"].ToObject<Dictionary<string, string>>()) {
-                NetworkedVariables.playerHealths[playerHealth.Key] = int.Parse(playerHealth.Value);
-                //Debug.Log($"Player {playerHealth.Key} has {playerHealth.Value} Health Points");
-            }
-
-            foreach(KeyValuePair<string, string> planeTypes in decodedMessage["planeTypes"].ToObject<Dictionary<string, string>>()) {
-                NetworkedVariables.planeTypes[planeTypes.Key] = (PlaneTypes)Enum.Parse(typeof(PlaneTypes), planeTypes.Value);
-                //Debug.Log($"Player {planeTypes.Key} flies the plane {(PlaneTypes) Enum.Parse(typeof(PlaneTypes), planeTypes.Value)}");
-            }
-        }
-        if(messageType.Equals("Error")) {
+        }if(messageType.Equals("Error")) {
             NetworkedVariables.errorMessage = ((string)decodedMessage["value"]);
         }
     }
