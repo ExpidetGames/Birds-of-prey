@@ -16,7 +16,7 @@ public class JsonParser : MonoBehaviour {
 
     //Decodes a message and does something based on that
     public static void decodeJsonMessage(string message) {
-        // Debug.Log(message);
+        Debug.Log(message);
         JObject decodedMessage = null;
         if(message != null) {
             decodedMessage = JObject.Parse(message);
@@ -188,7 +188,7 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.currentGameMode = (GameModeTypes)((int)decodedMessage["gameMode"]);
             NetworkedVariables.isRoomCreator = false;
             NetworkedVariables.inGame = true;
-            NetworkedVariables.scenceToLoad.Add(4);
+            NetworkedVariables.scenceToLoad.Add(2);
         }
         if(messageType.Equals("Error")) {
             NetworkedVariables.errorMessage = ((string)decodedMessage["value"]);
