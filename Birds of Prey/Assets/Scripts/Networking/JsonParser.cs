@@ -148,6 +148,7 @@ public class JsonParser : MonoBehaviour {
             if(disconnectedId == NetworkedVariables.playerId) {
                 NetworkedVariables.inGame = false;
                 NetworkedVariables.isRoomCreator = false;
+                NetworkedVariables.connectedClients[disconnectedId].isReady = false;
                 NetworkedVariables.scenceToLoad.Add(0);
                 NetworkedVariables.roomId = "";
                 NetworkedVariables.allConnectedPlayerTransforms.Clear();
