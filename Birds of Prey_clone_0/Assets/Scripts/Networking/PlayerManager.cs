@@ -76,7 +76,7 @@ public class PlayerManager : MonoBehaviour {
                     string deadPlayerId = deadPlayerInfo["deadPlayerId"];
                     if(deadPlayerId == NetworkedVariables.playerId) {
                         //Dead player side
-                        NetworkedVariables.scenceToLoad.Add(2);
+                        NetworkedVariables.scenceToLoad.Add(1);
                     } else if(allPlayers.ContainsKey(deadPlayerId)) {
                         //Killers side
                         spawnedPlayerIds.Remove(deadPlayerId);
