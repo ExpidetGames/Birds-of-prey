@@ -195,12 +195,4 @@ public class PlayerManager : MonoBehaviour {
             NetworkedVariables.connectedClients.Remove(playerId);
         }
     }
-
-    private string getStringFromList(List<string> input) {
-        string outputString = "";
-        for(int i = 0; i < input.Count; i++) {
-            outputString += input[i] + ", ";
-        }
-        return outputString;
-    }
 }

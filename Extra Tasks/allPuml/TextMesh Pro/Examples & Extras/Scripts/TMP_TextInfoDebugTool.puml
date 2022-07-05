@@ -1,5 +1,0 @@
-@startuml
-class TMP_TextInfoDebugTool {
-}
-MonoBehaviour <|-- TMP_TextInfoDebugTool
-@enduml
