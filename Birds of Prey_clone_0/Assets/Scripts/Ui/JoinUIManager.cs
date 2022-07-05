@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 //This class is responsible for updating UI and holds functions the buttons execute
 public class JoinUIManager : MonoBehaviour {
-    [SerializeField] private TMP_InputField roomIDInput;
+    [SerializeField] private TMP_InputField roomIdInput;
     [SerializeField] private TMP_InputField serverIpInput;
     [SerializeField] private TMP_InputField localUdpPortInput;
     [SerializeField] private TMP_InputField nameInput;
@@ -50,12 +50,12 @@ public class JoinUIManager : MonoBehaviour {
     IEnumerator joinRoomTask() {
         connectToServer();
         yield return new WaitWhile(() => string.IsNullOrEmpty(NetworkedVariables.playerId));
-        roomIDInput.SetTextWithoutNotify("AAAAAA");
-        if(roomIDInput.text.Length == 6 && !roomIDInput.text.Any(char.IsDigit)) {
-            string message = "{\"type\":\"joinRoom\", \"Id\":\"" + NetworkedVariables.playerId + "\",\"roomId\":\"" + roomIDInput.text.ToUpper() + "\", \"name\":\"" + nameInput.text + "\", \"startHealth\":\"" + PrefabOrganizer.Planes[planeType].startHealth + "\", \"planeType\":\"" + planeType.ToString() + "\"}";
+        roomIdInput.SetTextWithoutNotify("AAAAAA");
+        if(roomIdInput.text.Length == 6 && !roomIdInput.text.Any(char.IsDigit)) {
+            string message = "{\"type\":\"joinRoom\", \"Id\":\"" + NetworkedVariables.playerId + "\",\"roomId\":\"" + roomIdInput.text.ToUpper() + "\", \"name\":\"" + nameInput.text + "\", \"startHealth\":\"" + PrefabOrganizer.Planes[planeType].startHealth + "\", \"planeType\":\"" + planeType.ToString() + "\"}";
             TCPClient.callStack.Insert(0, message);
         } else {
-            TMPro.TextMeshProUGUI[] allTexts = roomIDInput.GetComponentsInChildren<TMPro.TextMeshProUGUI>();
+            TMPro.TextMeshProUGUI[] allTexts = roomIdInput.GetComponentsInChildren<TMPro.TextMeshProUGUI>();
             for(int i = 0; i < allTexts.Length; i++) {
                 allTexts[i].color = Color.red;
             }

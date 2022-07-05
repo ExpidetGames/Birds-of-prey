@@ -1,6 +1,0 @@
-@startuml
-class FileUtilities {
-    + {static} IsFileLocked(path:string) : bool
-}
-MonoBehaviour <|-- FileUtilities
-@enduml

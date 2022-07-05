@@ -1,9 +1,0 @@
-@startuml
-class DropdownSample {
-    + OnButtonClick() : void
-}
-MonoBehaviour <|-- DropdownSample
-DropdownSample o-> "text" TextMeshProUGUI
-DropdownSample o-> "dropdownWithoutPlaceholder" TMP_Dropdown
-DropdownSample o-> "dropdownWithPlaceholder" TMP_Dropdown
-@enduml

@@ -1,5 +1,7 @@
-Klassendiagramme :
-    - allPuml zeigt die UML vom gesamten Projekt inklusive der Sachen die wir nicht selber geschrieben haben (Imported packages und so)
-    - ScriptsPuml zeigt die UML von dem Teil vom Projekt welches wir selber geschrieben haben
-    - Der include folder in out zeigt immer die ganze UML und die anderen Folder nur die Teil UMLs vom jeweilgen Script
-    -Tipp: Im Browser öffnen und mit runter gedrücktem Mausrad durchschauen
+Extra Aufgabe Klassendiagramme:
+    - Zu finden in ./ClassDiagrams
+    - includeAll.svg zeigt das Verhältnis aller Klassen zwischeneinander (inkl. der Sachen, die Automatisch von Unity kommen)
+    - includeScripts.svg zeigt das Verhältnis aller Klassen zwischeneinander, die von uns selbst geschrieben sind (also ohne der Scripts die von Unity kommen)
+    - includeEssential.kdm zeigt das Verhältnis aller Klassen zwischeneinander, die für das Projekt von HÖCHSTER Bedeutung sind
+    
+    - Tipps: Wenn bei den svg files nicht alles sichtbar ist, kann man sich mit mittlerem Mausrad rumbewegen. Bei dem kdm file "ctrl" + "-"
