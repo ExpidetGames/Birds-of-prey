@@ -839,7 +839,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 531441374}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2009103227}
+        m_TargetAssemblyTypeName: CreateRoomUIManager, Assembly-CSharp
+        m_MethodName: quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &531441374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,7 +981,7 @@ GameObject:
   - component: {fileID: 659426524}
   - component: {fileID: 659426523}
   m_Layer: 5
-  m_Name: chooseLeftButton
+  m_Name: SwitchLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1038,7 +1050,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 659426524}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2009103227}
+        m_TargetAssemblyTypeName: CreateRoomUIManager, Assembly-CSharp
+        m_MethodName: changeShownMap
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &659426524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3432,7 +3456,7 @@ GameObject:
   - component: {fileID: 1962352230}
   - component: {fileID: 1962352229}
   m_Layer: 5
-  m_Name: chooseRightButton
+  m_Name: SwitchRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3501,7 +3525,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1962352230}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2009103227}
+        m_TargetAssemblyTypeName: CreateRoomUIManager, Assembly-CSharp
+        m_MethodName: changeShownMap
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1962352230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3643,6 +3679,7 @@ GameObject:
   - component: {fileID: 2009103225}
   - component: {fileID: 2009103224}
   - component: {fileID: 2009103223}
+  - component: {fileID: 2009103227}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3739,6 +3776,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2009103227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009103222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6add0ce2631eb27459cc6fcefbe1f9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameModes: {fileID: 1532192219}
+  mapPreview: {fileID: 1735641158}
 --- !u!1 &2076197111
 GameObject:
   m_ObjectHideFlags: 0
@@ -4025,7 +4076,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2142048336}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2009103227}
+        m_TargetAssemblyTypeName: CreateRoomUIManager, Assembly-CSharp
+        m_MethodName: next
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2142048336
 MonoBehaviour:
   m_ObjectHideFlags: 0

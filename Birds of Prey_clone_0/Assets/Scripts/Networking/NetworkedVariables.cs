@@ -31,6 +31,8 @@ public static class NetworkedVariables {
     public static bool isDead;
     //Stores the BuildIndex of the world the players are playing
     public static int worldIndex;
+    //Holds the variable name just for short time
+    public static string name;
     //The playerId which identifies the player
     public static string playerId;
     //The room Id the player is currently in

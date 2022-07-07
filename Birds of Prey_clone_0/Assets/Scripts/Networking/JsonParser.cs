@@ -189,7 +189,7 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.currentGameMode = (GameModeTypes)((int)decodedMessage["gameMode"]);
             NetworkedVariables.isRoomCreator = false;
             NetworkedVariables.inGame = true;
-            NetworkedVariables.scenceToLoad.Add(2);
+            NetworkedVariables.scenceToLoad.Add(6);
         }
         if(messageType.Equals("Error")) {
             NetworkedVariables.errorMessage = ((string)decodedMessage["value"]);

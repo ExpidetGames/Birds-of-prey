@@ -45,6 +45,8 @@ public class PrefabOrganizer : MonoBehaviour {
     public class World {
         public int buildIndex;
         public string name;
+        public Sprite mapPreview;
+        public List<GameObject> spawnPoints;
     }
 
     [SerializeField] private List<Bullet> _bullets = new List<Bullet>();

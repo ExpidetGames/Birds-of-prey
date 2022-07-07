@@ -11,7 +11,6 @@ public class JoinUIManager : MonoBehaviour {
     [SerializeField] private TMP_InputField localUdpPortInput;
     [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private TMP_Text errorDisplay;
-    [SerializeField] private TMP_Dropdown gameModes;
     [SerializeField] private Canvas JoinCanvas;
     [SerializeField] private Canvas selectionCanvas;
     [Space]
@@ -24,8 +23,6 @@ public class JoinUIManager : MonoBehaviour {
 
 
     private void Start() {
-        populateDropdown(gameModes);
-        gameModes.SetValueWithoutNotify((int)NetworkedVariables.currentGameMode);
         planeType = PlaneTypes.STANDARD_AIRCRAFT;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
@@ -43,8 +40,7 @@ public class JoinUIManager : MonoBehaviour {
     IEnumerator createRoomTask() {
         connectToServer();
         yield return new WaitWhile(() => string.IsNullOrEmpty(NetworkedVariables.playerId));
-        string message = "{\"type\":\"createRoom\", \"Id\":\"" + NetworkedVariables.playerId + "\", \"name\":\"" + nameInput.text + "\", \"startHealth\":\"" + PrefabOrganizer.Planes[planeType].startHealth + "\", \"planeType\":\"" + planeType.ToString() + "\", \"worldIndex\":\"" + PrefabOrganizer.Worlds[UnityEngine.Random.Range(0, PrefabOrganizer.Worlds.Count)].buildIndex + "\", \"gameModeInfo\":" + GameModeManager.gameModes[NetworkedVariables.currentGameMode].getGameModeInfo() + "}";
-        TCPClient.callStack.Insert(0, message);
+        NetworkedVariables.scenceToLoad.Add(6);
     }
 
     IEnumerator joinRoomTask() {
@@ -64,6 +60,7 @@ public class JoinUIManager : MonoBehaviour {
     }
 
     public void createRoom() {
+        NetworkedVariables.name = nameInput.text;
         StartCoroutine(createRoomTask());
     }
 
@@ -87,21 +84,5 @@ public class JoinUIManager : MonoBehaviour {
         }
     }
 
-    public void onGameModeChanged() {
-        Debug.Log(gameModes.value);
-        NetworkedVariables.currentGameMode = (GameModeTypes)gameModes.value;
-        Debug.Log($"The new Mode is: {NetworkedVariables.currentGameMode}");
-    }
 
-    public void populateDropdown(TMP_Dropdown dropdown) {
-        List<TMP_Dropdown.OptionData> newOptions = new List<TMP_Dropdown.OptionData>();
-
-        for(int i = 0; i < Enum.GetNames(typeof(GameModeTypes)).Length; i++)//Populate new Options
-        {
-            newOptions.Add(new TMP_Dropdown.OptionData(Enum.GetName(typeof(GameModeTypes), i)));
-        }
-
-        dropdown.ClearOptions();//Clear old options
-        dropdown.AddOptions(newOptions);//
-    }
 }
