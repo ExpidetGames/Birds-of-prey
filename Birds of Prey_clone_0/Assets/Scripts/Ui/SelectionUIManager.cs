@@ -48,4 +48,10 @@ public class SelectionUIManager : MonoBehaviour {
     public void selectElement(int index) {
         allSelectionImageControllers[currentlySelectedIndexToChange].changeImage(allPreviewControllers[index].displayedPlaneType);
     }
+
+    public void changeSelectedSelectionPreview(int newIndex) {
+        allSelectionImageControllers[currentlySelectedIndexToChange].deselect();
+        allSelectionImageControllers[newIndex].select();
+        currentlySelectedIndexToChange = newIndex;
+    }
 }

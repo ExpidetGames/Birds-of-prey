@@ -12,7 +12,7 @@ public class selectedPlanePreviewManager : MonoBehaviour {
     private PlaneTypes currentlySelectedPlaneType;
 
     public void OnPressed() {
-        manager.currentlySelectedIndexToChange = myIndex;
+        manager.changeSelectedSelectionPreview(myIndex);
     }
 
     public void select() {
