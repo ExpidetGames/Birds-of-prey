@@ -20,6 +20,8 @@ public class SelectionUIManager : MonoBehaviour {
         allPreviewControllers = new List<PlaneImageController>();
         allSelectionImageControllers = selectedPlanesHolder.GetComponentsInChildren<selectedPlanePreviewManager>();
 
+        allSelectionImageControllers[currentlySelectedIndexToChange].select();
+
         for(int i = 0; i < allSelectionImageControllers.Length; i++) {
             allSelectionImageControllers[i].myIndex = i;
             allSelectionImageControllers[i].manager = this;
@@ -53,5 +55,13 @@ public class SelectionUIManager : MonoBehaviour {
         allSelectionImageControllers[currentlySelectedIndexToChange].deselect();
         allSelectionImageControllers[newIndex].select();
         currentlySelectedIndexToChange = newIndex;
+    }
+
+    public void back() {
+        NetworkedVariables.scenceToLoad.Add(6);
+    }
+
+    public void connectToRoom() {
+        //Connection / Joining Logic
     }
 }
