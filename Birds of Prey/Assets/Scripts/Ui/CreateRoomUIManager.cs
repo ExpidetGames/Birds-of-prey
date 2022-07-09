@@ -13,8 +13,8 @@ public class CreateRoomUIManager : MonoBehaviour {
 
     private void Start() {
         NetworkedVariables.worldIndex = PrefabOrganizer.Worlds[currentlyShownMapIndex].buildIndex;
-        gameModes.SetValueWithoutNotify((int)NetworkedVariables.currentGameMode);
         populateDropdown(gameModes);
+        gameModes.SetValueWithoutNotify((int)NetworkedVariables.currentGameMode);
         mapPreview.sprite = PrefabOrganizer.Worlds[currentlyShownMapIndex].mapPreview;
     }
 
@@ -34,17 +34,15 @@ public class CreateRoomUIManager : MonoBehaviour {
 
     public void onGameModeChanged() {
         NetworkedVariables.currentGameMode = (GameModeTypes)gameModes.value;
+        Debug.Log($"The selected game Mode is: {NetworkedVariables.currentGameMode}");
     }
 
     public void populateDropdown(TMP_Dropdown dropdown) {
         List<TMP_Dropdown.OptionData> newOptions = new List<TMP_Dropdown.OptionData>();
-
-        for(int i = 0; i < Enum.GetNames(typeof(GameModeTypes)).Length; i++)//Populate new Options
-        {
-            newOptions.Add(new TMP_Dropdown.OptionData(Enum.GetName(typeof(GameModeTypes), i)));
+        dropdown.options.Clear();
+        for(int i = 0; i < Enum.GetNames(typeof(GameModeTypes)).Length; i++) {
+            newOptions.Add(new TMP_Dropdown.OptionData(text: Enum.GetName(typeof(GameModeTypes), i)));
         }
-
-        dropdown.ClearOptions();
         dropdown.AddOptions(newOptions);
     }
 }
