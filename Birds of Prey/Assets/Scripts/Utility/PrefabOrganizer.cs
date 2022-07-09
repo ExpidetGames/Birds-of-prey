@@ -93,5 +93,6 @@ public enum RocketTypes {
 
 public enum PlaneTypes {
     STANDARD_AIRCRAFT,
-    F35
+    F35,
+    SPITFIRE
 }

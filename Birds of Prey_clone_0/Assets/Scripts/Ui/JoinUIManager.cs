@@ -61,6 +61,7 @@ public class JoinUIManager : MonoBehaviour {
 
     public void createRoom() {
         NetworkedVariables.name = nameInput.text;
+        NetworkedVariables.isRoomCreator = true;
         StartCoroutine(createRoomTask());
     }
 

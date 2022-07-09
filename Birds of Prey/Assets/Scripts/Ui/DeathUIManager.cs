@@ -3,7 +3,7 @@ using UnityEngine;
 public class DeathUIManager : MonoBehaviour {
 
     public void rejoinTheFight() {
-        TCPClient.callStack.Insert(0, "{\"type\":\"rejoin\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"playerId\":\"" + NetworkedVariables.playerId + "\", \"newHealth\":\"" + PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeType].startHealth + "\"}");
+        TCPClient.callStack.Insert(0, "{\"type\":\"rejoin\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"playerId\":\"" + NetworkedVariables.playerId + "\", \"newHealth\":\"" + PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].startHealth + "\"}");
     }
 
     public void surrender() {

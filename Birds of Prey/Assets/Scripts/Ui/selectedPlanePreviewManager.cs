@@ -8,8 +8,8 @@ public class selectedPlanePreviewManager : MonoBehaviour {
 
     [HideInInspector] public int myIndex;
     [HideInInspector] public SelectionUIManager manager;
+    [HideInInspector] public PlaneTypes currentlySelectedPlaneType;
 
-    private PlaneTypes currentlySelectedPlaneType;
 
     public void OnPressed() {
         manager.changeSelectedSelectionPreview(myIndex);

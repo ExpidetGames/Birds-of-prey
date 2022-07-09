@@ -4,14 +4,14 @@ public class Client {
     public string teamColor;
     public bool isReady;
     public int playerHealth;
-    public PlaneTypes planeType;
+    public PlaneTypes[] planeTypes;
 
-    public Client(string id, string name, string teamColor, bool isReady, int playerHealth, PlaneTypes planeType) {
+    public Client(string id, string name, string teamColor, bool isReady, int playerHealth, PlaneTypes[] planeTypes) {
         this.id = id;
         this.name = name;
         this.teamColor = teamColor;
         this.isReady = isReady;
-        this.planeType = planeType;
+        this.planeTypes = (PlaneTypes[])planeTypes.Clone();
         this.playerHealth = playerHealth;
     }
 }

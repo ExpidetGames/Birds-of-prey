@@ -19,6 +19,7 @@ public class CreateRoomUIManager : MonoBehaviour {
     }
 
     public void quit() {
+        NetworkedVariables.isRoomCreator = false;
         NetworkedVariables.scenceToLoad.Add(0);
     }
 
