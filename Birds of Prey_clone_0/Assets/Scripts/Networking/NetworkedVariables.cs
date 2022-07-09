@@ -22,7 +22,7 @@ public static class NetworkedVariables {
     //Holds the players who want to rejoin the game
     public static List<Dictionary<string, string>> playersToRejoin = new List<Dictionary<string, string>>();
     //Holds the information about the current game Mode
-    public static GameModeTypes currentGameMode = GameModeTypes.OneVsOneDeathmatch;
+    public static GameModeTypes currentGameMode = (GameModeTypes)0;
     //Indicates if the client is the creator of the room or not
     public static bool isRoomCreator;
     //True when Player is in world false if he is in Main Menu

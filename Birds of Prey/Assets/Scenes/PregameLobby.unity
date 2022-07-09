@@ -1171,7 +1171,7 @@ MonoBehaviour:
   roomCode: {fileID: 480969501}
   mode: {fileID: 1507013077}
   readyUpButtonText: {fileID: 1543762479}
-  scrollView: {fileID: 8547837078726278313, guid: 4e82ee36f789dec42ac14d955428a56e, type: 3}
+  scrollView: {fileID: 5630712497222052904, guid: 3dc29ece5b2122043bb777441947f590, type: 3}
   spawnPointsParent: {fileID: 1680016183}
   startGameButton: {fileID: 2132644092}
 --- !u!1 &1507013075

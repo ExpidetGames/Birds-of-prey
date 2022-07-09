@@ -35,7 +35,6 @@ public class CreateRoomUIManager : MonoBehaviour {
 
     public void onGameModeChanged() {
         NetworkedVariables.currentGameMode = (GameModeTypes)gameModes.value;
-        Debug.Log($"The selected game Mode is: {NetworkedVariables.currentGameMode}");
     }
 
     public void populateDropdown(TMP_Dropdown dropdown) {

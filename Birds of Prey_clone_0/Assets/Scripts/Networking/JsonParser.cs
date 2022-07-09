@@ -16,7 +16,7 @@ public class JsonParser : MonoBehaviour {
 
     //Decodes a message and does something based on that
     public static void decodeJsonMessage(string message) {
-        //ebug.Log(message);
+        //Debug.Log(message);
         JObject decodedMessage = null;
         if(message != null) {
             decodedMessage = JObject.Parse(message);
@@ -31,7 +31,7 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.playerId = (string)decodedMessage["newId"];
         }
         if(messageType.Equals("clientConnected")) {
-            PlaneTypes[] planeTypes = (PlaneTypes[])JsonConvert.DeserializeObject((string)decodedMessage["PlaneTypes"]);
+            PlaneTypes[] planeTypes = decodedMessage["PlaneTypes"].ToObject<PlaneTypes[]>();
             addClient((string)decodedMessage["Id"], (string)decodedMessage["Name"], (string)decodedMessage["Team"], (int)decodedMessage["PlayerHealth"], (bool)decodedMessage["IsReady"], planeTypes);
         }
         //The transform data of at least one client has changed so it has to be updated
@@ -195,10 +195,6 @@ public class JsonParser : MonoBehaviour {
     }
 
     private static void addClient(string id, string name, string team, int playerHealth, bool isReady, PlaneTypes[] planeTypes) {
-        for(int i = 0; i < planeTypes.Length; i++) {
-            Console.WriteLine($"The {i}. of player {id} planeTypes is {planeTypes[i].ToString()}");
-        }
-        // Debug.Log($"Client {c.id} connected. The name is: {c.name} and the team is: {c.teamColor}");
         NetworkedVariables.connectedClients.Add(id, new Client(id: id, name: name, teamColor: team, playerHealth: playerHealth, isReady: isReady, planeTypes: planeTypes));
     }
 
