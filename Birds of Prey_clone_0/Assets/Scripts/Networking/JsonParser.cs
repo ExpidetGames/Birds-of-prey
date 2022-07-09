@@ -174,20 +174,26 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.connectedClients[playerId].isReady = false;
         }
         if(messageType.Equals("joinSuccess")) {
+            Debug.Log(message);
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
             NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
             //Populating the clients List in Networked Variables with the other clients
-            foreach(Dictionary<string, string> client in decodedMessage["otherClients"].ToObject<List<Dictionary<string, string>>>()) {
-                // Debug.Log($"Found client with name: {client["Name"]} and id {client["Id"]} with the team {client["Team"]}");
+            foreach(Dictionary<string, dynamic> client in decodedMessage["otherClients"].ToObject<List<Dictionary<string, dynamic>>>()) {
+                //Debug.Log($"Found client with name: {client["Name"]} and id {client["Id"]} with the team {client["Team"]}");
                 if(client["Id"] != NetworkedVariables.playerId) {
-                    PlaneTypes[] planeTypes = (PlaneTypes[])JsonConvert.DeserializeObject((string)decodedMessage["PlaneTypes"]);
-                    addClient(client["Id"], client["Name"], client["Team"], int.Parse(client["PlayerHealth"]), bool.Parse(client["IsReady"]), planeTypes);
+                    PlaneTypes[] planeTypes = client["PlaneTypes"].ToObject<PlaneTypes[]>();
+                    Debug.Log(client["Id"].GetType());
+                    Debug.Log(client["Name"].GetType());
+                    Debug.Log(client["Team"].GetType());
+                    Debug.Log(((int)client["PlayerHealth"]).GetType());
+                    Debug.Log(client["IsReady"].GetType());
+                    addClient(client["Id"], client["Name"], client["Team"], (int)client["PlayerHealth"], client["IsReady"], planeTypes);
                 }
             }
             NetworkedVariables.currentGameMode = (GameModeTypes)((int)decodedMessage["gameMode"]);
             NetworkedVariables.isRoomCreator = false;
             NetworkedVariables.inGame = true;
-            NetworkedVariables.scenceToLoad.Add(6);
+            NetworkedVariables.scenceToLoad.Add(2);
         }
         if(messageType.Equals("Error")) {
             NetworkedVariables.errorMessage = ((string)decodedMessage["value"]);

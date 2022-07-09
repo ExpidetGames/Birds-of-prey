@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 705321690}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.999982
+  m_Size: 0.9999607
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1300,7 +1300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.020239107, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -13.978506, y: 0}
+  m_AnchoredPosition: {x: -13.978635, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &975664118
@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 6
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -2423,7 +2423,7 @@ MonoBehaviour:
   contentHolder: {fileID: 975664116}
   planePreviewImagePrefab: {fileID: 6171124737200310579, guid: a1f1c2fe9e21eb542922673c14b70082, type: 3}
   selectedPlanesHolder: {fileID: 1250503644}
-  enterGameCode: {fileID: 992896481}
+  roomIdInputHolder: {fileID: 992896481}
 --- !u!1 &1657787971
 GameObject:
   m_ObjectHideFlags: 0

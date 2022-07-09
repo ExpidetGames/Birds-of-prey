@@ -801,17 +801,14 @@ MonoBehaviour:
     timeBetweenBullets: 0.1
   _worlds:
   - buildIndex: 3
-    name: World1
+    name: Can you give me a HOOOOOOOJAAAAAA
     mapPreview: {fileID: 21300000, guid: 75a876801b9829e42a0172d05d180a6b, type: 3}
-    spawnPoints: []
   - buildIndex: 4
-    name: World2
+    name: Flatland like your MOM
     mapPreview: {fileID: 21300000, guid: bd94d90d9655ef548bd6302d369258cb, type: 3}
-    spawnPoints: []
   - buildIndex: 5
-    name: World3
+    name: Holla die Waldfee
     mapPreview: {fileID: 21300000, guid: 2c0301c2421fc8649b0ab84eb4e1c903, type: 3}
-    spawnPoints: []
 --- !u!114 &390984969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3498,7 +3495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a150bb24eca994da287cf525543e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomIdInput: {fileID: 0}
   serverIpInput: {fileID: 298581887}
   localUdpPortInput: {fileID: 1220227538}
   nameInput: {fileID: 1560045964}

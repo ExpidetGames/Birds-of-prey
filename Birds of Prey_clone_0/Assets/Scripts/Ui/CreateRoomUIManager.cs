@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class CreateRoomUIManager : MonoBehaviour {
 
     [SerializeField] private TMP_Dropdown gameModes;
+    [SerializeField] private TMP_Text mapName;
     [SerializeField] private Image mapPreview;
 
     private int currentlyShownMapIndex = 0;
 
     private void Start() {
         NetworkedVariables.worldIndex = PrefabOrganizer.Worlds[currentlyShownMapIndex].buildIndex;
+        mapName.text = PrefabOrganizer.Worlds[currentlyShownMapIndex].name;
         populateDropdown(gameModes);
         gameModes.SetValueWithoutNotify((int)NetworkedVariables.currentGameMode);
         mapPreview.sprite = PrefabOrganizer.Worlds[currentlyShownMapIndex].mapPreview;
@@ -31,6 +33,7 @@ public class CreateRoomUIManager : MonoBehaviour {
         currentlyShownMapIndex = (currentlyShownMapIndex + Mathf.Abs(PrefabOrganizer.Worlds.Count + amount)) % PrefabOrganizer.Worlds.Count;
         NetworkedVariables.worldIndex = PrefabOrganizer.Worlds[currentlyShownMapIndex].buildIndex;
         mapPreview.sprite = PrefabOrganizer.Worlds[currentlyShownMapIndex].mapPreview;
+        mapName.text = PrefabOrganizer.Worlds[currentlyShownMapIndex].name;
     }
 
     public void onGameModeChanged() {

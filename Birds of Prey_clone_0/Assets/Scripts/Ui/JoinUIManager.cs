@@ -1,12 +1,8 @@
 using UnityEngine;
-using System;
-using System.Linq;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 //This class is responsible for updating UI and holds functions the buttons execute
 public class JoinUIManager : MonoBehaviour {
-    [SerializeField] private TMP_InputField roomIdInput;
     [SerializeField] private TMP_InputField serverIpInput;
     [SerializeField] private TMP_InputField localUdpPortInput;
     [SerializeField] private TMP_InputField nameInput;
@@ -46,17 +42,7 @@ public class JoinUIManager : MonoBehaviour {
     IEnumerator joinRoomTask() {
         connectToServer();
         yield return new WaitWhile(() => string.IsNullOrEmpty(NetworkedVariables.playerId));
-        roomIdInput.SetTextWithoutNotify("AAAAAA");
-        if(roomIdInput.text.Length == 6 && !roomIdInput.text.Any(char.IsDigit)) {
-            string message = "{\"type\":\"joinRoom\", \"Id\":\"" + NetworkedVariables.playerId + "\",\"roomId\":\"" + roomIdInput.text.ToUpper() + "\", \"name\":\"" + nameInput.text + "\", \"startHealth\":\"" + PrefabOrganizer.Planes[planeType].startHealth + "\", \"planeType\":\"" + planeType.ToString() + "\"}";
-            TCPClient.callStack.Insert(0, message);
-        } else {
-            TMPro.TextMeshProUGUI[] allTexts = roomIdInput.GetComponentsInChildren<TMPro.TextMeshProUGUI>();
-            for(int i = 0; i < allTexts.Length; i++) {
-                allTexts[i].color = Color.red;
-            }
-            NetworkedVariables.errorMessage = "Invalid Room Id. The Room Id has six letters with zero digits! There is no Case sensitivity!";
-        }
+        NetworkedVariables.scenceToLoad.Add(7);
     }
 
     public void createRoom() {
@@ -66,6 +52,8 @@ public class JoinUIManager : MonoBehaviour {
     }
 
     public void joinRoom() {
+        NetworkedVariables.name = nameInput.text;
+        NetworkedVariables.isRoomCreator = false;
         StartCoroutine(joinRoomTask());
     }
 
@@ -87,3 +75,4 @@ public class JoinUIManager : MonoBehaviour {
 
 
 }
+
