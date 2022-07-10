@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class FlightController : MonoBehaviour {
 
     InputMaster controls;
-    [SerializeField] private float speed = .05f, barrelRowlSpeed = 20f, mouseSensitivity = 20, zRotationClamp = 70, zRotationLerpSpeed = 20;
+    [SerializeField] private float speed = .05f, barrelRollSpeed = 20f, mouseSensitivity = 20f, zRotationClamp = 70f, zRotationLerpSpeed = 20f;
     private float zRotation;
     private bool isLerpingBack;
     //public Rigidbody rb;
@@ -39,7 +39,7 @@ public class FlightController : MonoBehaviour {
         else {
             isLerpingBack = false;
             zRotation = controls.Player.Mouse.ReadValue<float>() * mouseSensitivity;
-            zRotation = controls.Player.BarrelRowl.ReadValue<float>() * barrelRowlSpeed / 10 + zRotation;
+            zRotation = controls.Player.BarrelRowl.ReadValue<float>() * barrelRollSpeed / 10 + zRotation;
 
             //mouse rotation is clambed 
             if(controls.Player.BarrelRowl.ReadValue<float>() == 0) {
@@ -49,12 +49,12 @@ public class FlightController : MonoBehaviour {
         }
 
         //calculate value wich will be addet to the yRotation relativ to the zRotation from the mouse
-        float yrotation = 0;
+        float yRotation = 0;
         if(controls.Player.BarrelRowl.ReadValue<float>() == 0 && !isLerpingBack) {
             if(transform.rotation.eulerAngles.z > 180) {
-                yrotation = 360 - transform.rotation.eulerAngles.z;
+                yRotation = 360 - transform.rotation.eulerAngles.z;
             } else {
-                yrotation = -transform.rotation.eulerAngles.z;
+                yRotation = -transform.rotation.eulerAngles.z;
             }
         }
 
@@ -63,7 +63,7 @@ public class FlightController : MonoBehaviour {
 
         //perform the calculated movements and rotations 
         transform.Rotate(rotation.x, rotation.y, -zRotation);
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + yrotation / 40, transform.rotation.eulerAngles.z);
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + yRotation / 40, transform.rotation.eulerAngles.z);
         transform.position += transform.forward * Time.deltaTime * speed;
     }
 

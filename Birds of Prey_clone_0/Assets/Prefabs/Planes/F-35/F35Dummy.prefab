@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1853208931216430586}
   - component: {fileID: 7044356513797883912}
   - component: {fileID: 3973318473954034369}
-  - component: {fileID: 6359130579302061077}
-  - component: {fileID: 4200542170040318032}
+  - component: {fileID: 5740742358935665886}
+  - component: {fileID: 8806554519017203849}
+  - component: {fileID: 9023990789724263618}
   m_Layer: 0
   m_Name: F35Dummy
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368033364787646272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.742, y: 3.13, z: -0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -65,7 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myId: 
   currentHealth: 0
---- !u!136 &6359130579302061077
+--- !u!136 &5740742358935665886
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,11 +76,11 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.6175759
-  m_Height: 13.996612
+  m_Radius: 0.24655667
+  m_Height: 1.2124462
   m_Direction: 2
-  m_Center: {x: 0, y: 1, z: 0.62119913}
---- !u!65 &4200542170040318032
+  m_Center: {x: -0.012355447, y: 0.0054880083, z: 0.7175057}
+--- !u!65 &8806554519017203849
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,8 +91,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.955595, y: 1, z: 2.1942744}
-  m_Center: {x: -0.062030792, y: 0, z: 2.5877128}
+  m_Size: {x: 1.8042693, y: 0.088160515, z: 0.69066024}
+  m_Center: {x: 0.0208745, y: 0.0742898, z: -0.39216673}
+--- !u!65 &9023990789724263618
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368033364787646272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4856746, y: 0.09893799, z: 0.54459524}
+  m_Center: {x: -0.0160259, y: -0.001953125, z: -1.0404272}
 --- !u!1 &4303168829994480357
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,11 +367,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2ac39e1a9c7ced949bc0371b65f948af, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.366
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2ac39e1a9c7ced949bc0371b65f948af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.093
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2ac39e1a9c7ced949bc0371b65f948af, type: 3}
       propertyPath: m_LocalPosition.z

@@ -38,8 +38,6 @@ public class PlayerManager : MonoBehaviour {
             ownPlayer = Instantiate(PrefabOrganizer.Planes[currentType].realPlayer, spawnPosition, Quaternion.identity);
             ownPlayer.GetComponent<PlayerHealth>().setHealth(NetworkedVariables.connectedClients[NetworkedVariables.playerId].playerHealth);
             ownPlayer.GetComponent<PlayerHealth>().myId = NetworkedVariables.playerId;
-            ownPlayer.GetComponentInChildren<Plane>().thrust = PrefabOrganizer.Planes[currentType].thrust;
-            ownPlayer.GetComponentInChildren<Plane>().turnTorque = PrefabOrganizer.Planes[currentType].turnTorque;
             spawnedPlayerIds.Add(NetworkedVariables.playerId);
         }
         updatePlayerTransforms();
