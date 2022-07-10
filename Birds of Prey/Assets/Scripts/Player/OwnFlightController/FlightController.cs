@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class FlightController : MonoBehaviour {
 
     InputMaster controls;
-    [SerializeField] private float speed = .05f, barrelRollSpeed = 20f, mouseSensitivity = 20f, zRotationClamp = 70f, zRotationLerpSpeed = 20f;
+    [SerializeField] private float speed = .05f, barrelRollSpeed = 20f, mouseSensitivity = 20f, zRotationClamp = 70f, zRotationLerpSpeed = 20f,wasdSpeed = 20f;
     private float zRotation;
     private bool isLerpingBack;
     //public Rigidbody rb;
@@ -39,12 +39,13 @@ public class FlightController : MonoBehaviour {
         else {
             isLerpingBack = false;
             zRotation = controls.Player.Mouse.ReadValue<float>() * mouseSensitivity;
-            zRotation = controls.Player.BarrelRowl.ReadValue<float>() * barrelRollSpeed / 10 + zRotation;
+            zRotation = controls.Player.BarrelRowl.ReadValue<float>() * barrelRollSpeed * 10 + zRotation;
 
             //mouse rotation is clambed 
             if(controls.Player.BarrelRowl.ReadValue<float>() == 0) {
-                zRotation = Mathf.Clamp(zRotation, -zRotationClamp, zRotationClamp) * Time.deltaTime;
+                zRotation = Mathf.Clamp(zRotation, -zRotationClamp, zRotationClamp);
             }
+            zRotation = zRotation * Time.deltaTime;
 
         }
 
@@ -59,7 +60,7 @@ public class FlightController : MonoBehaviour {
         }
 
         //calculate the wasd controls
-        Vector2 rotation = controls.Player.Rotate.ReadValue<Vector2>();
+        Vector2 rotation = controls.Player.Rotate.ReadValue<Vector2>() * Time.deltaTime * wasdSpeed;
 
         //perform the calculated movements and rotations 
         transform.Rotate(rotation.x, rotation.y, -zRotation);
