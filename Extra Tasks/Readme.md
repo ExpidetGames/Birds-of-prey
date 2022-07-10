@@ -12,5 +12,11 @@ Extra Aufgabe Steuerungen:
     - LMB um Kugeln zu schießen
     - WASD und Maus zu Steuerung
 
+Um das Spiel zu spielen:
+    - Zwei mal die Birds Of prey.exe ausführen.
+    - Nachdem beide Fenster offen sind, auf dem einen Fenster den Raum erstellen
+    - Nach der Raum erstellt ist (Auf dem Bildschirm sollten zwei Listen sein) auf dem anderen Fenster beitreten indem Raum code (zu sehen auf Fenster 1) eingegeben wird
+    - Hoffen das es keine Bugs gibt.    
+
 
 In Summary.odt sind die restlichen Zusatzaufgaben zu finden
