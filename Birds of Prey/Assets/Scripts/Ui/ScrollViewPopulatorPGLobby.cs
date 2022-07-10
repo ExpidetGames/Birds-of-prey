@@ -13,21 +13,21 @@ public class ScrollViewPopulatorPGLobby : MonoBehaviour {
     public void addToList(Client newClient) {
         if(!spawnedNames.ContainsKey(newClient.id)) {
             GameObject newPlayerTag = Instantiate(namePlate);
-            newPlayerTag.GetComponentInChildren<TMP_Text>().SetText(newClient.name);
-            newPlayerTag.GetComponentsInChildren<Image>()[1].color = (newClient.isReady) ? Color.green : Color.red;
+            newPlayerTag.GetComponent<NamePlateController>().setName(newClient.name);
+            spawnedNames[newClient.id].GetComponent<NamePlateController>().updateReadyState(newClient.isReady);
             newPlayerTag.transform.SetParent(this.gameObject.transform);
             spawnedNames.Add(newClient.id, newPlayerTag);
         }
     }
 
-    public void removeFromList(Client disconnectedClient) {
-        GameObject objectToDestroy = spawnedNames[disconnectedClient.id];
+    public void removeFromList(Client clientToRemove) {
+        GameObject objectToDestroy = spawnedNames[clientToRemove.id];
         Destroy(objectToDestroy);
-        spawnedNames.Remove(disconnectedClient.id);
+        spawnedNames.Remove(clientToRemove.id);
     }
 
     public void updateClient(Client client) {
-        spawnedNames[client.id].GetComponentsInChildren<Image>()[1].color = (client.isReady) ? Color.green : Color.red;
+        spawnedNames[client.id].GetComponent<NamePlateController>().updateReadyState(client.isReady);
     }
 
 }

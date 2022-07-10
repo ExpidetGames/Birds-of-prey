@@ -15,6 +15,7 @@ public class PregameLobbyUIManager : MonoBehaviour {
     //Contain the team Colors as keys and the actual ScrollViews as Values
     private Dictionary<string, GameObject> scrollViews = new Dictionary<string, GameObject>();
     private Dictionary<string, bool> clientReadyStates = new Dictionary<string, bool>();
+    private Dictionary<string, string> teamColors = new Dictionary<string, string>();
     private Transform[] spawnPoints;
 
     void Start() {
@@ -51,6 +52,7 @@ public class PregameLobbyUIManager : MonoBehaviour {
                 if(!clientReadyStates.ContainsKey(newClient.id)) {
                     scrollViews[newClient.teamColor].GetComponentInChildren<ScrollViewPopulatorPGLobby>().addToList(newClient);
                     clientReadyStates.Add(newClient.id, newClient.isReady);
+                    teamColors.Add(newClient.id, newClient.teamColor);
                 }
             }
         } else if(NetworkedVariables.connectedClients.Count == clientReadyStates.Count) {
@@ -60,9 +62,19 @@ public class PregameLobbyUIManager : MonoBehaviour {
                     clientReadyStates[client.id] = client.isReady;
                     scrollViews[client.teamColor].GetComponentInChildren<ScrollViewPopulatorPGLobby>().updateClient(client);
                 }
+
+                if(client.teamColor != teamColors[client.id]) {
+                    //Removing from old list
+                    scrollViews[teamColors[client.id]].GetComponentInChildren<ScrollViewPopulatorPGLobby>().removeFromList(client);
+                    //Updating value
+                    teamColors[client.id] = client.teamColor;
+                    //Adding to new List
+                    scrollViews[teamColors[client.id]].GetComponentInChildren<ScrollViewPopulatorPGLobby>().addToList(client);
+                }
             }
         }
         if(NetworkedVariables.disconnectedPlayerIds.Count > 0) {
+            //Somebody disconnected so the client has to be removed
             foreach(string disconnectedId in NetworkedVariables.disconnectedPlayerIds) {
                 if(NetworkedVariables.connectedClients.ContainsKey(disconnectedId)) {
                     Client disconnectedClient = NetworkedVariables.connectedClients[disconnectedId];
