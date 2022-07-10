@@ -36,9 +36,6 @@ public class Shooter : MonoBehaviour {
         if(Input.GetMouseButton(0) && timePastSinceLastBullet >= timeBetweenBullets) {
             foreach(GameObject gun in bulletSpawnPoints) {
                 Vector3 planeFacingDirection = plane.transform.TransformDirection(Vector3.forward);
-                Debug.Log($"Gun transform {gun.transform.position}");
-                Debug.Log($"planeFacingDirection {planeFacingDirection}");
-
                 playerManager.shootBullet(
                     gun.transform.position, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType()].bulletAmuniton);
             }

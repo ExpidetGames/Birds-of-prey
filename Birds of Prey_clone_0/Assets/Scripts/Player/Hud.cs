@@ -21,6 +21,8 @@ public class Hud : MonoBehaviour {
     private Camera playerCam = null;
 
     private void Awake() {
+        if(lockInfoDisplay != null)
+            lockInfoDisplay.text = "";
         if(mouseFlight == null)
             Debug.LogError(name + ": Hud - Mouse Flight Controller not assigned!");
 

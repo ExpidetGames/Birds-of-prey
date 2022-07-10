@@ -1058,7 +1058,7 @@ MonoBehaviour:
   thrust: 300
   turnTorque: {x: 5, y: 2, z: 7}
   thrustMult: 15
-  turnMult: 1
+  turnMult: 30
   sensitivity: 5
   aggressiveTurnAngle: 5
   pitch: 0

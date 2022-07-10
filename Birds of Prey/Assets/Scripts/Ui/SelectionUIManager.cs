@@ -24,6 +24,7 @@ public class SelectionUIManager : MonoBehaviour {
 
     private void Start() {
         connectToRoomButton.enabled = false;
+        errorDisplay.text = "";
         roomIdInputHolder.SetActive(!NetworkedVariables.isRoomCreator);
         roomIdInput = roomIdInputHolder.GetComponent<TMP_InputField>();
         //roomIdInput.SetTextWithoutNotify("AAAAAA");

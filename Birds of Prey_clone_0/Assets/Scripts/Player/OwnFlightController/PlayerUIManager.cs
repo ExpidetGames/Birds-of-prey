@@ -8,6 +8,10 @@ public class PlayerUIManager : MonoBehaviour {
     [SerializeField] private TMP_Text lockDisplay;
     [SerializeField] private PlayerHealth playerHealth;
 
+    private void Start() {
+        if(lockDisplay != null)
+            lockDisplay.text = "";
+    }
 
     private void Update() {
         if(healthDisplay != null) {
