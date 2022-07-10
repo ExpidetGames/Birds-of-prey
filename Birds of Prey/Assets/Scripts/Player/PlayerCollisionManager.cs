@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 [DisallowMultipleComponent]
 public class PlayerCollisionManager : MonoBehaviour {

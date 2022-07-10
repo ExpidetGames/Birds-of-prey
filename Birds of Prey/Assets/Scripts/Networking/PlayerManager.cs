@@ -28,11 +28,12 @@ public class PlayerManager : MonoBehaviour {
     private void Update() {
         //Spawning the own Player if it is null and the Player is back in the world
         if(ownPlayer == null && SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex) {
-            ownPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);
+            PlaneTypes currentType = NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType();
+            ownPlayer = Instantiate(PrefabOrganizer.Planes[currentType].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);
             ownPlayer.GetComponent<PlayerHealth>().setHealth(NetworkedVariables.connectedClients[NetworkedVariables.playerId].playerHealth);
             ownPlayer.GetComponent<PlayerHealth>().myId = NetworkedVariables.playerId;
-            ownPlayer.GetComponentInChildren<Plane>().thrust = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].thrust;
-            ownPlayer.GetComponentInChildren<Plane>().turnTorque = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].turnTorque;
+            ownPlayer.GetComponentInChildren<Plane>().thrust = PrefabOrganizer.Planes[currentType].thrust;
+            ownPlayer.GetComponentInChildren<Plane>().turnTorque = PrefabOrganizer.Planes[currentType].turnTorque;
             spawnedPlayerIds.Add(NetworkedVariables.playerId);
         }
         updatePlayerTransforms();
@@ -48,7 +49,8 @@ public class PlayerManager : MonoBehaviour {
                         GameObject spawnedPlayer;
                         //Spawning the new Player Dummy Object
                         if(NetworkedVariables.connectedClients.ContainsKey(newPlayerId)) {
-                            spawnedPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.connectedClients[newPlayerId].planeTypes[0]].playerDummy, transform.position, Quaternion.identity);
+                            PlaneTypes currentType = NetworkedVariables.connectedClients[newPlayerId].getCurrentType();
+                            spawnedPlayer = Instantiate(PrefabOrganizer.Planes[currentType].playerDummy, transform.position, Quaternion.identity);
                         } else {
                             continue;
                         }
@@ -97,7 +99,8 @@ public class PlayerManager : MonoBehaviour {
                     NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
                     spawnedPlayerIds.Clear();
                     allPlayers.Clear();
-                    ownPlayer = Instantiate(PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);
+                    PlaneTypes currentType = NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType();
+                    ownPlayer = Instantiate(PrefabOrganizer.Planes[currentType].realPlayer, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), Quaternion.identity);
                     ownPlayer.GetComponent<PlayerHealth>().setHealth(NetworkedVariables.connectedClients[NetworkedVariables.playerId].playerHealth);
                     ownPlayer.GetComponent<PlayerHealth>().myId = NetworkedVariables.playerId;
                     //Disabling all audioListeners because own Player has an Audio Listener and this stupid error message is really annoying..

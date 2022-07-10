@@ -64,9 +64,9 @@ public class JsonParser : MonoBehaviour {
         }
         //A target got locket and the players get informed about this unfortunate event
         if(messageType.Equals("targetLocked")) {
-            //TCPClient.callStack.Insert(0, "{\"type\": \"targetLocked\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"shooter\":\"" + NetworkedVariables.playerId + "\", \"target\":\"" + targetId + "\"}");
             string lockedTargetId = (string)decodedMessage["target"];
             string shooter = (string)decodedMessage["shooter"];
+            Debug.Log($"The player {lockedTargetId} was locked by the player {shooter}");
             NetworkedVariables.targetLockInfo.Add(new Dictionary<string, string> { ["shooter"] = shooter, ["target"] = lockedTargetId });
         }
         //A bullet was shot and the other clients are informed with this message
@@ -122,8 +122,14 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("playerDied")) {
             string deadPlayer = (string)decodedMessage["deadPlayer"];
             string killer = (string)decodedMessage["killer"];
-            Dictionary<string, string> deadPlayerInfo = new Dictionary<string, string>() { ["deadPlayerId"] = deadPlayer, ["killer"] = killer, ["deactivated"] = "0" };
-            NetworkedVariables.deadPlayers.Add(deadPlayerInfo);
+            if(!NetworkedVariables.connectedClients[deadPlayer].isDead) {
+                Dictionary<string, string> deadPlayerInfo = new Dictionary<string, string>() { ["deadPlayerId"] = deadPlayer, ["killer"] = killer, ["deactivated"] = "0" };
+                Debug.Log($"The old index of the dead player was: {NetworkedVariables.connectedClients[deadPlayer].currentPlaneType}");
+                NetworkedVariables.connectedClients[deadPlayer].currentPlaneType += 1;
+                NetworkedVariables.connectedClients[deadPlayer].isDead = true;
+                Debug.Log($"The new index of the dead player is: {NetworkedVariables.connectedClients[deadPlayer].currentPlaneType}");
+                NetworkedVariables.deadPlayers.Add(deadPlayerInfo);
+            }
         }
         if(messageType.Equals("rejoin")) {
             string playerId = (string)decodedMessage["playerId"];
@@ -131,11 +137,11 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.connectedClients[playerId].playerHealth = newHealth;
             //Debug.Log($"The new health of player {playerId} is {NetworkedVariables.playerHealths[playerId]}");
             Dictionary<string, string> respawningPlayerInfo = new Dictionary<string, string> { ["id"] = playerId };
+            NetworkedVariables.connectedClients[playerId].isDead = false;
             NetworkedVariables.playersToRejoin.Add(respawningPlayerInfo);
         }
         if(messageType.Equals("transferOwnership")) {
             string newOwner = (string)decodedMessage["newOwner"];
-            Debug.Log("Ownership transfered to " + newOwner);
             if(newOwner == NetworkedVariables.playerId) {
                 NetworkedVariables.isRoomCreator = true;
                 Debug.Log(NetworkedVariables.isRoomCreator);
@@ -174,7 +180,7 @@ public class JsonParser : MonoBehaviour {
             NetworkedVariables.connectedClients[playerId].isReady = false;
         }
         if(messageType.Equals("joinSuccess")) {
-            Debug.Log(message);
+            //Debug.Log(message);
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);
             NetworkedVariables.worldIndex = (int)decodedMessage["sceneIndex"];
             //Populating the clients List in Networked Variables with the other clients
@@ -182,11 +188,6 @@ public class JsonParser : MonoBehaviour {
                 //Debug.Log($"Found client with name: {client["Name"]} and id {client["Id"]} with the team {client["Team"]}");
                 if(client["Id"] != NetworkedVariables.playerId) {
                     PlaneTypes[] planeTypes = client["PlaneTypes"].ToObject<PlaneTypes[]>();
-                    Debug.Log(client["Id"].GetType());
-                    Debug.Log(client["Name"].GetType());
-                    Debug.Log(client["Team"].GetType());
-                    Debug.Log(((int)client["PlayerHealth"]).GetType());
-                    Debug.Log(client["IsReady"].GetType());
                     addClient(client["Id"], client["Name"], client["Team"], (int)client["PlayerHealth"], client["IsReady"], planeTypes);
                 }
             }
@@ -201,7 +202,7 @@ public class JsonParser : MonoBehaviour {
     }
 
     private static void addClient(string id, string name, string team, int playerHealth, bool isReady, PlaneTypes[] planeTypes) {
-        NetworkedVariables.connectedClients.Add(id, new Client(id: id, name: name, teamColor: team, playerHealth: playerHealth, isReady: isReady, planeTypes: planeTypes));
+        NetworkedVariables.connectedClients.Add(id, new Client(id: id, name: name, teamColor: team, playerHealth: playerHealth, isReady: isReady, isDead: false, planeTypes: planeTypes, startingPlaneType: 0));
     }
 
     public static List<List<float>> stringListToFloatList(List<List<string>> input) {
