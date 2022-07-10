@@ -1,8 +1,0 @@
-@startuml
-class PlayerNetworking {
-    - Start() : void
-    Update() : void
-}
-MonoBehaviour <|-- PlayerNetworking
-PlayerNetworking --> "aircraftTransform" Transform
-@enduml

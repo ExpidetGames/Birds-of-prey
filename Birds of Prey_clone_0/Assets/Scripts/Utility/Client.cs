@@ -2,16 +2,24 @@ public class Client {
     public string id;
     public string name;
     public string teamColor;
-    public int playerHealth;
     public bool isReady;
-    public PlaneTypes planeType;
+    public bool isDead;
+    public int playerHealth;
+    public PlaneTypes[] planeTypes;
+    public int currentPlaneType;
 
-    public Client(string id, string name, string teamColor, bool isReady, int playerHealth, PlaneTypes planeType) {
+    public Client(string id, string name, string teamColor, bool isReady, bool isDead, int playerHealth, PlaneTypes[] planeTypes, int startingPlaneType) {
         this.id = id;
         this.name = name;
         this.teamColor = teamColor;
         this.isReady = isReady;
-        this.planeType = planeType;
+        this.isDead = isDead;
+        this.planeTypes = (PlaneTypes[])planeTypes.Clone();
         this.playerHealth = playerHealth;
+        this.currentPlaneType = startingPlaneType;
+    }
+
+    public PlaneTypes getCurrentType() {
+        return planeTypes[this.currentPlaneType];
     }
 }

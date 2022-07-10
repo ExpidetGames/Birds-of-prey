@@ -11,26 +11,26 @@ public class UDPClient {
     public static UdpClient updClient;
 
     public int thisPort;
-    private int PORT;
-    private string IP;
+    private int port;
+    private string ip;
 
     private IPEndPoint remoteEndPoint;
-    private Thread sender;
-    private Thread receiver;
+    private static Thread sender;
+    private static Thread receiver;
 
 
     public UDPClient(string ip, int serverPort, int localPort) {
-        this.IP = ip;
-        this.PORT = serverPort;
+        this.ip = ip;
+        this.port = serverPort;
         this.thisPort = localPort;
     }
 
     public void connect() {
         udpCallStack = new List<string>();
         updClient = new UdpClient(thisPort);
-        remoteEndPoint = new IPEndPoint(IPAddress.Any, PORT);
+        remoteEndPoint = new IPEndPoint(IPAddress.Any, port);
         try {
-            updClient.Connect(IP, PORT);
+            updClient.Connect(ip, port);
         } catch(Exception e) {
             Debug.Log("Error occured: " + e.Message);
         }
@@ -72,7 +72,7 @@ public class UDPClient {
         }
     }
 
-    private void OnApplicationQuit() {
+    public static void killThreads() {
         if(sender != null) {
             sender.Abort();
         }

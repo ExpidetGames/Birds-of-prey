@@ -1,21 +1,11 @@
-using System;
 using UnityEngine;
 
-public class Bullet : Projectile
-{
-
-    /*
-      public BulletTypes bulletType;
-      public GameObject bulletPrefab;
-      public int damage;
-      public float projectileSpeed;
-      public float despawnTime;
-    */
+public class Bullet : Projectile {
 
     private void Start() {
         base.OnStart();
 
-        BulletTypes bulletType = (BulletTypes) projectileType;
+        BulletTypes bulletType = (BulletTypes)projectileType;
 
         projectileSpeed = PrefabOrganizer.Bullets[bulletType].projectileSpeed;
         damage = PrefabOrganizer.Bullets[bulletType].damage;
@@ -27,7 +17,7 @@ public class Bullet : Projectile
 
     }
 
-    public void Update(){
+    public void Update() {
         base.OnUpdate();
     }
 }

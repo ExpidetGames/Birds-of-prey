@@ -411,6 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   borders: {fileID: 6031600039651514267}
+  spriteDisplay: {fileID: 7090559608648418730}
   manager: {fileID: 0}
   myIndex: 0
 --- !u!1 &8255070194239500876

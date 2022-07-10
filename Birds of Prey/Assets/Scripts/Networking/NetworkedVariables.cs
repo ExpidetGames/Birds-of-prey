@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ public static class NetworkedVariables {
     //Holds the players who want to rejoin the game
     public static List<Dictionary<string, string>> playersToRejoin = new List<Dictionary<string, string>>();
     //Holds the information about the current game Mode
-    public static GameModeTypes currentGameMode = GameModeTypes.OneVsOne;
+    public static GameModeTypes currentGameMode = (GameModeTypes)0;
     //Indicates if the client is the creator of the room or not
     public static bool isRoomCreator;
     //True when Player is in world false if he is in Main Menu
@@ -32,6 +31,8 @@ public static class NetworkedVariables {
     public static bool isDead;
     //Stores the BuildIndex of the world the players are playing
     public static int worldIndex;
+    //Holds the variable name just for short time
+    public static string name;
     //The playerId which identifies the player
     public static string playerId;
     //The room Id the player is currently in

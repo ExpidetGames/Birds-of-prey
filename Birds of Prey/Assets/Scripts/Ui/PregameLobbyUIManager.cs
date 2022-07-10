@@ -18,8 +18,8 @@ public class PregameLobbyUIManager : MonoBehaviour {
     private Transform[] spawnPoints;
 
     void Start() {
-        roomCode.text = NetworkedVariables.roomId;
-        mode.text = NetworkedVariables.currentGameMode.ToString();
+        roomCode.text = $"RoomId: {NetworkedVariables.roomId}";
+        mode.text = $"Mode: {NetworkedVariables.currentGameMode.ToString()}";
         readyUpButtonText.text = "Ready Up";
         spawnPoints = spawnPointsParent.GetComponentsInChildren<RectTransform>();
         if(GameModeManager.gameModes[NetworkedVariables.currentGameMode].hasTeams) {
@@ -64,13 +64,15 @@ public class PregameLobbyUIManager : MonoBehaviour {
         }
         if(NetworkedVariables.disconnectedPlayerIds.Count > 0) {
             foreach(string disconnectedId in NetworkedVariables.disconnectedPlayerIds) {
-                Client disconnectedClient = NetworkedVariables.connectedClients[disconnectedId];
-                clientReadyStates.Remove(disconnectedClient.id);
-                scrollViews[disconnectedClient.teamColor].GetComponentInChildren<ScrollViewPopulatorPGLobby>().removeFromList(disconnectedClient);
-                if(disconnectedClient.id == NetworkedVariables.playerId) {
-                    NetworkedVariables.connectedClients.Clear();
-                } else {
-                    NetworkedVariables.connectedClients.Remove(disconnectedClient.id);
+                if(NetworkedVariables.connectedClients.ContainsKey(disconnectedId)) {
+                    Client disconnectedClient = NetworkedVariables.connectedClients[disconnectedId];
+                    clientReadyStates.Remove(disconnectedClient.id);
+                    scrollViews[disconnectedClient.teamColor].GetComponentInChildren<ScrollViewPopulatorPGLobby>().removeFromList(disconnectedClient);
+                    if(disconnectedClient.id == NetworkedVariables.playerId) {
+                        NetworkedVariables.connectedClients.Clear();
+                    } else {
+                        NetworkedVariables.connectedClients.Remove(disconnectedClient.id);
+                    }
                 }
             }
             NetworkedVariables.disconnectedPlayerIds.Clear();
