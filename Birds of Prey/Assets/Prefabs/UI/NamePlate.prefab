@@ -228,10 +228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848391c27e92b634db9c32338fbb1956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  readyImage: {fileID: 6006596293768180951}
+  readyImage: {fileID: 4267816961936504754}
   nameText: {fileID: 4086111614348036617}
   otherOptionsButton: {fileID: 7461955096174978220}
   otherOptions: {fileID: 6488545189569062406}
+  clientId: 
 --- !u!1 &4951401691789980919
 GameObject:
   m_ObjectHideFlags: 0

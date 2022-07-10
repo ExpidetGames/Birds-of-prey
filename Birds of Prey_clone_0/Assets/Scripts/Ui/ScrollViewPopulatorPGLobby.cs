@@ -28,7 +28,7 @@ public class ScrollViewPopulatorPGLobby : MonoBehaviour {
             teamHeaders.Add(header.teamName, header);
         }
         listHeaderImage.sprite = teamHeaders[teamColor].headerSprite;
-        listHeaderText.text = teamColor;
+        listHeaderText.text = $"Team {teamColor}";
     }
 
     public void addToList(Client newClient) {
