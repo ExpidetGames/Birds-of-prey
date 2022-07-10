@@ -66,7 +66,6 @@ public class TCPClient {
     }
 
     public static void killThreads() {
-        Debug.Log("Killing TCP connection");
         if(senderThread != null) {
             senderThread.Abort();
         }

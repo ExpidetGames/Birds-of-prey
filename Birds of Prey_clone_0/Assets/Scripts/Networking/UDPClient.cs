@@ -73,7 +73,6 @@ public class UDPClient {
     }
 
     public static void killThreads() {
-        Debug.Log("Killing UDP connection");
         if(sender != null) {
             sender.Abort();
         }
