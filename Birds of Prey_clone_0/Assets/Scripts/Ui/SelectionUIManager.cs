@@ -12,9 +12,10 @@ public class SelectionUIManager : MonoBehaviour {
     [SerializeField] private GameObject contentHolder;
     [SerializeField] private GameObject planePreviewImagePrefab;
     [SerializeField] private GameObject selectedPlanesHolder;
-    [SerializeField] private Button connectToRoomButton;
-
     [SerializeField] private GameObject roomIdInputHolder;
+
+    [SerializeField] private Button connectToRoomButton;
+    [SerializeField] private TMP_Text errorDisplay;
 
     private TMP_InputField roomIdInput;
     private List<PlaneImageController> allPreviewControllers;
@@ -25,7 +26,7 @@ public class SelectionUIManager : MonoBehaviour {
         connectToRoomButton.enabled = false;
         roomIdInputHolder.SetActive(!NetworkedVariables.isRoomCreator);
         roomIdInput = roomIdInputHolder.GetComponent<TMP_InputField>();
-        roomIdInput.SetTextWithoutNotify("AAAAAA");
+        //roomIdInput.SetTextWithoutNotify("AAAAAA");
         allPreviewControllers = new List<PlaneImageController>();
         allSelectionImageControllers = selectedPlanesHolder.GetComponentsInChildren<selectedPlanePreviewManager>();
 
@@ -42,6 +43,10 @@ public class SelectionUIManager : MonoBehaviour {
 
     private void Update() {
         connectToRoomButton.enabled = isPlaneSelectionValid();
+
+        if(!string.IsNullOrEmpty(NetworkedVariables.errorMessage) && errorDisplay != null) {
+            errorDisplay.text = NetworkedVariables.errorMessage;
+        }
     }
 
     private bool isPlaneSelectionValid() {

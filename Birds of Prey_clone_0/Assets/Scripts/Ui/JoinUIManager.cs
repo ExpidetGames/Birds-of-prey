@@ -6,7 +6,6 @@ public class JoinUIManager : MonoBehaviour {
     [SerializeField] private TMP_InputField serverIpInput;
     [SerializeField] private TMP_InputField localUdpPortInput;
     [SerializeField] private TMP_InputField nameInput;
-    [SerializeField] private TMP_Text errorDisplay;
     [SerializeField] private Animator animator;
     [Space]
     [SerializeField] private string ip;
@@ -26,9 +25,7 @@ public class JoinUIManager : MonoBehaviour {
     }
 
     private void Update() {
-        if(!string.IsNullOrEmpty(NetworkedVariables.errorMessage) && errorDisplay != null) {
-            errorDisplay.text = NetworkedVariables.errorMessage;
-        }
+
 
 
         if(timeUntilAnimStarts <= 0) {
