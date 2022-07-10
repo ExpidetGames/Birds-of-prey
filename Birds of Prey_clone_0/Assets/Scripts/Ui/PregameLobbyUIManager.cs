@@ -18,8 +18,8 @@ public class PregameLobbyUIManager : MonoBehaviour {
     private Transform[] spawnPoints;
 
     void Start() {
-        roomCode.text = NetworkedVariables.roomId;
-        mode.text = NetworkedVariables.currentGameMode.ToString();
+        roomCode.text = $"RoomId: {NetworkedVariables.roomId}";
+        mode.text = $"Mode: {NetworkedVariables.currentGameMode.ToString()}";
         readyUpButtonText.text = "Ready Up";
         spawnPoints = spawnPointsParent.GetComponentsInChildren<RectTransform>();
         if(GameModeManager.gameModes[NetworkedVariables.currentGameMode].hasTeams) {
