@@ -9,16 +9,25 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 316fbdf5ed018c549af54f3395515916
   - enabled: 1
-    path: Assets/Scenes/World.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: eb9069d84576e4847931201d6a4d308f
+  - enabled: 1
+    path: Assets/Scenes/PregameLobby.unity
+    guid: 0b9cdac47a6011a4aa447d78cd72801d
   - enabled: 1
     path: Assets/Scenes/Worlds/World 1.unity
     guid: 2eeb5dd1e4659a44a8a76ad00bcdee22
   - enabled: 1
-    path: Assets/Scenes/PregameLobby.unity
-    guid: 0b9cdac47a6011a4aa447d78cd72801d
+    path: Assets/Scenes/Worlds/World 2.unity
+    guid: 3f94f0c06e38b7149b52680edb449a7f
+  - enabled: 1
+    path: Assets/Scenes/Worlds/World 3.unity
+    guid: 603183dbaebeefb4f8b95443b239287c
+  - enabled: 1
+    path: Assets/Scenes/CreateRoomScene.unity
+    guid: 27d7d8112a9f68b44ae277d75fc4abcc
+  - enabled: 1
+    path: Assets/Scenes/SelectPlanes.unity
+    guid: e35b125e59691344aa8d2e509f51c728
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f73182e95ebda40a38caca6366d4b2b9, type: 2}
