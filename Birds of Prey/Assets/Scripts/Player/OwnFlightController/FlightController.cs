@@ -1,43 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FlightController : MonoBehaviour
 {
-  public float speed = .05f;
-  float zRotation;
-  public float zRotationLerpSpeed;
-  public Rigidbody rb;
+ 
+ InputMaster controls;
+  [SerializeField] private float speed = .05f,barrelRowlSpeed = 20f,  mouseSensitivity = 20, zRotationClamp = 70, zRotationLerpSpeed = 20;
+  private float zRotation;
+  private bool isLerpingBack;
+  //public Rigidbody rb;
 
   // Use this for initialization
+  void Awake(){
+    controls = new InputMaster();
+    controls.Enable();
+  }
   void Start()
   {
     Cursor.lockState = CursorLockMode.Locked;
     Cursor.visible = false;
   }
-
   // Update is called once per frame
   void Update()
   {
-    Debug.Log(Input.GetAxis("Mouse X"));
-    if(Input.GetAxis("Mouse X") == 0){
-      transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y,zRotationLerpSpeed),2f * Time.deltaTime);
+    //if mouse isnt moved
+    //and barrelRowl isnt called
+    //and zRotation isnt 0
+    //calculate the lerping of the rotation from the plane back to 0 on the z axis
+    if(controls.Player.Mouse.ReadValue<float>() == 0 && transform.rotation.eulerAngles.z != 0 && controls.Player.BarrelRowl.ReadValue<float>() == 0){
+      zRotation = 0;
+      isLerpingBack = true;
+      Quaternion lerpRotation;
+      Quaternion qa = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y,0);
+      lerpRotation = Quaternion.Lerp(transform.rotation, qa, zRotationLerpSpeed * Time.deltaTime);
+      transform.rotation =  lerpRotation.normalized;
     }
+
+    //calculate zRotation with mouse and barrelRowl
     else{
-       zRotation = (Input.GetAxis("Mouse X") + transform.rotation.x) * 40;
+      isLerpingBack = false;
+      zRotation = controls.Player.Mouse.ReadValue<float>() * mouseSensitivity;
+      zRotation = controls.Player.BarrelRowl.ReadValue<float>() * barrelRowlSpeed/10  +zRotation;
+      
+      //mouse rotation is clambed 
+      if(controls.Player.BarrelRowl.ReadValue<float>() == 0)
+      {
+        zRotation = Mathf.Clamp(zRotation,-zRotationClamp, zRotationClamp) * Time.deltaTime;
+      }
+
     }
-     float rotation;
-     if(transform.rotation.eulerAngles.z > 180){
-      rotation =360 - transform.rotation.eulerAngles.z;
-     }
-     else{
-      rotation = -transform.rotation.eulerAngles.z;
-     }
-    Debug.Log(transform.rotation.eulerAngles.z);
-    transform.Rotate(Input.GetAxis("Vertical") , Input.GetAxis("Horizontal"), -zRotation * Time.deltaTime);
-    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + rotation / 40, transform.rotation.eulerAngles.z);
-    transform.position += transform.forward * Time.deltaTime * speed;
-    //rb.AddForce(this.gameObject.transform.TransformDirection(Vector3.forward) * speed * Time.deltaTime);
+
+    //calculate value wich will be addet to the yRotation relativ to the zRotation from the mouse
+    float yrotation = 0;
+    if(controls.Player.BarrelRowl.ReadValue<float>() == 0 && !isLerpingBack)
+    {
+      if(transform.rotation.eulerAngles.z > 180){
+        yrotation =360 - transform.rotation.eulerAngles.z;
+      }
+      else{
+        yrotation = -transform.rotation.eulerAngles.z;
+      }
+    }
     
+    //calculate the wasd controls
+    Vector2 rotation = controls.Player.Rotate.ReadValue<Vector2>();
+
+    //perform the calculated movements and rotations 
+    transform.Rotate(rotation.x, rotation.y, -zRotation);
+    transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + yrotation / 40, transform.rotation.eulerAngles.z);
+    transform.position += transform.forward * Time.deltaTime * speed;
   }
 }
