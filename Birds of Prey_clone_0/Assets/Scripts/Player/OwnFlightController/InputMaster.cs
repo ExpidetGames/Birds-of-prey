@@ -169,6 +169,15 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Camera"",
+                    ""type"": ""Value"",
+                    ""id"": ""b8ef9e1d-587d-4762-bb28-883faf3415dc"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -226,6 +235,28 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c025c472-6dc5-4419-8282-aa40b11c4d3b"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64bd54c4-98ee-4b4d-bfbd-cb167fbbf34f"",
+                    ""path"": ""<Mouse>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -257,6 +288,7 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         // GhostControlls
         m_GhostControlls = asset.FindActionMap("GhostControlls", throwIfNotFound: true);
         m_GhostControlls_Movement = m_GhostControlls.FindAction("Movement", throwIfNotFound: true);
+        m_GhostControlls_Camera = m_GhostControlls.FindAction("Camera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -366,11 +398,13 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GhostControlls;
     private IGhostControllsActions m_GhostControllsActionsCallbackInterface;
     private readonly InputAction m_GhostControlls_Movement;
+    private readonly InputAction m_GhostControlls_Camera;
     public struct GhostControllsActions
     {
         private @InputMaster m_Wrapper;
         public GhostControllsActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_GhostControlls_Movement;
+        public InputAction @Camera => m_Wrapper.m_GhostControlls_Camera;
         public InputActionMap Get() { return m_Wrapper.m_GhostControlls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -383,6 +417,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_GhostControllsActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_GhostControllsActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_GhostControllsActionsCallbackInterface.OnMovement;
+                @Camera.started -= m_Wrapper.m_GhostControllsActionsCallbackInterface.OnCamera;
+                @Camera.performed -= m_Wrapper.m_GhostControllsActionsCallbackInterface.OnCamera;
+                @Camera.canceled -= m_Wrapper.m_GhostControllsActionsCallbackInterface.OnCamera;
             }
             m_Wrapper.m_GhostControllsActionsCallbackInterface = instance;
             if (instance != null)
@@ -390,6 +427,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Camera.started += instance.OnCamera;
+                @Camera.performed += instance.OnCamera;
+                @Camera.canceled += instance.OnCamera;
             }
         }
     }
@@ -412,5 +452,6 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
     public interface IGhostControllsActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
     }
 }
