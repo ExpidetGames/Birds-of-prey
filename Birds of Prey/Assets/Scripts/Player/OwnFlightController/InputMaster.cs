@@ -156,6 +156,78 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""GhostControlls"",
+            ""id"": ""c59e3755-bb52-4dd9-bbcc-fbcb81a4fb03"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""eec98fb4-ce75-4c5f-8fc2-88b8258b7de5"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""00b34957-6c8d-4f2f-ab23-549edf09057e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""0ceb1cc4-b0b0-47b2-a139-958244831c63"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""50e863af-12b9-4fb8-bd46-854744ed12fc"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""b5996152-62a5-4508-b12b-96e88b8dfc1f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""9a6815ef-f9f2-4189-8720-4c7216fab66d"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -182,6 +254,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
         m_Player_BarrelRowl = m_Player.FindAction("BarrelRowl", throwIfNotFound: true);
+        // GhostControlls
+        m_GhostControlls = asset.FindActionMap("GhostControlls", throwIfNotFound: true);
+        m_GhostControlls_Movement = m_GhostControlls.FindAction("Movement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -286,6 +361,39 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // GhostControlls
+    private readonly InputActionMap m_GhostControlls;
+    private IGhostControllsActions m_GhostControllsActionsCallbackInterface;
+    private readonly InputAction m_GhostControlls_Movement;
+    public struct GhostControllsActions
+    {
+        private @InputMaster m_Wrapper;
+        public GhostControllsActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_GhostControlls_Movement;
+        public InputActionMap Get() { return m_Wrapper.m_GhostControlls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GhostControllsActions set) { return set.Get(); }
+        public void SetCallbacks(IGhostControllsActions instance)
+        {
+            if (m_Wrapper.m_GhostControllsActionsCallbackInterface != null)
+            {
+                @Movement.started -= m_Wrapper.m_GhostControllsActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_GhostControllsActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_GhostControllsActionsCallbackInterface.OnMovement;
+            }
+            m_Wrapper.m_GhostControllsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
+            }
+        }
+    }
+    public GhostControllsActions @GhostControlls => new GhostControllsActions(this);
     private int m_MouseandKeyboardSchemeIndex = -1;
     public InputControlScheme MouseandKeyboardScheme
     {
@@ -300,5 +408,9 @@ public partial class @InputMaster : IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
         void OnBarrelRowl(InputAction.CallbackContext context);
+    }
+    public interface IGhostControllsActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
     }
 }

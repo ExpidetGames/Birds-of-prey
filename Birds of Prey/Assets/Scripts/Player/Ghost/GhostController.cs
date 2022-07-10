@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class GhostController : MonoBehaviour {
 
-    [SerializeField] private Rigidbody rigidbody;
+    [SerializeField] private Rigidbody movementRigidbody;
     [SerializeField] private Camera ghostCamera;
-    // Start is called before the first frame update
+    [SerializeField] private float movementSpeed;
+
+    InputMaster controls;
+
+    private void Awake() {
+        controls = new InputMaster();
+        controls.Enable();
+    }
+
     void Start() {
 
     }
 
-    // Update is called once per frame
     void Update() {
+        Vector2 moveInput = controls.GhostControlls.Movement.ReadValue<Vector2>();
+        Debug.Log(ghostCamera.transform.TransformDirection(Vector3.forward) * movementSpeed);
+        movementRigidbody.AddForce(ghostCamera.transform.TransformDirection(Vector3.forward) * moveInput.y * movementSpeed * Time.deltaTime, ForceMode.VelocityChange);
+    }
 
+    private void OnDestroy() {
+        controls.Disable();
     }
 }
