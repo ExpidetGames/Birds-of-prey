@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/JoinScreen.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: 316fbdf5ed018c549af54f3395515916
-  - enabled: 1
-    path: Assets/Scenes/World.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: eb9069d84576e4847931201d6a4d308f
   - enabled: 1
-    path: Assets/Scenes/World 1.unity
+    path: Assets/Scenes/Worlds/World 1.unity
     guid: 2eeb5dd1e4659a44a8a76ad00bcdee22
   - enabled: 1
     path: Assets/Scenes/PregameLobby.unity

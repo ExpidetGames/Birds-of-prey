@@ -7,8 +7,7 @@ public class JoinUIManager : MonoBehaviour {
     [SerializeField] private TMP_InputField localUdpPortInput;
     [SerializeField] private TMP_InputField nameInput;
     [SerializeField] private TMP_Text errorDisplay;
-    [SerializeField] private Canvas JoinCanvas;
-    [SerializeField] private Canvas selectionCanvas;
+    [SerializeField] private Animator animator;
     [Space]
     [SerializeField] private string ip;
     [SerializeField] private int tcpServerPort;
@@ -17,21 +16,32 @@ public class JoinUIManager : MonoBehaviour {
     [Space]
     [HideInInspector] public PlaneTypes planeType;
 
+    private float timeUntilAnimStarts;
 
     private void Start() {
+        timeUntilAnimStarts = Random.Range(5f, 10f);
         planeType = PlaneTypes.STANDARD_AIRCRAFT;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
 
     private void Update() {
-
         if(!string.IsNullOrEmpty(NetworkedVariables.errorMessage) && errorDisplay != null) {
             errorDisplay.text = NetworkedVariables.errorMessage;
         }
+
+
+        if(timeUntilAnimStarts <= 0) {
+            animator.SetBool("startAnimation", true);
+            timeUntilAnimStarts = Random.Range(10f, 30f);
+        } else {
+            timeUntilAnimStarts -= Time.deltaTime;
+        }
+
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("MainMenuBackground")) {
+            animator.SetBool("startAnimation", false);
+        }
     }
-
-
 
     IEnumerator createRoomTask() {
         connectToServer();
@@ -55,11 +65,6 @@ public class JoinUIManager : MonoBehaviour {
         NetworkedVariables.name = nameInput.text;
         NetworkedVariables.isRoomCreator = false;
         StartCoroutine(joinRoomTask());
-    }
-
-    public void selectPlane() {
-        JoinCanvas.GetComponent<Canvas>().enabled = false;
-        selectionCanvas.GetComponent<Canvas>().enabled = true;
     }
 
     private void connectToServer() {

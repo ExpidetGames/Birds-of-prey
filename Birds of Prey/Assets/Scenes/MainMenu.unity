@@ -156,7 +156,7 @@ RectTransform:
   m_Children:
   - {fileID: 1035134257}
   m_Father: {fileID: 1746726407}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -290,7 +290,7 @@ RectTransform:
   m_Children:
   - {fileID: 478940897}
   m_Father: {fileID: 1746726407}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1138,7 +1138,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1746726407}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1275,7 +1275,7 @@ RectTransform:
   m_Children:
   - {fileID: 1271683987}
   m_Father: {fileID: 1746726407}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1492,7 +1492,7 @@ RectTransform:
   - {fileID: 1669815733}
   - {fileID: 2063817883}
   m_Father: {fileID: 1746726407}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1966,7 +1966,7 @@ RectTransform:
   m_Children:
   - {fileID: 1430927995}
   m_Father: {fileID: 1746726407}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2907,7 +2907,7 @@ RectTransform:
   m_Children:
   - {fileID: 1346180727}
   m_Father: {fileID: 1746726407}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3121,6 +3121,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 774236864}
   - {fileID: 535778336}
   - {fileID: 214537164}
   - {fileID: 298581886}
@@ -3128,7 +3129,6 @@ RectTransform:
   - {fileID: 523587542}
   - {fileID: 1560045965}
   - {fileID: 1810504430}
-  - {fileID: 774236864}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3153,8 +3153,7 @@ MonoBehaviour:
   localUdpPortInput: {fileID: 1220227538}
   nameInput: {fileID: 1560045964}
   errorDisplay: {fileID: 523587543}
-  JoinCanvas: {fileID: 1746726406}
-  selectionCanvas: {fileID: 0}
+  animator: {fileID: 2063817884}
   ip: jodast.de
   tcpServerPort: 6942
   udpServerPort: 6943
@@ -3193,7 +3192,7 @@ RectTransform:
   m_Children:
   - {fileID: 1360724877}
   m_Father: {fileID: 1746726407}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
