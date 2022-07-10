@@ -27,5 +27,8 @@ public class SceneDirector : MonoBehaviour {
             TCPClient.ws.SendAsync("{\"type\":\"completeDelete\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"playerId\":\"" + NetworkedVariables.playerId + "\"}", null);
         }
         TCPClient.ws.Close();
+        TCPClient.killThreads();
+        UDPClient.updClient.Close();
+        UDPClient.killThreads();
     }
 }

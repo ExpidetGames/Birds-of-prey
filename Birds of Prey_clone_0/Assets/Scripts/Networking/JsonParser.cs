@@ -135,7 +135,6 @@ public class JsonParser : MonoBehaviour {
             string playerId = (string)decodedMessage["playerId"];
             int newHealth = (int)decodedMessage["newHealth"];
             NetworkedVariables.connectedClients[playerId].playerHealth = newHealth;
-            //Debug.Log($"The new health of player {playerId} is {NetworkedVariables.playerHealths[playerId]}");
             Dictionary<string, string> respawningPlayerInfo = new Dictionary<string, string> { ["id"] = playerId };
             NetworkedVariables.connectedClients[playerId].isDead = false;
             NetworkedVariables.playersToRejoin.Add(respawningPlayerInfo);

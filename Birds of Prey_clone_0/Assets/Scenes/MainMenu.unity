@@ -565,9 +565,9 @@ MonoBehaviour:
     bulletAmuniton: 0
     rocketAmunition: 2
     planeSprite: {fileID: 21300000, guid: 8913e3df526653b4aacd01fdab736da1, type: 3}
-    turnTorque: {x: 5, y: 2, z: 7}
-    startHealth: 500
-    thrust: 500
+    turnTorque: {x: 70, y: 40, z: 45}
+    startHealth: 600
+    thrust: 200
     timeBetweenRockets: 1
     timeBetweenBullets: 0.1
   _worlds:
@@ -1006,7 +1006,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dab6e88b9147fcd4bba5eff5000551bf, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9adf1458722bb8b48bce51ae21fb6d27, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

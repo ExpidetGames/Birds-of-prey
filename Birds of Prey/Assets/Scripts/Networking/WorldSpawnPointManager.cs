@@ -6,6 +6,8 @@ using System;
 [RequireComponent(typeof(PlayerManager))]
 public class WorldSpawnPointManager : MonoBehaviour {
 
+
+
     [Serializable]
     public class Spawnpoint {
         public string team;

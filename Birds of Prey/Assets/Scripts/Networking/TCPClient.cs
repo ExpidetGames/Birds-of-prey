@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using WebSocketSharp;
 using System.Threading;
+using UnityEngine;
 
 //This class is responsible for establishing the connection and receiving Messages
 public class TCPClient {
     public static WebSocket ws;
     public static List<string> callStack = new List<string>();
     private List<string> receivedMessages = new List<string>();
-    private Thread senderThread;
-    private Thread receiverThread;
+    private static Thread senderThread;
+    private static Thread receiverThread;
 
     private string ip;
     private int port;
@@ -64,7 +65,8 @@ public class TCPClient {
         }
     }
 
-    private void OnApplicationQuit() {
+    public static void killThreads() {
+        Debug.Log("Killing TCP connection");
         if(senderThread != null) {
             senderThread.Abort();
         }

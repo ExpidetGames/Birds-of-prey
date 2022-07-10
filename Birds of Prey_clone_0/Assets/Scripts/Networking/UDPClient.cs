@@ -15,8 +15,8 @@ public class UDPClient {
     private string ip;
 
     private IPEndPoint remoteEndPoint;
-    private Thread sender;
-    private Thread receiver;
+    private static Thread sender;
+    private static Thread receiver;
 
 
     public UDPClient(string ip, int serverPort, int localPort) {
@@ -72,7 +72,8 @@ public class UDPClient {
         }
     }
 
-    private void OnApplicationQuit() {
+    public static void killThreads() {
+        Debug.Log("Killing UDP connection");
         if(sender != null) {
             sender.Abort();
         }

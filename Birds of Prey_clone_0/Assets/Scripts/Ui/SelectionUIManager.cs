@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
 
 public class SelectionUIManager : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class SelectionUIManager : MonoBehaviour {
     [SerializeField] private GameObject contentHolder;
     [SerializeField] private GameObject planePreviewImagePrefab;
     [SerializeField] private GameObject selectedPlanesHolder;
+    [SerializeField] private Button connectToRoomButton;
 
     [SerializeField] private GameObject roomIdInputHolder;
 
@@ -20,6 +22,7 @@ public class SelectionUIManager : MonoBehaviour {
 
 
     private void Start() {
+        connectToRoomButton.enabled = false;
         roomIdInputHolder.SetActive(!NetworkedVariables.isRoomCreator);
         roomIdInput = roomIdInputHolder.GetComponent<TMP_InputField>();
         roomIdInput.SetTextWithoutNotify("AAAAAA");
@@ -35,6 +38,25 @@ public class SelectionUIManager : MonoBehaviour {
 
         Populate();
 
+    }
+
+    private void Update() {
+        connectToRoomButton.enabled = isPlaneSelectionValid();
+    }
+
+    private bool isPlaneSelectionValid() {
+        List<PlaneTypes> selectedPlaneTypes = new List<PlaneTypes>();
+        foreach(selectedPlanePreviewManager previewManager in allSelectionImageControllers) {
+            if(selectedPlaneTypes.Contains(previewManager.currentlySelectedPlaneType)) {
+                return false;
+            }
+            if(!previewManager.hasBeenSet) {
+                return false;
+            }
+            selectedPlaneTypes.Add(previewManager.currentlySelectedPlaneType);
+        }
+
+        return true;
     }
 
     void Populate() {

@@ -9,6 +9,7 @@ public class selectedPlanePreviewManager : MonoBehaviour {
     [HideInInspector] public int myIndex;
     [HideInInspector] public SelectionUIManager manager;
     [HideInInspector] public PlaneTypes currentlySelectedPlaneType;
+    [HideInInspector] public bool hasBeenSet = false;
 
 
     public void OnPressed() {
@@ -24,6 +25,7 @@ public class selectedPlanePreviewManager : MonoBehaviour {
     }
 
     public void changeImage(PlaneTypes newPlaneType) {
+        hasBeenSet = true;
         currentlySelectedPlaneType = newPlaneType;
         spriteDisplay.sprite = PrefabOrganizer.Planes[currentlySelectedPlaneType].planeSprite;
     }
