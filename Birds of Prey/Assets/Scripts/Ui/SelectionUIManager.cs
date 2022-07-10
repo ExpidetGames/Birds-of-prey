@@ -86,7 +86,7 @@ public class SelectionUIManager : MonoBehaviour {
     }
 
     public void back() {
-        NetworkedVariables.scenceToLoad.Add(6);
+        NetworkedVariables.scenceToLoad.Add((NetworkedVariables.isRoomCreator) ? 6 : 0);
     }
 
     public void connectToRoom() {
