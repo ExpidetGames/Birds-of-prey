@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneDirector : MonoBehaviour {
     private void Start() {
         DontDestroyOnLoad(this.gameObject);
-        Screen.SetResolution(1000, 1000, false);
+        Screen.SetResolution(1500, 1000, false);
     }
 
     void Update() {
