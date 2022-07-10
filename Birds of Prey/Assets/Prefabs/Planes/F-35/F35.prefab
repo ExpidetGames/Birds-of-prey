@@ -224,9 +224,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8709822154484641470}
-  - {fileID: 8709822153437208513}
   - {fileID: 8709822153917443142}
-  - {fileID: 8709822154249166096}
   - {fileID: 8709822154609849925}
   - {fileID: 8709822154296142810}
   m_Father: {fileID: 8709822153379448676}
@@ -301,7 +299,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7798165, y: 1}
+    m_SensorSize: {x: 1.7787418, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -323,6 +321,7 @@ GameObject:
   - component: {fileID: 8709822153379448672}
   - component: {fileID: 8709822153379448673}
   - component: {fileID: 8709822153379448678}
+  - component: {fileID: 8618279083490163373}
   m_Layer: 0
   m_Name: F35
   m_TagString: Untagged
@@ -364,10 +363,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  barrelRowlSpeed: 50
+  barrelRollSpeed: 20
   mouseSensitivity: 20
   zRotationClamp: 70
   zRotationLerpSpeed: 1.5
+  wasdSpeed: 20
 --- !u!114 &8709822153379448672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,9 +398,9 @@ MonoBehaviour:
   timeToLockTarget: 0.00001
   lockDuration: 5000
   bulletSpawnPoints:
-  - {fileID: 8709822153437208518}
+  - {fileID: 8709822154484641471}
   - {fileID: 8709822154609849946}
-  - {fileID: 8709822154249166097}
+  - {fileID: 8709822153917443143}
   rocketSpawnPoints:
   - {fileID: 8709822154484641471}
   - {fileID: 8709822153917443143}
@@ -419,6 +419,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aircraftTransform: {fileID: 8709822153379448676}
+--- !u!54 &8618279083490163373
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709822153379448677}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8709822153413330471
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +482,7 @@ GameObject:
   - component: {fileID: 8709822153421852175}
   - component: {fileID: 8709822153421852172}
   - component: {fileID: 8709822153421852173}
+  - component: {fileID: 4273849503855330497}
   m_Layer: 0
   m_Name: MouseFlightHud
   m_TagString: OwnPlayer
@@ -558,6 +575,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4273849503855330497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709822153421852160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e4242f96904f1c4aadf7934af9b509d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthDisplay: {fileID: 8709822153457673234}
+  lockDisplay: {fileID: 8709822153558065944}
+  playerHealth: {fileID: 8709822153379448672}
 --- !u!1 &8709822153436813135
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +616,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8709822153436813135}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.002, y: 159, z: -0.954}
+  m_LocalPosition: {x: -0.002, y: 0, z: -0.954}
   m_LocalScale: {x: 0.049999997, y: 0.049999997, z: 0.049999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5370,37 +5402,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!1 &8709822153437208518
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8709822153437208513}
-  m_Layer: 0
-  m_Name: LeftCenter Gun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8709822153437208513
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8709822153437208518}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.406, y: 0, z: -0.522}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8709822153089085103}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8709822153457673232
 GameObject:
   m_ObjectHideFlags: 0
@@ -5740,7 +5741,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7798165, y: 1}
+    m_SensorSize: {x: 1.7787418, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5774,7 +5775,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8709822153697991791}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.918, y: 159, z: -0.47}
+  m_LocalPosition: {x: 0.918, y: 0, z: -0.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6045,7 +6046,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8709822153089085103}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8709822153976962988
 GameObject:
@@ -6250,37 +6251,6 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!1 &8709822154249166097
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8709822154249166096}
-  m_Layer: 0
-  m_Name: RightCenter Gun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8709822154249166096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8709822154249166097}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.406, y: 0, z: -0.522}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8709822153089085103}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8709822154296142811
 GameObject:
   m_ObjectHideFlags: 0
@@ -6310,7 +6280,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8709822153089085103}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8709822154466428846
 GameObject:
@@ -6338,7 +6308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8709822154466428846}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.002, y: 159, z: -1.625}
+  m_LocalPosition: {x: -0.002, y: 0, z: -1.625}
   m_LocalScale: {x: 0.049999997, y: 0.049999997, z: 0.049999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11184,7 +11154,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8709822153089085103}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8709822154697464424
 GameObject:
@@ -11251,7 +11221,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7798165, y: 1}
+    m_SensorSize: {x: 1.7787418, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -11521,7 +11491,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7798165, y: 1}
+    m_SensorSize: {x: 1.7787418, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -11555,7 +11525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8709822154925269073}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.96, y: 159, z: -0.47}
+  m_LocalPosition: {x: -0.96, y: 0, z: -0.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -23,9 +23,10 @@ public class Shooter : MonoBehaviour {
     private float timeUntilUnlock;
 
     private void Start() {
-        timeBetweenBullets = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].timeBetweenBullets;
-        timeBetweenRockets = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].timeBetweenRockets;
-        planeRb = plane.GetComponentInChildren<Rigidbody>();
+        PlaneTypes currentPlaneType = NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType();
+        timeBetweenBullets = PrefabOrganizer.Planes[currentPlaneType].timeBetweenBullets;
+        timeBetweenRockets = PrefabOrganizer.Planes[currentPlaneType].timeBetweenRockets;
+        planeRb = plane.GetComponent<Rigidbody>();
         timeUntilLock = timeToLockTarget;
         playerManager = GameObject.Find("NetworkComponents").GetComponent<PlayerManager>();
     }
@@ -35,7 +36,11 @@ public class Shooter : MonoBehaviour {
         if(Input.GetMouseButton(0) && timePastSinceLastBullet >= timeBetweenBullets) {
             foreach(GameObject gun in bulletSpawnPoints) {
                 Vector3 planeFacingDirection = plane.transform.TransformDirection(Vector3.forward);
-                playerManager.shootBullet(gun.transform.position, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].bulletAmuniton);
+                Debug.Log($"Gun transform {gun.transform.position}");
+                Debug.Log($"planeFacingDirection {planeFacingDirection}");
+
+                playerManager.shootBullet(
+                    gun.transform.position, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType()].bulletAmuniton);
             }
             timePastSinceLastBullet = 0f;
         }
