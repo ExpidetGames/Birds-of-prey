@@ -28,6 +28,7 @@ public class PregameLobbyUIManager : MonoBehaviour {
                 GameObject newScrollView = Instantiate(scrollView);
                 newScrollView.GetComponent<RectTransform>().SetParent(this.gameObject.transform);
                 newScrollView.GetComponent<RectTransform>().SetPositionAndRotation(spawnPoints[i].position, Quaternion.identity);
+                newScrollView.GetComponentInChildren<ScrollViewPopulatorPGLobby>().teamColor = GameModeManager.gameModes[NetworkedVariables.currentGameMode].teamColors[i];
                 scrollViews.Add(GameModeManager.gameModes[NetworkedVariables.currentGameMode].teamColors[i], newScrollView);
             }
         }

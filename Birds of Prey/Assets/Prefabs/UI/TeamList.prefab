@@ -170,6 +170,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   namePlate: {fileID: 3647872468577396040, guid: 598503229d36c354cbb6cc77d9fec8b2, type: 3}
+  listHeaderImage: {fileID: 7793653286691798368}
+  listHeaderText: {fileID: 4663207194732372794}
+  _teamHeaders:
+  - teamName: Blue
+    headerSprite: {fileID: 21300000, guid: e209547184411744c8d517173e3c1806, type: 3}
+  - teamName: Red
+    headerSprite: {fileID: 21300000, guid: f0d4c01d7d29d0541a33597c216481d0, type: 3}
+  teamColor: 
 --- !u!1 &5721808756565503813
 GameObject:
   m_ObjectHideFlags: 0
