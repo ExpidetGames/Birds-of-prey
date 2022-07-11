@@ -1,2 +1,3 @@
 GorillaWebsockets for go: https://golangdocs.com/golang-gorilla-websockets
 ParrelSync for Unity: https://github.com/VeriorPies/ParrelSync
+The flight controller of some of the planes (A new one is in develpment): https://github.com/brihernandez/MouseFlight
