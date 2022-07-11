@@ -6,13 +6,15 @@ public class ProjectileManager : MonoBehaviour {
     public static List<Dictionary<string, dynamic>> bulletInformations = new List<Dictionary<string, dynamic>>();
     public static List<Dictionary<string, dynamic>> rocketInformations = new List<Dictionary<string, dynamic>>();
 
+    public static Dictionary<string, GameObject> projectileSpawnPoints = new Dictionary<string, GameObject>();
+
     private void Update() {
         if(bulletInformations.Count > 0) {
             //A bullet needs to be spawned
             lock(bulletInformations) {
                 foreach(Dictionary<string, dynamic> bulletInformation in bulletInformations) {
                     BulletTypes bulletType = (BulletTypes)Enum.Parse(typeof(BulletTypes), bulletInformation["bulletType"]);
-                    GameObject spawnedBullet = Instantiate(PrefabOrganizer.Bullets[bulletType].bulletPrefab, new Vector3(bulletInformation["start"][0], bulletInformation["start"][1], bulletInformation["start"][2]), Quaternion.identity);
+                    GameObject spawnedBullet = Instantiate(PrefabOrganizer.Bullets[bulletType].bulletPrefab, projectileSpawnPoints[bulletInformation["gunName"]].transform.position, Quaternion.identity);
                     Bullet bullet = spawnedBullet.GetComponent<Bullet>();
                     bullet.angleToFireProjectile = bullet.listToVector3(bulletInformation["facingAngle"]);
                     bullet.originalVelocity = bullet.listToVector3(bulletInformation["velocity"]);
@@ -28,7 +30,7 @@ public class ProjectileManager : MonoBehaviour {
             lock(rocketInformations) {
                 foreach(Dictionary<string, dynamic> rocketInformation in rocketInformations) {
                     RocketTypes rocketType = (RocketTypes)Enum.Parse(typeof(RocketTypes), rocketInformation["rocketType"]);
-                    GameObject spawnedRocket = Instantiate(PrefabOrganizer.Rockets[rocketType].rocketPrefab, new Vector3(rocketInformation["start"][0], rocketInformation["start"][1], rocketInformation["start"][2]), Quaternion.identity);
+                    GameObject spawnedRocket = Instantiate(PrefabOrganizer.Rockets[rocketType].rocketPrefab, projectileSpawnPoints[rocketInformation["gunName"]].transform.position, Quaternion.identity);
                     Rocket rocket = spawnedRocket.GetComponent<Rocket>();
                     rocket.projectileType = rocketType;
                     rocket.angleToFireProjectile = rocket.listToVector3(rocketInformation["facingAngle"]);
@@ -41,10 +43,10 @@ public class ProjectileManager : MonoBehaviour {
         }
     }
 
-    public static void shootBullet(List<float> bulletStart, List<float> bulletAngle, List<float> velocity, string type, string shooter) {
+    public static void shootBullet(string gunName, List<float> bulletAngle, List<float> velocity, string type, string shooter) {
         lock(bulletInformations) {
             Dictionary<string, dynamic> bulletInformation = new Dictionary<string, dynamic>();
-            bulletInformation.Add("start", bulletStart);
+            bulletInformation.Add("gunName", gunName);
             bulletInformation.Add("facingAngle", bulletAngle);
             bulletInformation.Add("velocity", velocity);
             bulletInformation.Add("bulletType", type);
@@ -53,10 +55,10 @@ public class ProjectileManager : MonoBehaviour {
         }
     }
 
-    public static void shootRocket(List<float> startPosition, List<float> facingAngle, List<float> velocity, string type, string shooter, string target) {
+    public static void shootRocket(string gunName, List<float> facingAngle, List<float> velocity, string type, string shooter, string target) {
         lock(rocketInformations) {
             Dictionary<string, dynamic> rocketInformation = new Dictionary<string, dynamic>();
-            rocketInformation.Add("start", startPosition);
+            rocketInformation.Add("gunName", gunName);
             rocketInformation.Add("facingAngle", facingAngle);
             rocketInformation.Add("velocity", velocity);
             rocketInformation.Add("rocketType", type);

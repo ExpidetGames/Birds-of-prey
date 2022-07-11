@@ -22,7 +22,9 @@ public class NamePlateController : MonoBehaviour {
         this.allTeams = allTeams;
         this.currentTeam = currentTeam;
         Debug.Log($"All teams Count: {allTeams.Count}");
-        moveToNextTeamButton.GetComponentInChildren<TMP_Text>().text = $"Move to next Team {allTeams[(allTeams.IndexOf(currentTeam) + 1) % allTeams.Count]}";
+        if(allTeams.Count > 0) {
+            moveToNextTeamButton.GetComponentInChildren<TMP_Text>().text = $"Move to next Team {allTeams[(allTeams.IndexOf(currentTeam) + 1) % allTeams.Count]}";
+        }
     }
 
     private void Start() {

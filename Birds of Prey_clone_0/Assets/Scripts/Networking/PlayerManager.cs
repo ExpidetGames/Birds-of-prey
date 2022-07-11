@@ -172,21 +172,19 @@ public class PlayerManager : MonoBehaviour {
 
     }
 
-    public void shootRocket(GameObject target, Vector3 startPoint, Vector3 planeFacingDirection, Vector3 planeVelocity, RocketTypes rocketType) {
+    public void shootRocket(GameObject target, string gunName, Vector3 planeFacingDirection, Vector3 planeVelocity, RocketTypes rocketType) {
         string targetId = idFromGameObject(target);
         if(!string.IsNullOrEmpty(targetId)) {
             string facingDirection = "[\"" + planeFacingDirection.x.ToString().Replace(",", ".") + "\",\"" + planeFacingDirection.y.ToString().Replace(",", ".") + "\", \"" + planeFacingDirection.z.ToString().Replace(",", ".") + "\"]";
-            string startPosition = "[\"" + startPoint.x.ToString().Replace(",", ".") + "\",\"" + startPoint.y.ToString().Replace(",", ".") + "\", \"" + startPoint.z.ToString().Replace(",", ".") + "\"]";
             string velocity = "[\"" + planeVelocity.x.ToString().Replace(",", ".") + "\",\"" + planeVelocity.y.ToString().Replace(",", ".") + "\", \"" + planeVelocity.z.ToString().Replace(",", ".") + "\"]";
-            TCPClient.callStack.Insert(0, "{\"type\":\"shootRocketRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"shooter\":\"" + NetworkedVariables.playerId + "\", \"rocketType\":\"" + rocketType + "\", \"target\":\"" + targetId + "\", \"bulletStartPosition\": " + startPosition + ", \"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
+            TCPClient.callStack.Insert(0, "{\"type\":\"shootRocketRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"shooter\":\"" + NetworkedVariables.playerId + "\", \"rocketType\":\"" + rocketType + "\", \"target\":\"" + targetId + "\", \"gunName\": \"" + gunName + "\", \"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
         }
     }
 
-    public void shootBullet(Vector3 startPoint, Vector3 planeFacingDirection, Vector3 planeVelocity, BulletTypes bulletType) {
+    public void shootBullet(string gunName, Vector3 planeFacingDirection, Vector3 planeVelocity, BulletTypes bulletType) {
         string facingDirection = "[\"" + planeFacingDirection.x.ToString().Replace(",", ".") + "\",\"" + planeFacingDirection.y.ToString().Replace(",", ".") + "\", \"" + planeFacingDirection.z.ToString().Replace(",", ".") + "\"]";
-        string startPosition = "[\"" + startPoint.x.ToString().Replace(",", ".") + "\",\"" + startPoint.y.ToString().Replace(",", ".") + "\", \"" + startPoint.z.ToString().Replace(",", ".") + "\"]";
         string velocity = "[\"" + planeVelocity.x.ToString().Replace(",", ".") + "\",\"" + planeVelocity.y.ToString().Replace(",", ".") + "\", \"" + planeVelocity.z.ToString().Replace(",", ".") + "\"]";
-        TCPClient.callStack.Insert(0, "{\"type\":\"shootBulletRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"shooter\":\"" + NetworkedVariables.playerId + "\", \"bulletType\":\"" + bulletType + "\", \"bulletStartPosition\": " + startPosition + ",\"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
+        TCPClient.callStack.Insert(0, "{\"type\":\"shootBulletRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"shooter\":\"" + NetworkedVariables.playerId + "\", \"bulletType\":\"" + bulletType + "\", \"gunName\": \"" + gunName + "\",\"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
     }
 
     public void disconnectPlayer(string playerId) {

@@ -16,7 +16,11 @@ public class JsonParser : MonoBehaviour {
 
     //Decodes a message and does something based on that
     public static void decodeJsonMessage(string message) {
-        //Debug.Log(message);
+        /*
+        if(!message.Contains("updatePlayerTransform")) {
+            Debug.Log(message);
+        }
+        */
         JObject decodedMessage = null;
         if(message != null) {
             decodedMessage = JObject.Parse(message);
@@ -73,13 +77,9 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("bulletShot")) {
             string bulletType = (string)decodedMessage["bulletType"];
             string shooter = (string)decodedMessage["shooter"];
-            List<float> startPosition = new List<float>();
+            string gunName = (string)decodedMessage["gunName"];
             List<float> angle = new List<float>();
             List<float> velocity = new List<float>();
-            //Retrieving the start Position of the bullet
-            foreach(string position in decodedMessage["startPos"].ToObject<List<string>>()) {
-                startPosition.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
-            }
             //Retrieving the velocity of the plane
             foreach(string position in decodedMessage["velocity"].ToObject<List<string>>()) {
                 velocity.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
@@ -89,19 +89,15 @@ public class JsonParser : MonoBehaviour {
             foreach(string position in decodedMessage["planeFacingDirection"].ToObject<List<string>>()) {
                 angle.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
             }
-            ProjectileManager.shootBullet(startPosition, angle, velocity, bulletType, shooter);
+            ProjectileManager.shootBullet(gunName, angle, velocity, bulletType, shooter);
         }
         if(messageType.Equals("rocketShot")) {
             string rocketType = (string)decodedMessage["rocketType"];
             string shooter = (string)decodedMessage["shooter"];
             string target = (string)decodedMessage["targetId"];
-            List<float> startPosition = new List<float>();
+            string gunName = (string)decodedMessage["gunName"];
             List<float> facingAngle = new List<float>();
             List<float> velocity = new List<float>();
-            //Retrieving the start Position of the rocket
-            foreach(string position in decodedMessage["startPos"].ToObject<List<string>>()) {
-                startPosition.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
-            }
             //Retrieving the facing Direction of the shooter
             foreach(string position in decodedMessage["facingAngle"].ToObject<List<string>>()) {
                 facingAngle.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
@@ -110,7 +106,7 @@ public class JsonParser : MonoBehaviour {
             foreach(string position in decodedMessage["velocity"].ToObject<List<string>>()) {
                 velocity.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
             }
-            ProjectileManager.shootRocket(startPosition: startPosition, facingAngle: facingAngle, velocity: velocity, type: rocketType, shooter: shooter, target: target);
+            ProjectileManager.shootRocket(gunName: gunName, facingAngle: facingAngle, velocity: velocity, type: rocketType, shooter: shooter, target: target);
         }
         if(messageType.Equals("playerHit")) {
             int newHealth = (int)decodedMessage["newHealth"];

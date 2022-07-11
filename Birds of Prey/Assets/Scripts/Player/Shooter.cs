@@ -23,6 +23,18 @@ public class Shooter : MonoBehaviour {
     private float timeUntilUnlock;
 
     private void Start() {
+        for(int i = 0; i < bulletSpawnPoints.Length; i++) {
+            if(!ProjectileManager.projectileSpawnPoints.ContainsKey(bulletSpawnPoints[i].name)) {
+                ProjectileManager.projectileSpawnPoints.Add(bulletSpawnPoints[i].name, bulletSpawnPoints[i]);
+            }
+        }
+
+        for(int i = 0; i < rocketSpawnPoints.Length; i++) {
+            if(!ProjectileManager.projectileSpawnPoints.ContainsKey(rocketSpawnPoints[i].name)) {
+                ProjectileManager.projectileSpawnPoints.Add(rocketSpawnPoints[i].name, rocketSpawnPoints[i]);
+            }
+        }
+        Debug.Log(string.Join("", ProjectileManager.projectileSpawnPoints.Values));
         PlaneTypes currentPlaneType = NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType();
         timeBetweenBullets = PrefabOrganizer.Planes[currentPlaneType].timeBetweenBullets;
         timeBetweenRockets = PrefabOrganizer.Planes[currentPlaneType].timeBetweenRockets;
@@ -37,7 +49,7 @@ public class Shooter : MonoBehaviour {
             foreach(GameObject gun in bulletSpawnPoints) {
                 Vector3 planeFacingDirection = plane.transform.TransformDirection(Vector3.forward);
                 playerManager.shootBullet(
-                    gun.transform.position, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType()].bulletAmuniton);
+                    gun.name, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType()].bulletAmuniton);
             }
             timePastSinceLastBullet = 0f;
         }
@@ -70,7 +82,7 @@ public class Shooter : MonoBehaviour {
                 if(Input.GetMouseButton(1) && timeUntilUnlock > 0) {
                     foreach(GameObject rocketSpawner in rocketSpawnPoints) {
                         Vector3 planeFacingDirection = plane.transform.TransformDirection(Vector3.forward);
-                        playerManager.shootRocket(currentTarget, rocketSpawner.transform.position, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].rocketAmunition);
+                        playerManager.shootRocket(currentTarget, rocketSpawner.name, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].rocketAmunition);
                     }
                     timePastSinceLastRocket = 0f;
                 }
