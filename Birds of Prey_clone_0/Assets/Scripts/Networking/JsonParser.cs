@@ -178,6 +178,11 @@ public class JsonParser : MonoBehaviour {
             string playerId = (string)decodedMessage["Id"];
             NetworkedVariables.connectedClients[playerId].isReady = false;
         }
+        if(messageType.Equals("changeTeam")) {
+            string playerToMove = (string)decodedMessage["playerId"];
+            string newTeam = (string)decodedMessage["newTeam"];
+            NetworkedVariables.connectedClients[playerToMove].teamColor = newTeam;
+        }
         if(messageType.Equals("joinSuccess")) {
             //Debug.Log(message);
             NetworkedVariables.roomId = ((string)decodedMessage["newRoomId"]);

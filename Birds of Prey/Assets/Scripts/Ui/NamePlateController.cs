@@ -8,12 +8,22 @@ public class NamePlateController : MonoBehaviour {
 
     [SerializeField] private Image readyImage;
     [SerializeField] private TMP_Text nameText;
-    [SerializeField] GameObject otherOptionsButton;
-    [SerializeField] GameObject otherOptions;
+    [SerializeField] private GameObject otherOptionsButton;
+    [SerializeField] private GameObject otherOptions;
+    [SerializeField] private GameObject moveToNextTeamButton;
 
     [HideInInspector] public string clientId;
 
+    private List<string> allTeams;
+    private string currentTeam;
     private bool currentlyShowsOtherOptions;
+
+    public void initValues(List<string> allTeams, string currentTeam) {
+        this.allTeams = allTeams;
+        this.currentTeam = currentTeam;
+        Debug.Log($"All teams Count: {allTeams.Count}");
+        moveToNextTeamButton.GetComponentInChildren<TMP_Text>().text = $"Move to next Team {allTeams[(allTeams.IndexOf(currentTeam) + 1) % allTeams.Count]}";
+    }
 
     private void Start() {
         currentlyShowsOtherOptions = false;
@@ -39,5 +49,11 @@ public class NamePlateController : MonoBehaviour {
     public void transferOwnership() {
         string newOwnerId = this.GetComponentInParent<NamePlateController>().clientId;
         TCPClient.callStack.Insert(0, "{\"type\":\"transferOwnership\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"newOwner\":\"" + newOwnerId + "\"}");
+    }
+
+    public void moveToNextTeam() {
+        string newTeam = allTeams[(allTeams.IndexOf(currentTeam) + 1) % allTeams.Count];
+        string playerToMove = this.GetComponentInParent<NamePlateController>().clientId;
+        TCPClient.callStack.Insert(0, "{\"type\":\"changeTeam\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"playerId\":\"" + playerToMove + "\", \"newTeam\":\"" + newTeam + "\"}");
     }
 }

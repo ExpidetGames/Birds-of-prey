@@ -34,8 +34,16 @@ public class ScrollViewPopulatorPGLobby : MonoBehaviour {
     public void addToList(Client newClient) {
         if(!spawnedNames.ContainsKey(newClient.id)) {
             GameObject newPlayerTag = Instantiate(namePlate);
-            newPlayerTag.GetComponent<NamePlateController>().setName(newClient.name);
-            newPlayerTag.GetComponent<NamePlateController>().updateReadyState(newClient.isReady);
+            NamePlateController controller = newPlayerTag.GetComponent<NamePlateController>();
+            List<string> allTeams = new List<string>();
+            foreach(ListHeaderInfo header in teamHeaders.Values) {
+                allTeams.Add(header.teamName);
+            }
+
+            controller.initValues(allTeams, teamColor);
+            controller.setName(newClient.name);
+            controller.clientId = newClient.id;
+            controller.updateReadyState(newClient.isReady);
             newPlayerTag.transform.SetParent(this.gameObject.transform);
             spawnedNames.Add(newClient.id, newPlayerTag);
         }
