@@ -145,7 +145,7 @@ public class PlayerManager : MonoBehaviour {
                     //Updating Rotation of Name Tag so the name is always readable
                     PlayerDummyScript dummy = allPlayers[playerId].GetComponent<PlayerDummyScript>();
                     if(dummy != null && ownPlayer != null) {
-                        dummy.rotateNameTowards();
+                        dummy.rotateNameTowardsCamera();
                     }
                 }
             }

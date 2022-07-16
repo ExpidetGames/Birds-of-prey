@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 705321690}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9997189
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1300,7 +1300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.020239107, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -13.978882, y: 0}
+  m_AnchoredPosition: {x: -13.979037, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &975664118
@@ -1990,8 +1990,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 577, y: 420}
-  m_SizeDelta: {x: 716.117, y: 50}
+  m_AnchoredPosition: {x: 582.93, y: 459}
+  m_SizeDelta: {x: 754.136, y: 117.264}
   m_Pivot: {x: 0.4999995, y: 0.49999857}
 --- !u!114 &1353647874
 MonoBehaviour:
@@ -2013,7 +2013,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'Error Display (if somebody wonders about
+
+    why a read message is here)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c8e3861bba869394c8b90b6b3096f4e6, type: 2}
@@ -2040,12 +2042,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
+  m_fontSize: 30
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 30
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

@@ -14,8 +14,7 @@ public class PlayerDummyScript : MonoBehaviour {
     public void disableNameTag() {
         nameTagCanvas.enabled = false;
     }
-    public void rotateNameTowards() {
-        nameDisplay.transform.LookAt(Camera.main.transform);
-        nameDisplay.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+    public void rotateNameTowardsCamera() {
+        nameTagCanvas.transform.rotation = Quaternion.LookRotation(nameTagCanvas.transform.position - Camera.main.transform.position, Vector3.up);
     }
 }
