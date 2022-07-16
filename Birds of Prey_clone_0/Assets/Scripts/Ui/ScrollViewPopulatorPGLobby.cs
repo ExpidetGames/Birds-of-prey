@@ -41,8 +41,8 @@ public class ScrollViewPopulatorPGLobby : MonoBehaviour {
             }
 
             controller.initValues(allTeams, teamColor);
-            controller.setName(newClient.name);
             controller.clientId = newClient.id;
+            controller.setName(newClient.name);
             controller.updateReadyState(newClient.isReady);
             newPlayerTag.transform.SetParent(this.gameObject.transform);
             spawnedNames.Add(newClient.id, newPlayerTag);

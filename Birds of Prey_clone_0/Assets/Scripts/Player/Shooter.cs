@@ -7,8 +7,8 @@ public class Shooter : MonoBehaviour {
     [SerializeField] private float radarDistance = 10f;
     [SerializeField] private float timeToLockTarget = 5f;
     [SerializeField] private float lockDuration = 5f;
-    [SerializeField] private GameObject[] bulletSpawnPoints;
-    [SerializeField] private GameObject[] rocketSpawnPoints;
+    public GameObject[] bulletSpawnPoints;
+    public GameObject[] rocketSpawnPoints;
     [SerializeField] private GameObject plane;
     [SerializeField] private GameObject radarPoint;
 
@@ -23,18 +23,6 @@ public class Shooter : MonoBehaviour {
     private float timeUntilUnlock;
 
     private void Start() {
-        for(int i = 0; i < bulletSpawnPoints.Length; i++) {
-            if(!ProjectileManager.projectileSpawnPoints.ContainsKey(bulletSpawnPoints[i].name)) {
-                ProjectileManager.projectileSpawnPoints.Add(bulletSpawnPoints[i].name, bulletSpawnPoints[i]);
-            }
-        }
-
-        for(int i = 0; i < rocketSpawnPoints.Length; i++) {
-            if(!ProjectileManager.projectileSpawnPoints.ContainsKey(rocketSpawnPoints[i].name)) {
-                ProjectileManager.projectileSpawnPoints.Add(rocketSpawnPoints[i].name, rocketSpawnPoints[i]);
-            }
-        }
-        Debug.Log(string.Join("", ProjectileManager.projectileSpawnPoints.Values));
         PlaneTypes currentPlaneType = NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType();
         timeBetweenBullets = PrefabOrganizer.Planes[currentPlaneType].timeBetweenBullets;
         timeBetweenRockets = PrefabOrganizer.Planes[currentPlaneType].timeBetweenRockets;
@@ -46,10 +34,9 @@ public class Shooter : MonoBehaviour {
     void Update() {
         //BULLETS
         if(Input.GetMouseButton(0) && timePastSinceLastBullet >= timeBetweenBullets) {
-            foreach(GameObject gun in bulletSpawnPoints) {
+            for(int i = 0; i < bulletSpawnPoints.Length; i++) {
                 Vector3 planeFacingDirection = plane.transform.TransformDirection(Vector3.forward);
-                playerManager.shootBullet(
-                    gun.name, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType()].bulletAmuniton);
+                playerManager.shootBullet(i, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType()].bulletAmuniton);
             }
             timePastSinceLastBullet = 0f;
         }

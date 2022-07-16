@@ -77,7 +77,7 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("bulletShot")) {
             string bulletType = (string)decodedMessage["bulletType"];
             string shooter = (string)decodedMessage["shooter"];
-            string gunName = (string)decodedMessage["gunName"];
+            string gunIndex = (string)decodedMessage["gunIndex"];
             List<float> angle = new List<float>();
             List<float> velocity = new List<float>();
             //Retrieving the velocity of the plane
@@ -89,7 +89,7 @@ public class JsonParser : MonoBehaviour {
             foreach(string position in decodedMessage["planeFacingDirection"].ToObject<List<string>>()) {
                 angle.Add(float.Parse(position, CultureInfo.InvariantCulture.NumberFormat));
             }
-            ProjectileManager.shootBullet(gunName, angle, velocity, bulletType, shooter);
+            ProjectileManager.shootBullet(gunIndex, angle, velocity, bulletType, shooter);
         }
         if(messageType.Equals("rocketShot")) {
             string rocketType = (string)decodedMessage["rocketType"];
@@ -139,7 +139,8 @@ public class JsonParser : MonoBehaviour {
             string newOwner = (string)decodedMessage["newOwner"];
             if(newOwner == NetworkedVariables.playerId) {
                 NetworkedVariables.isRoomCreator = true;
-                Debug.Log(NetworkedVariables.isRoomCreator);
+            } else if(NetworkedVariables.isRoomCreator) {
+                NetworkedVariables.isRoomCreator = false;
             }
         }
         //Another client disconnected

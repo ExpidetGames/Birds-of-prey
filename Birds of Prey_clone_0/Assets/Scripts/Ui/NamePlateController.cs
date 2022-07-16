@@ -21,7 +21,6 @@ public class NamePlateController : MonoBehaviour {
     public void initValues(List<string> allTeams, string currentTeam) {
         this.allTeams = allTeams;
         this.currentTeam = currentTeam;
-        Debug.Log($"All teams Count: {allTeams.Count}");
         if(allTeams.Count > 0) {
             moveToNextTeamButton.GetComponentInChildren<TMP_Text>().text = $"Move to next Team {allTeams[(allTeams.IndexOf(currentTeam) + 1) % allTeams.Count]}";
         }
@@ -35,12 +34,13 @@ public class NamePlateController : MonoBehaviour {
     private void Update() {
         otherOptionsButton.SetActive(NetworkedVariables.isRoomCreator);
     }
+
     public void updateReadyState(bool newState) {
         readyImage.color = (newState) ? Color.green : Color.red;
     }
 
     public void setName(string name) {
-        nameText.text = name;
+        nameText.text = name + ((NetworkedVariables.playerId == clientId) ? " (You)" : "");
     }
 
     public void onPressed() {

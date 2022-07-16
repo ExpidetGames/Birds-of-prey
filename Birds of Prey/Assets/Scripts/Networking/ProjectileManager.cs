@@ -6,7 +6,11 @@ public class ProjectileManager : MonoBehaviour {
     public static List<Dictionary<string, dynamic>> bulletInformations = new List<Dictionary<string, dynamic>>();
     public static List<Dictionary<string, dynamic>> rocketInformations = new List<Dictionary<string, dynamic>>();
 
-    public static Dictionary<string, GameObject> projectileSpawnPoints = new Dictionary<string, GameObject>();
+    private PlayerManager playerManager;
+
+    private void Start() {
+        playerManager = this.gameObject.GetComponent<PlayerManager>();
+    }
 
     private void Update() {
         if(bulletInformations.Count > 0) {
@@ -14,7 +18,11 @@ public class ProjectileManager : MonoBehaviour {
             lock(bulletInformations) {
                 foreach(Dictionary<string, dynamic> bulletInformation in bulletInformations) {
                     BulletTypes bulletType = (BulletTypes)Enum.Parse(typeof(BulletTypes), bulletInformation["bulletType"]);
-                    GameObject spawnedBullet = Instantiate(PrefabOrganizer.Bullets[bulletType].bulletPrefab, projectileSpawnPoints[bulletInformation["gunName"]].transform.position, Quaternion.identity);
+                    Vector3 spawnPosition = calculateBulletSpawnPosition(bulletInformation["shooter"], bulletInformation["gunIndex"]);
+                    if(spawnPosition == Vector3.zero) {
+                        continue;
+                    }
+                    GameObject spawnedBullet = Instantiate(PrefabOrganizer.Bullets[bulletType].bulletPrefab, spawnPosition, Quaternion.identity);
                     Bullet bullet = spawnedBullet.GetComponent<Bullet>();
                     bullet.angleToFireProjectile = bullet.listToVector3(bulletInformation["facingAngle"]);
                     bullet.originalVelocity = bullet.listToVector3(bulletInformation["velocity"]);
@@ -30,7 +38,11 @@ public class ProjectileManager : MonoBehaviour {
             lock(rocketInformations) {
                 foreach(Dictionary<string, dynamic> rocketInformation in rocketInformations) {
                     RocketTypes rocketType = (RocketTypes)Enum.Parse(typeof(RocketTypes), rocketInformation["rocketType"]);
-                    GameObject spawnedRocket = Instantiate(PrefabOrganizer.Rockets[rocketType].rocketPrefab, projectileSpawnPoints[rocketInformation["gunName"]].transform.position, Quaternion.identity);
+                    Vector3 spawnPosition = calculateRocketSpawnPosition(rocketInformation["shooter"], rocketInformation["gunIndex"]);
+                    if(spawnPosition == Vector3.zero) {
+                        continue;
+                    }
+                    GameObject spawnedRocket = Instantiate(PrefabOrganizer.Rockets[rocketType].rocketPrefab, Vector3.one, Quaternion.identity);
                     Rocket rocket = spawnedRocket.GetComponent<Rocket>();
                     rocket.projectileType = rocketType;
                     rocket.angleToFireProjectile = rocket.listToVector3(rocketInformation["facingAngle"]);
@@ -43,10 +55,10 @@ public class ProjectileManager : MonoBehaviour {
         }
     }
 
-    public static void shootBullet(string gunName, List<float> bulletAngle, List<float> velocity, string type, string shooter) {
+    public static void shootBullet(string gunIndex, List<float> bulletAngle, List<float> velocity, string type, string shooter) {
         lock(bulletInformations) {
             Dictionary<string, dynamic> bulletInformation = new Dictionary<string, dynamic>();
-            bulletInformation.Add("gunName", gunName);
+            bulletInformation.Add("gunIndex", gunIndex);
             bulletInformation.Add("facingAngle", bulletAngle);
             bulletInformation.Add("velocity", velocity);
             bulletInformation.Add("bulletType", type);
@@ -65,6 +77,28 @@ public class ProjectileManager : MonoBehaviour {
             rocketInformation.Add("shooter", shooter);
             rocketInformation.Add("target", target);
             rocketInformations.Add(rocketInformation);
+        }
+    }
+
+    private Vector3 calculateBulletSpawnPosition(string shooterId, string gunIndex) {
+        if(!NetworkedVariables.connectedClients[shooterId].isDead) {
+            Transform parent = playerManager.playerObjectFromId(shooterId).GetComponentsInChildren<Transform>()[(shooterId == NetworkedVariables.playerId) ? 1 : 0];
+            Vector3 gunOffset = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[shooterId].getCurrentType()].realPlayer.GetComponentInChildren<Shooter>().bulletSpawnPoints[int.Parse(gunIndex)].transform.localPosition;
+            Vector3 spawnPosition = parent.transform.TransformPoint(gunOffset);
+            return spawnPosition;
+        } else {
+            return Vector3.zero;
+        }
+    }
+
+    private Vector3 calculateRocketSpawnPosition(string shooterId, string gunIndex) {
+        if(!NetworkedVariables.connectedClients[shooterId].isDead) {
+            Transform parent = playerManager.playerObjectFromId(shooterId).GetComponentsInChildren<Transform>()[(shooterId == NetworkedVariables.playerId) ? 1 : 0];
+            Vector3 gunOffset = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[shooterId].getCurrentType()].realPlayer.GetComponentInChildren<Shooter>().rocketSpawnPoints[int.Parse(gunIndex)].transform.localPosition;
+            Vector3 spawnPosition = parent.transform.TransformPoint(gunOffset);
+            return spawnPosition;
+        } else {
+            return Vector3.zero;
         }
     }
 }

@@ -155,6 +155,8 @@ public class PlayerManager : MonoBehaviour {
     public GameObject playerObjectFromId(string playerId) {
         if(allPlayers != null && allPlayers.ContainsKey(playerId)) {
             return allPlayers[playerId];
+        } else if(ownPlayer != null) {
+            return ownPlayer;
         }
         return null;
     }
@@ -181,10 +183,10 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
-    public void shootBullet(string gunName, Vector3 planeFacingDirection, Vector3 planeVelocity, BulletTypes bulletType) {
+    public void shootBullet(int gunIndex, Vector3 planeFacingDirection, Vector3 planeVelocity, BulletTypes bulletType) {
         string facingDirection = "[\"" + planeFacingDirection.x.ToString().Replace(",", ".") + "\",\"" + planeFacingDirection.y.ToString().Replace(",", ".") + "\", \"" + planeFacingDirection.z.ToString().Replace(",", ".") + "\"]";
         string velocity = "[\"" + planeVelocity.x.ToString().Replace(",", ".") + "\",\"" + planeVelocity.y.ToString().Replace(",", ".") + "\", \"" + planeVelocity.z.ToString().Replace(",", ".") + "\"]";
-        TCPClient.callStack.Insert(0, "{\"type\":\"shootBulletRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"shooter\":\"" + NetworkedVariables.playerId + "\", \"bulletType\":\"" + bulletType + "\", \"gunName\": \"" + gunName + "\",\"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
+        TCPClient.callStack.Insert(0, "{\"type\":\"shootBulletRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\",\"shooter\":\"" + NetworkedVariables.playerId + "\", \"bulletType\":\"" + bulletType + "\", \"gunIndex\": \"" + gunIndex + "\",\"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
     }
 
     public void disconnectPlayer(string playerId) {

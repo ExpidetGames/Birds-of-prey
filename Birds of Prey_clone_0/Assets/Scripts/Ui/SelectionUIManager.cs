@@ -23,7 +23,6 @@ public class SelectionUIManager : MonoBehaviour {
 
 
     private void Start() {
-        connectToRoomButton.enabled = false;
         errorDisplay.text = "";
         roomIdInputHolder.SetActive(!NetworkedVariables.isRoomCreator);
         roomIdInput = roomIdInputHolder.GetComponent<TMP_InputField>();
@@ -43,7 +42,7 @@ public class SelectionUIManager : MonoBehaviour {
     }
 
     private void Update() {
-        connectToRoomButton.enabled = isPlaneSelectionValid();
+        connectToRoomButton.interactable = isPlaneSelectionValid();
 
         if(!string.IsNullOrEmpty(NetworkedVariables.errorMessage) && errorDisplay != null) {
             errorDisplay.text = NetworkedVariables.errorMessage;
