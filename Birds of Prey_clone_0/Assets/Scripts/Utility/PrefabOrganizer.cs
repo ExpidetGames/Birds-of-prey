@@ -94,5 +94,6 @@ public enum PlaneTypes {
     STANDARD_AIRCRAFT,
     F35,
     SPITFIRE,
-    BETTERF35
+    BETTERF35,
+    DOPPELDECKER
 }

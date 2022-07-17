@@ -66,6 +66,11 @@ public class Plane : MonoBehaviour {
             Debug.LogError(name + ": Plane - Missing reference to MouseFlightController!");
     }
 
+    private void Start() {
+        this.thrust = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType()].thrust;
+        this.turnTorque = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType()].turnTorque;
+    }
+
     private void Update() {
         // When the player commands their own stick input, it should override what the
         // autopilot is trying to do.

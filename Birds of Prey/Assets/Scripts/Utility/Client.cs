@@ -4,9 +4,12 @@ public class Client {
     public string teamColor;
     public bool isReady;
     public bool isDead;
+    public bool isDeadForever;
     public int playerHealth;
-    public PlaneTypes[] planeTypes;
     public int currentPlaneType;
+    public int kills;
+    public int deaths;
+    public PlaneTypes[] planeTypes;
 
     public Client(string id, string name, string teamColor, bool isReady, bool isDead, int playerHealth, PlaneTypes[] planeTypes, int startingPlaneType) {
         this.id = id;

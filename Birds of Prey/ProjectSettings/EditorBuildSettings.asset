@@ -29,5 +29,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectPlanes.unity
     guid: e35b125e59691344aa8d2e509f51c728
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 7a268b24d702e6348b5449f256e0aa1a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f73182e95ebda40a38caca6366d4b2b9, type: 2}

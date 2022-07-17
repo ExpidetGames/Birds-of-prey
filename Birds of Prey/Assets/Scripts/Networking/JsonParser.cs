@@ -64,7 +64,10 @@ public class JsonParser : MonoBehaviour {
             //To ensure that the kill who won the game is accounted for
             string lastKill = (string)decodedMessage["lastKill"];
 
-            Debug.Log($"The game was won by the player {winner}");
+            NetworkedVariables.connectedClients[lastKill].deaths++;
+            if(NetworkedVariables.connectedClients[NetworkedVariables.playerId].isDeadForever) {
+                NetworkedVariables.scenceToLoad.Add(8);
+            }
         }
         //A target got locket and the players get informed about this unfortunate event
         if(messageType.Equals("targetLocked")) {
@@ -118,14 +121,23 @@ public class JsonParser : MonoBehaviour {
         if(messageType.Equals("playerDied")) {
             string deadPlayer = (string)decodedMessage["deadPlayer"];
             string killer = (string)decodedMessage["killer"];
-            if(!NetworkedVariables.connectedClients[deadPlayer].isDead) {
+            if(!NetworkedVariables.connectedClients[deadPlayer].isDead && !NetworkedVariables.connectedClients[deadPlayer].isDeadForever) {
+                NetworkedVariables.connectedClients[killer].kills++;
+                NetworkedVariables.connectedClients[deadPlayer].deaths++;
+                if(NetworkedVariables.connectedClients[deadPlayer].deaths == NetworkedVariables.connectedClients[deadPlayer].planeTypes.Length) {
+                    NetworkedVariables.connectedClients[deadPlayer].isDeadForever = true;
+                    if(deadPlayer == NetworkedVariables.playerId) {
+                        NetworkedVariables.scenceToLoad.Add(8);
+                        return;
+                    }
+                }
                 Dictionary<string, string> deadPlayerInfo = new Dictionary<string, string>() { ["deadPlayerId"] = deadPlayer, ["killer"] = killer, ["deactivated"] = "0" };
-                Debug.Log($"The old index of the dead player was: {NetworkedVariables.connectedClients[deadPlayer].currentPlaneType}");
                 NetworkedVariables.connectedClients[deadPlayer].currentPlaneType += 1;
                 NetworkedVariables.connectedClients[deadPlayer].isDead = true;
-                Debug.Log($"The new index of the dead player is: {NetworkedVariables.connectedClients[deadPlayer].currentPlaneType}");
                 NetworkedVariables.deadPlayers.Add(deadPlayerInfo);
             }
+
+
         }
         if(messageType.Equals("rejoin")) {
             string playerId = (string)decodedMessage["playerId"];
