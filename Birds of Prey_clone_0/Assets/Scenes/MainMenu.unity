@@ -641,6 +641,18 @@ MonoBehaviour:
     killsToWin: 2
     usePoints: 0
     pointsToWin: 0
+  - gameModeType: 2
+    hasMaxPlayers: 0
+    maxPlayerCount: 2
+    hasTeams: 0
+    teamCount: 0
+    teamColors: []
+    useTime: 0
+    timeInSeconds: 200
+    useKills: 1
+    killsToWin: 10
+    usePoints: 0
+    pointsToWin: 0
 --- !u!1 &409244197
 GameObject:
   m_ObjectHideFlags: 0

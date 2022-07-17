@@ -39,5 +39,5 @@ public class GameMode {
 }
 
 public enum GameModeTypes {
-    OneVsOne, OneVsOneDeathmatch
+    OneVsOne, OneVsOneDeathmatch, FreeForAll
 }
