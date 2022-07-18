@@ -83,10 +83,14 @@ public class ProjectileManager : MonoBehaviour {
 
     private Vector3 calculateBulletSpawnPosition(string shooterId, string gunIndex) {
         if(!NetworkedVariables.connectedClients[shooterId].isDead) {
-            Transform parent = playerManager.playerObjectFromId(shooterId).GetComponentsInChildren<Transform>()[(shooterId == NetworkedVariables.playerId) ? 1 : 0];
-            Vector3 gunOffset = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[shooterId].getCurrentType()].realPlayer.GetComponentInChildren<Shooter>().bulletSpawnPoints[int.Parse(gunIndex)].transform.localPosition;
-            Vector3 spawnPosition = parent.transform.TransformPoint(gunOffset);
-            return spawnPosition;
+            GameObject par = playerManager.playerObjectFromId(shooterId);
+            if(par != null) {
+                Transform parent = playerManager.playerObjectFromId(shooterId).GetComponentsInChildren<Transform>()[(shooterId == NetworkedVariables.playerId) ? 1 : 0];
+                Vector3 gunOffset = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[shooterId].getCurrentType()].realPlayer.GetComponentInChildren<Shooter>().bulletSpawnPoints[int.Parse(gunIndex)].transform.localPosition;
+                Vector3 spawnPosition = parent.transform.TransformPoint(gunOffset);
+                return spawnPosition;
+            }
+            return Vector3.zero;
         } else {
             return Vector3.zero;
         }
@@ -94,10 +98,14 @@ public class ProjectileManager : MonoBehaviour {
 
     private Vector3 calculateRocketSpawnPosition(string shooterId, string gunIndex) {
         if(!NetworkedVariables.connectedClients[shooterId].isDead) {
-            Transform parent = playerManager.playerObjectFromId(shooterId).GetComponentsInChildren<Transform>()[(shooterId == NetworkedVariables.playerId) ? 1 : 0];
-            Vector3 gunOffset = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[shooterId].getCurrentType()].realPlayer.GetComponentInChildren<Shooter>().rocketSpawnPoints[int.Parse(gunIndex)].transform.localPosition;
-            Vector3 spawnPosition = parent.transform.TransformPoint(gunOffset);
-            return spawnPosition;
+            GameObject par = playerManager.playerObjectFromId(shooterId);
+            if(par != null) {
+                Transform parent = playerManager.playerObjectFromId(shooterId).GetComponentsInChildren<Transform>()[(shooterId == NetworkedVariables.playerId) ? 1 : 0];
+                Vector3 gunOffset = PrefabOrganizer.Planes[NetworkedVariables.connectedClients[shooterId].getCurrentType()].realPlayer.GetComponentInChildren<Shooter>().rocketSpawnPoints[int.Parse(gunIndex)].transform.localPosition;
+                Vector3 spawnPosition = parent.transform.TransformPoint(gunOffset);
+                return spawnPosition;
+            }
+            return Vector3.zero;
         } else {
             return Vector3.zero;
         }

@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour {
         //Spawning the own Player if it is null and the Player is back in the world
         if(ownPlayer == null && SceneManager.GetActiveScene().buildIndex == NetworkedVariables.worldIndex) {
             Vector3 spawnPosition = new Vector3();
-            if(GameModeManager.gameModes[NetworkedVariables.currentGameMode].hasTeams) {
+            if(GameModeManager.gameModes.ContainsKey(NetworkedVariables.currentGameMode) && GameModeManager.gameModes[NetworkedVariables.currentGameMode].hasTeams) {
                 spawnPosition = WorldSpawnPointManager.spawnPoints[NetworkedVariables.connectedClients[NetworkedVariables.playerId].teamColor].getRandomPointInsideBox();
             } else {
                 spawnPosition = WorldSpawnPointManager.spawnPoints[""].getRandomPointInsideBox();
@@ -168,8 +168,6 @@ public class PlayerManager : MonoBehaviour {
                 return currentCheck.Key;
             }
         }
-
-        Debug.LogError($"The player Object was not found");
         return null;
 
     }
