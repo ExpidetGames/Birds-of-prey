@@ -42,8 +42,9 @@ public class ProjectileManager : MonoBehaviour {
                     if(spawnPosition == Vector3.zero) {
                         continue;
                     }
-                    GameObject spawnedRocket = Instantiate(PrefabOrganizer.Rockets[rocketType].rocketPrefab, Vector3.one, Quaternion.identity);
+                    GameObject spawnedRocket = Instantiate(PrefabOrganizer.Rockets[rocketType].rocketPrefab, spawnPosition, Quaternion.identity);
                     Rocket rocket = spawnedRocket.GetComponent<Rocket>();
+                    rocket.playerManager = playerManager;
                     rocket.projectileType = rocketType;
                     rocket.angleToFireProjectile = rocket.listToVector3(rocketInformation["facingAngle"]);
                     rocket.originalVelocity = rocket.listToVector3(rocketInformation["velocity"]);
@@ -67,10 +68,10 @@ public class ProjectileManager : MonoBehaviour {
         }
     }
 
-    public static void shootRocket(string gunName, List<float> facingAngle, List<float> velocity, string type, string shooter, string target) {
+    public static void shootRocket(string gunIndex, List<float> facingAngle, List<float> velocity, string type, string shooter, string target) {
         lock(rocketInformations) {
             Dictionary<string, dynamic> rocketInformation = new Dictionary<string, dynamic>();
-            rocketInformation.Add("gunName", gunName);
+            rocketInformation.Add("gunIndex", gunIndex);
             rocketInformation.Add("facingAngle", facingAngle);
             rocketInformation.Add("velocity", velocity);
             rocketInformation.Add("rocketType", type);

@@ -174,12 +174,12 @@ public class PlayerManager : MonoBehaviour {
 
     }
 
-    public void shootRocket(GameObject target, string gunName, Vector3 planeFacingDirection, Vector3 planeVelocity, RocketTypes rocketType) {
+    public void shootRocket(GameObject target, int gunIndex, Vector3 planeFacingDirection, Vector3 planeVelocity, RocketTypes rocketType) {
         string targetId = idFromGameObject(target);
         if(!string.IsNullOrEmpty(targetId)) {
             string facingDirection = "[\"" + planeFacingDirection.x.ToString().Replace(",", ".") + "\",\"" + planeFacingDirection.y.ToString().Replace(",", ".") + "\", \"" + planeFacingDirection.z.ToString().Replace(",", ".") + "\"]";
             string velocity = "[\"" + planeVelocity.x.ToString().Replace(",", ".") + "\",\"" + planeVelocity.y.ToString().Replace(",", ".") + "\", \"" + planeVelocity.z.ToString().Replace(",", ".") + "\"]";
-            TCPClient.callStack.Insert(0, "{\"type\":\"shootRocketRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"shooter\":\"" + NetworkedVariables.playerId + "\", \"rocketType\":\"" + rocketType + "\", \"target\":\"" + targetId + "\", \"gunName\": \"" + gunName + "\", \"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
+            TCPClient.callStack.Insert(0, "{\"type\":\"shootRocketRequest\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"shooter\":\"" + NetworkedVariables.playerId + "\", \"rocketType\":\"" + rocketType + "\", \"target\":\"" + targetId + "\", \"gunIndex\": \"" + gunIndex + "\", \"planeFacingDirection\": " + facingDirection + ", \"velocity\": " + velocity + "}");
         }
     }
 

@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class Rocket : Projectile {
     [HideInInspector] public string targetId;
+    [HideInInspector] public PlayerManager playerManager;
 
     private float turnSpeed;
     private float timeUntilRocketEnginesFire;
+    private GameObject target;
     private ParticleSystem[] particleSystems;
 
 
@@ -18,6 +20,7 @@ public class Rocket : Projectile {
         turnSpeed = PrefabOrganizer.Rockets[rocketType].turnSpeed;
         timeUntilRocketEnginesFire = PrefabOrganizer.Rockets[rocketType].timeUntilRocketEnginesFire;
         timeUntilProjectileGetsLethal = PrefabOrganizer.Rockets[rocketType].timeUntilRocketGetsLethal;
+        target = playerManager.playerObjectFromId(targetId);
 
         this.transform.rotation = Quaternion.LookRotation(angleToFireProjectile);
         projectileRigidbody.velocity = originalVelocity;
@@ -25,22 +28,9 @@ public class Rocket : Projectile {
 
 
     private void Update() {
-        if(Vector3.Distance(this.gameObject.transform.position, this.gameObject.transform.position) <= 10) {
-            //base.updateCollidersOfGameObject(base.ColliderObject, true);
-        }
         if(timeUntilRocketEnginesFire <= 0) {
-            Vector3 flightDirection = Vector3.forward;
-            if(NetworkedVariables.allConnectedPlayerTransforms.ContainsKey(targetId)) {
-                Vector3 targetRotation = (listToVector3(NetworkedVariables.allConnectedPlayerTransforms[targetId][0]) - this.transform.position).normalized;
-                flightDirection = transform.TransformDirection(Vector3.forward);
-                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(targetRotation), turnSpeed * Time.deltaTime);
-            }
-            projectileRigidbody.velocity = flightDirection * projectileSpeed;
-            foreach(ParticleSystem particleSystem in particleSystems) {
-                if(!particleSystem.isPlaying) {
-                    particleSystem.Play();
-                }
-            }
+            transform.position += (target.transform.position - transform.position).normalized * projectileSpeed * Time.deltaTime;
+            transform.LookAt(target.transform.position);
         } else {
             timeUntilRocketEnginesFire -= Time.deltaTime;
         }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 85193014568221928}
   m_Layer: 0
   m_Name: goldenBullet
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,6 +71,7 @@ MonoBehaviour:
   originalVelocity: {x: 0, y: 0, z: 0}
   projectileRigidbody: {fileID: 85193014568221928}
   ColliderObject: {fileID: 4770881860055594464}
+  particleSystemHolder: {fileID: 0}
 --- !u!54 &85193014568221928
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -112,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 5447438548948773647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0024009, y: 0.6164448, z: 2.067371}
+  m_LocalScale: {x: 0.46, y: 0.26, z: 0.84}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 817117433438257255}
@@ -136,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5689447209376424978
 Transform:
   m_ObjectHideFlags: 0
@@ -144,14 +145,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5689447209376424979}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.264, z: 0}
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: -0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5295744338125893466}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!198 &5689447209376424976
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -235,7 +236,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.6
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2

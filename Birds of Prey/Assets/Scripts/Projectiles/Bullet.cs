@@ -14,7 +14,6 @@ public class Bullet : Projectile {
 
         projectileRigidbody.velocity = originalVelocity;
         this.transform.rotation = Quaternion.LookRotation(angleToFireProjectile);
-        Debug.Log(this.transform.rotation);
         projectileRigidbody.AddForce(angleToFireProjectile * projectileSpeed, ForceMode.Impulse);
 
     }

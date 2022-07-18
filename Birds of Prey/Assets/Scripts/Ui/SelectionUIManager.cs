@@ -111,7 +111,7 @@ public class SelectionUIManager : MonoBehaviour {
                 for(int i = 0; i < planeTypes.Length; i++) {
                     planeTypes[i] = allSelectionImageControllers[i].currentlySelectedPlaneType.ToString();
                 }
-                JoinRoomMessage jrm = new JoinRoomMessage(NetworkedVariables.playerId, roomIdInput.text, NetworkedVariables.name, planeTypes, PrefabOrganizer.Planes[firstPlane].startHealth.ToString());
+                JoinRoomMessage jrm = new JoinRoomMessage(NetworkedVariables.playerId, roomIdInput.text.ToUpper(), NetworkedVariables.name, planeTypes, PrefabOrganizer.Planes[firstPlane].startHealth.ToString());
                 TCPClient.callStack.Insert(0, "{\"type\":\"joinRoom\", " + jrm.getJoiningInfo() + "}");
             } else {
                 TMPro.TextMeshProUGUI[] allTexts = roomIdInput.GetComponentsInChildren<TMPro.TextMeshProUGUI>();

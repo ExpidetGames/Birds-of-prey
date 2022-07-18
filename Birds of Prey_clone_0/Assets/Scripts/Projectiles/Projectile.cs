@@ -17,8 +17,12 @@ public class Projectile : MonoBehaviour {
 
     [SerializeField] public Rigidbody projectileRigidbody;
     [SerializeField] public GameObject ColliderObject;
+    [SerializeField] public GameObject particleSystemHolder;
 
     public void OnStart() {
+        if(particleSystemHolder != null) {
+            updateParticleSystemsOfGameObject(particleSystemHolder, false);
+        }
         updateCollidersOfGameObject(ColliderObject, false);
     }
 
@@ -31,6 +35,7 @@ public class Projectile : MonoBehaviour {
 
         if(timeUntilProjectileGetsLethal <= 0) {
             updateCollidersOfGameObject(ColliderObject, true);
+            updateParticleSystemsOfGameObject(particleSystemHolder, true);
         } else {
             timeUntilProjectileGetsLethal -= Time.deltaTime;
         }
@@ -44,6 +49,18 @@ public class Projectile : MonoBehaviour {
         }
     }
 
+    public void updateParticleSystemsOfGameObject(GameObject particleSystemHolder, bool start) {
+        if(particleSystemHolder != null) {
+            ParticleSystem[] particleSystems = particleSystemHolder.GetComponentsInChildren<ParticleSystem>();
+            foreach(ParticleSystem ps in particleSystems) {
+                if(start) {
+                    ps.Play();
+                } else {
+                    ps.Stop();
+                }
+            }
+        }
+    }
     public void updateColorsOfGameObject(GameObject rendererGameObject, Color newColor) {
         Renderer[] renderers = rendererGameObject.GetComponentsInChildren<Renderer>(true);
         foreach(Renderer renderComponent in renderers) {

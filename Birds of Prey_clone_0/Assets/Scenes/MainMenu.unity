@@ -514,7 +514,7 @@ MonoBehaviour:
   - bulletType: 1
     bulletPrefab: {fileID: 4770881860055594464, guid: 51e5be9a9ffe0794cbc1fc7a5765bae9, type: 3}
     damage: 200
-    projectileSpeed: 20
+    projectileSpeed: 100
     despawnTime: 10
     timeUntilBulletGetsLethal: 0.07
   _rockets:

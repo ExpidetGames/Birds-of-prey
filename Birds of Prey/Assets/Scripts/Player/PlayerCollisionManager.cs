@@ -13,6 +13,7 @@ public class PlayerCollisionManager : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision other) {
+        Debug.Log("Player collided with an object with tag: " + other.gameObject.tag);
         if(other.gameObject.tag == "Projectile" && !NetworkedVariables.connectedClients[NetworkedVariables.playerId].isDead) {
             Projectile projectile = other.gameObject.GetComponent<Projectile>();
             if(projectile.shooter != NetworkedVariables.playerId && NetworkedVariables.connectedClients[NetworkedVariables.playerId].playerHealth - projectile.damage > 0) {

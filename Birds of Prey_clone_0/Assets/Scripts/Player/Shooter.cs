@@ -67,9 +67,9 @@ public class Shooter : MonoBehaviour {
             //If a lock is accquired and the right mouse button is clicket rockets are ready to fire and the current Target is not null
             if(timePastSinceLastRocket >= timeBetweenRockets) {
                 if(Input.GetMouseButton(1) && timeUntilUnlock > 0) {
-                    foreach(GameObject rocketSpawner in rocketSpawnPoints) {
+                    for(int i = 0; i < rocketSpawnPoints.Length; i++) {
                         Vector3 planeFacingDirection = plane.transform.TransformDirection(Vector3.forward);
-                        playerManager.shootRocket(currentTarget, rocketSpawner.name, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].rocketAmunition);
+                        playerManager.shootRocket(currentTarget, i, planeFacingDirection, planeRb.velocity, PrefabOrganizer.Planes[NetworkedVariables.connectedClients[NetworkedVariables.playerId].planeTypes[0]].rocketAmunition);
                     }
                     timePastSinceLastRocket = 0f;
                 }

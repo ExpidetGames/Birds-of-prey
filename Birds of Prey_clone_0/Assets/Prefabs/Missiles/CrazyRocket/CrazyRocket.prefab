@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 5498384020234834196}
   m_Layer: 0
   m_Name: CrazyRocket
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,9 @@ MonoBehaviour:
   originalVelocity: {x: 0, y: 0, z: 0}
   projectileRigidbody: {fileID: 5498384020234834187}
   ColliderObject: {fileID: 5498384019068869736}
-  target: 
+  particleSystemHolder: {fileID: 0}
+  targetId: 
+  playerManager: {fileID: 0}
 --- !u!1001 &5498384018910275102
 PrefabInstance:
   m_ObjectHideFlags: 0
