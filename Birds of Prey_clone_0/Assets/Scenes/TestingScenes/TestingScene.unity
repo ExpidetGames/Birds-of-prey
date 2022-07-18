@@ -1907,6 +1907,7 @@ MonoBehaviour:
   originalVelocity: {x: 0, y: 0, z: 0}
   projectileRigidbody: {fileID: 85193013903508454}
   ColliderObject: {fileID: 4770881860698458862}
+  particleSystemHolder: {fileID: 0}
 --- !u!1 &4770881860698458862
 GameObject:
   m_ObjectHideFlags: 0

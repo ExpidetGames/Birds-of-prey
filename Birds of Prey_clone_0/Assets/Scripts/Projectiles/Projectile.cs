@@ -69,7 +69,6 @@ public class Projectile : MonoBehaviour {
     }
 
     public void OnCollisionEnter(Collision other) {
-        Debug.Log("Rocket collided with " + other.gameObject.name);
         if(other.gameObject.tag != "Projectile") {
             destroyProjectile();
         }
