@@ -6,8 +6,8 @@ public class Rocket : Projectile {
 
     private float turnSpeed;
     private float timeUntilRocketEnginesFire;
-    private GameObject target;
     private ParticleSystem[] particleSystems;
+    private GameObject target;
 
 
     void Start() {
@@ -31,9 +31,16 @@ public class Rocket : Projectile {
         if(timeUntilRocketEnginesFire <= 0) {
             transform.position += (target.transform.position - transform.position).normalized * projectileSpeed * Time.deltaTime;
             transform.LookAt(target.transform.position);
+            foreach(ParticleSystem particleSystem in particleSystems) {
+                if(!particleSystem.isPlaying) {
+                    particleSystem.Play();
+                }
+            }
         } else {
             timeUntilRocketEnginesFire -= Time.deltaTime;
         }
         base.OnUpdate();
     }
+
+
 }

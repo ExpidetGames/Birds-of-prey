@@ -20,9 +20,6 @@ public class Projectile : MonoBehaviour {
     [SerializeField] public GameObject particleSystemHolder;
 
     public void OnStart() {
-        if(particleSystemHolder != null) {
-            updateParticleSystemsOfGameObject(particleSystemHolder, false);
-        }
         updateCollidersOfGameObject(ColliderObject, false);
     }
 
@@ -35,7 +32,6 @@ public class Projectile : MonoBehaviour {
 
         if(timeUntilProjectileGetsLethal <= 0) {
             updateCollidersOfGameObject(ColliderObject, true);
-            updateParticleSystemsOfGameObject(particleSystemHolder, true);
         } else {
             timeUntilProjectileGetsLethal -= Time.deltaTime;
         }
@@ -73,6 +69,7 @@ public class Projectile : MonoBehaviour {
     }
 
     public void OnCollisionEnter(Collision other) {
+        Debug.Log("Rocket collided with " + other.gameObject.name);
         if(other.gameObject.tag != "Projectile") {
             destroyProjectile();
         }
