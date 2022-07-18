@@ -122,7 +122,10 @@ public class JsonParser : MonoBehaviour {
             string deadPlayer = (string)decodedMessage["deadPlayer"];
             string killer = (string)decodedMessage["killer"];
             if(!NetworkedVariables.connectedClients[deadPlayer].isDead && !NetworkedVariables.connectedClients[deadPlayer].isDeadForever) {
-                NetworkedVariables.connectedClients[killer].kills++;
+                if(deadPlayer != killer) {
+                    //If Equal Somebody killed himself by flying against the ground. Thats not a kill is it
+                    NetworkedVariables.connectedClients[killer].kills++;
+                }
                 NetworkedVariables.connectedClients[deadPlayer].deaths++;
                 if(NetworkedVariables.connectedClients[deadPlayer].deaths == NetworkedVariables.connectedClients[deadPlayer].planeTypes.Length) {
                     NetworkedVariables.connectedClients[deadPlayer].isDeadForever = true;

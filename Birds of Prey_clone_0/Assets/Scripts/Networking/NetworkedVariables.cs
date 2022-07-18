@@ -27,8 +27,6 @@ public static class NetworkedVariables {
     public static bool isRoomCreator;
     //True when Player is in world false if he is in Main Menu
     public static bool inGame;
-    //To avoid getting hit twice when the player is already dead
-    public static bool isDead;
     //Stores the BuildIndex of the world the players are playing
     public static int worldIndex;
     //Holds the variable name just for short time

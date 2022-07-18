@@ -1056,9 +1056,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 874154394901598875}
   thrust: 300
-  turnTorque: {x: 5, y: 2, z: 7}
+  turnTorque: {x: 70, y: 40, z: 45}
   thrustMult: 15
-  turnMult: 30
+  turnMult: 4
   sensitivity: 5
   aggressiveTurnAngle: 5
   pitch: 0

@@ -82,6 +82,7 @@ public class PrefabOrganizer : MonoBehaviour {
 
 public enum BulletTypes {
     CRAZY_BULLET,
+    GOLDEN_BULLET
 }
 
 public enum RocketTypes {

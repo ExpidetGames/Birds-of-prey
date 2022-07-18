@@ -99,7 +99,7 @@ public class PlayerManager : MonoBehaviour {
             foreach(Dictionary<string, string> respawningPlayerInfo in NetworkedVariables.playersToRejoin) {
                 //The owned client wants to rejoin
                 if(respawningPlayerInfo["id"] == NetworkedVariables.playerId) {
-                    NetworkedVariables.isDead = false;
+                    NetworkedVariables.connectedClients[NetworkedVariables.playerId].isDead = false;
                     NetworkedVariables.scenceToLoad.Add(NetworkedVariables.worldIndex);
                     spawnedPlayerIds.Clear();
                     allPlayers.Clear();

@@ -979,7 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482a72f78627d5042a6c7ac933bb722b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseFlight: {fileID: 0}
+  mouseFlight: {fileID: 1553595554264610607}
   boresight: {fileID: 3609111522424757797}
   mousePos: {fileID: 3609111523074458331}
   healthDisplay: {fileID: 6303005198398177917}

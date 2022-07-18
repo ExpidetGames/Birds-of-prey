@@ -5,7 +5,6 @@ public class DeathUIManager : MonoBehaviour {
     public void rejoinTheFight() {
         //This is called next Type because the plane Index gets Updated when the player dies not when it rejoins
         PlaneTypes nextType = NetworkedVariables.connectedClients[NetworkedVariables.playerId].getCurrentType();
-        Debug.Log($"The current Index is: {NetworkedVariables.connectedClients[NetworkedVariables.playerId].currentPlaneType}");
         TCPClient.callStack.Insert(0, "{\"type\":\"rejoin\", \"roomId\":\"" + NetworkedVariables.roomId + "\", \"playerId\":\"" + NetworkedVariables.playerId + "\", \"newHealth\":\"" + PrefabOrganizer.Planes[nextType].startHealth + "\"}");
     }
 
